@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
+    env:
+      BASE_URL: https://www.saucedemo.com/
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,26 +26,20 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Debug files
-        run: |
-          pwd
-          ls -la
-          find . -maxdepth 4 -type f
-          npx playwright test --list
-
-      - name: List tests
-        run: npx playwright test --list
-
       - name: Run Playwright tests
-        run: npx playwright test tests
-        env:
-          BASE_URL: https://www.saucedemo.com/
+        run: npm test
 
       - name: Upload Playwright HTML report
         if: always()
@@ -51,6 +48,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+          if-no-files-found: ignore
 
       - name: Upload test results
         if: always()
@@ -59,3 +57,4 @@ jobs:
           name: test-results
           path: test-results/
           retention-days: 7
+          if-no-files-found: ignore
