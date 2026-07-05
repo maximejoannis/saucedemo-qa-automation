@@ -36,9 +36,6 @@ jobs:
           find . -maxdepth 4 -type f
           npx playwright test --list
 
-      - name: Show Playwright config
-        run: npx playwright test --show-config
-
       - name: List tests
         run: npx playwright test --list
 
