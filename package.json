@@ -1,0 +1,22 @@
+{
+  "name": "saucedemo-qa-automation",
+  "version": "1.0.0",
+  "description": "Framework QA Automation Playwright pour SauceDemo avec architecture POM, fixtures et pipeline GitHub Actions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:critical": "playwright test --grep @critical",
+    "test:regression": "playwright test --grep @regression",
+    "report": "playwright show-report",
+    "lint:syntax": "find . -name '*.js' -not -path './node_modules/*' -not -path './playwright-report/*' -print0 | xargs -0 -n1 node --check"
+  },
+  "keywords": ["qa", "automation", "playwright", "saucedemo", "pom"],
+  "author": "Maxime Joannis",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.54.0"
+  }
+}
