@@ -1,5 +1,7 @@
 # SauceDemo QA Automation
 
+![Playwright](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)
+
 Framework d’automatisation QA construit avec **Playwright JavaScript** sur l’application e-commerce de démonstration **SauceDemo**.
 
 L’objectif est de sécuriser les parcours critiques : authentification, catalogue produits, panier, checkout et confirmation de commande, avec une architecture maintenable de type **Page Object Model**, des données de test centralisées et une exécution CI/CD GitHub Actions.
