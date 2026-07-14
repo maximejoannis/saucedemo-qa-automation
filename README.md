@@ -1,5 +1,7 @@
 # SauceDemo QA Automation
 
+[![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
+
 Suite de tests end-to-end du site [SauceDemo](https://www.saucedemo.com/) réalisée avec **Playwright** et structurée selon une approche de traçabilité ISTQB.
 
 La suite couvre les parcours essentiels d’authentification, de consultation du catalogue, de gestion du panier, de saisie des informations client et de finalisation de commande.
