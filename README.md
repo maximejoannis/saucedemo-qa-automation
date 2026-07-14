@@ -1,6 +1,7 @@
 # SauceDemo QA Automation
 
 [![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
+[![Allure Report](https://maximejoannis.github.io/saucedemo-qa-automation/)
 
 Suite de tests end-to-end du site [SauceDemo](https://www.saucedemo.com/) réalisée avec **Playwright** et structurée selon une approche de traçabilité ISTQB.
 
