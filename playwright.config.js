@@ -24,7 +24,6 @@ module.exports = defineConfig({
         application: 'SauceDemo',
         baseURL: 'https://www.saucedemo.com/',
         framework: 'Playwright',
-        browser: 'Chromium',
         platform: process.platform,
         node: process.version,
       },
