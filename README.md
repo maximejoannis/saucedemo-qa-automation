@@ -1,328 +1,250 @@
 # SauceDemo QA Automation
 
-![Playwright](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)
+Suite de tests end-to-end du site [SauceDemo](https://www.saucedemo.com/) réalisée avec **Playwright** et structurée selon une approche de traçabilité ISTQB.
 
-Framework d'automatisation QA développé avec **Playwright** et **JavaScript** sur l'application e-commerce de démonstration **SauceDemo**.
+La suite couvre les parcours essentiels d’authentification, de consultation du catalogue, de gestion du panier, de saisie des informations client et de finalisation de commande.
 
-L'objectif de ce projet est de sécuriser les parcours critiques de l'application (authentification, catalogue produits, panier, checkout et confirmation de commande) grâce à une architecture **Page Object Model (POM)**, des données de test centralisées et une exécution automatisée via **GitHub Actions**.
+## État du projet
 
----
+- **36 tests Playwright** répartis dans **5 fichiers de spécification** ;
+- exécution sur **Chromium** ;
+- architecture **Page Object Model** ;
+- fixtures et données de test centralisées ;
+- rapports **Playwright HTML** et **Allure** ;
+- exécution parallèle activée hors CI ;
+- traces au premier retry, captures et vidéos conservées en cas d’échec.
 
-# Sommaire
+La suite a été validée localement avec succès lors de plusieurs exécutions complètes, avec `--repeat-each=5` et avec `--workers=4`.
 
-- [Application sous test](#application-sous-test)
-- [Objectifs QA](#objectifs-qa)
-- [Architecture](#architecture)
-- [Approche Page Object Model](#approche-page-object-model)
-- [Principe *learn, build, deploy*](#principe-learn-build-deploy)
-- [Documentation](#documentation)
-- [Jeux de données de test](#jeux-de-données-de-test)
-- [Couverture automatisée](#couverture-automatisée)
-- [Installation](#installation)
-- [Exécution locale](#exécution-locale)
-- [Exécution par tags](#exécution-par-tags)
-- [Reporting](#reporting)
-- [Pipeline CI/CD](#pipeline-cicd)
-- [Bonnes pratiques appliquées](#bonnes-pratiques-appliquées)
-- [Commandes utiles](#commandes-utiles)
-- [Critères d'acceptation du framework](#critères-dacceptation-du-framework)
+## Prérequis
 
----
+- Node.js 18 ou supérieur ;
+- npm ;
+- accès à `https://www.saucedemo.com/` ;
+- Java uniquement pour certaines utilisations de la CLI Allure selon l’environnement.
 
-# Application sous test
+## Installation
 
-| Élément | Valeur |
-|----------|--------|
-| Nom | SauceDemo |
-| URL | https://www.saucedemo.com/ |
-| Type | Application web e-commerce de démonstration |
-| Outil | Playwright |
-| Langage | JavaScript |
-| Navigateur CI | Chromium |
+Depuis la racine du projet :
 
----
+```bash
+npm ci
+npx playwright install chromium
+```
 
-# Objectifs QA
+Sur une machine Linux nécessitant les dépendances système du navigateur :
 
-Le framework permet de valider les principaux parcours fonctionnels de l'application :
+```bash
+npx playwright install --with-deps chromium
+```
 
-- Vérifier la connexion avec un utilisateur valide.
-- Vérifier les erreurs d'authentification.
-- Vérifier l'affichage du catalogue produits.
-- Vérifier l'ajout et le retrait de produits au panier.
-- Vérifier le contenu du panier.
-- Vérifier les contrôles obligatoires du checkout.
-- Vérifier le récapitulatif de commande.
-- Sécuriser le parcours complet d'achat.
-- Générer un rapport HTML exploitable.
-- Exécuter automatiquement les tests via GitHub Actions.
+## Exécuter les tests
 
----
+### Toute la suite
 
-# Architecture
+```bash
+npx playwright test
+```
 
-Le projet suit une architecture **Page Object Model (POM)** afin de séparer les responsabilités :
+### Mode navigateur visible
 
-- **pages/** : objets représentant les pages de l'application ;
-- **tests/** : scénarios Playwright organisés par domaine fonctionnel ;
-- **fixtures/** : données de test centralisées ;
-- **docs/** : documentation fonctionnelle et stratégie de test ;
-- **.github/workflows/** : pipeline GitHub Actions.
+```bash
+npx playwright test --headed
+```
+
+### Interface graphique Playwright
+
+```bash
+npx playwright test --ui
+```
+
+### Un fichier de tests
+
+```bash
+npx playwright test tests/us01-authentication/ac01-login.spec.js
+```
+
+### Un test par son titre
+
+```bash
+npx playwright test -g "TC-US01-AC01-01"
+```
+
+### Tests marqués smoke
+
+```bash
+npx playwright test -g "@smoke"
+```
+
+### Vérification de la stabilité
+
+Chaque test est rejoué cinq fois :
+
+```bash
+npx playwright test --repeat-each=5
+```
+
+Exécution avec quatre workers :
+
+```bash
+npx playwright test --workers=4
+```
+
+### Débogage
+
+```bash
+npx playwright test --debug
+```
+
+Pour afficher les étapes et les locators dans l’inspecteur Playwright :
+
+```bash
+PWDEBUG=1 npx playwright test
+```
+
+Sous PowerShell :
+
+```powershell
+$env:PWDEBUG=1; npx playwright test
+```
+
+## Rapports
+
+### Rapport HTML Playwright
+
+Le rapport est généré dans `playwright-report/` après l’exécution.
+
+```bash
+npx playwright show-report
+```
+
+### Rapport Allure
+
+Les résultats bruts sont écrits dans `allure-results/` par le reporter configuré dans `playwright.config.js`.
+
+Générer le rapport :
+
+```bash
+npx allure generate allure-results --clean -o allure-report
+```
+
+Ouvrir le rapport généré :
+
+```bash
+npx allure open allure-report
+```
+
+Ou générer et servir le rapport directement :
+
+```bash
+npx allure serve allure-results
+```
+
+## Architecture
 
 ```text
-saucedemo-qa-automation/
-├── .github/
-│   └── workflows/
-│       └── playwright.yml
+.
 ├── docs/
-│   ├── cadrage-qa.md
-│   └── strategie-de-test.md
-├── fixtures/
-│   ├── checkoutData.js
-│   ├── products.js
-│   └── users.js
-├── pages/
-│   ├── CartPage.js
-│   ├── CheckoutCompletePage.js
-│   ├── CheckoutPage.js
-│   ├── LoginPage.js
-│   └── ProductsPage.js
+│   ├── 01-user-stories-acceptance-criteria.md
+│   ├── 02-test-cases.md
+│   └── 03-traceability-matrix.md
+├── src/
+│   ├── data/
+│   │   ├── checkout.js
+│   │   ├── products.js
+│   │   └── users.js
+│   ├── fixtures/
+│   │   └── test.js
+│   └── pages/
+│       ├── CartPage.js
+│       ├── CheckoutPage.js
+│       ├── InventoryPage.js
+│       └── LoginPage.js
 ├── tests/
-│   ├── cart/
-│   │   └── cart.test.js
-│   ├── checkout/
-│   │   └── checkout.test.js
-│   ├── e2e/
-│   │   └── purchase-flow.test.js
-│   ├── login/
-│   │   └── login.test.js
-│   ├── products/
-│   │   └── product.test.js
-│   └── testBase.js
-├── playwright.config.js
+│   ├── us01-authentication/
+│   ├── us02-catalogue/
+│   ├── us03-panier/
+│   ├── us04-checkout/
+│   └── us05-e2e/
 ├── package.json
-└── README.md
+└── playwright.config.js
 ```
 
----
+### `src/pages/`
 
-# Approche Page Object Model
+Contient les Page Objects. Les locators et les actions propres à chaque écran y sont centralisés afin de limiter la duplication et de rendre les tests plus faciles à maintenir.
 
-Le projet applique le pattern **Page Object Model (POM)** afin de séparer clairement les responsabilités :
+### `src/fixtures/`
 
-- les **sélecteurs** sont centralisés dans les classes du dossier `pages/` ;
-- les **actions métier** sont regroupées dans les méthodes des Page Objects ;
-- les **assertions réutilisables** sont définies dans les pages ;
-- les **données de test** sont centralisées dans le dossier `fixtures/` ;
-- les **scénarios** sont organisés dans le dossier `tests/`.
+Expose les Page Objects sous forme de fixtures Playwright et fournit la fixture `authenticatedPage`, qui réalise une connexion standard avant les scénarios nécessitant un utilisateur authentifié.
 
-Cette approche réduit la duplication du code, améliore la lisibilité des scénarios et facilite la maintenance du framework.
+### `src/data/`
 
----
+Centralise les utilisateurs, produits et données de checkout utilisés par les scénarios.
 
-# Principe *learn, build, deploy*
+### `tests/`
 
-Des commentaires sont présents dans le code afin d'expliciter certains choix techniques et fonctionnels.
+Les spécifications sont regroupées par user story. Les tests utilisent des assertions web-first Playwright et des locators stables, notamment les attributs `data-test` exposés par SauceDemo.
 
-- **learn** : expliquer un choix QA ou technique afin de faciliter l'apprentissage ;
-- **build** : montrer la construction et l'organisation du framework ;
-- **deploy** : mettre en évidence les éléments permettant une exécution fiable en pipeline CI/CD.
+### `docs/`
 
----
+Contient :
 
-# Documentation
+- les user stories et critères d’acceptation ;
+- le catalogue des 50 cas de test fonctionnels ;
+- la matrice de traçabilité détaillée, avec le statut de chaque cas.
 
-La documentation du projet est disponible dans le dossier **docs/**.
+## Convention d’identification
 
-| Document | Description |
-|----------|-------------|
-| `cadrage-qa.md` | Présentation du contexte, du périmètre et des objectifs QA |
-| `strategie-de-test.md` | Stratégie de test et couverture fonctionnelle |
-
----
-
-# Jeux de données de test
-
-## Utilisateurs
-
-Tous les utilisateurs utilisent le mot de passe :
+Chaque cas suit le format :
 
 ```text
-secret_sauce
+TC-USxx-ACxx-nn
 ```
 
-| Profil | Username | Usage QA |
-|----------|----------|----------|
-| Standard | `standard_user` | Parcours nominal |
-| Locked out | `locked_out_user` | Erreur utilisateur bloqué |
-| Problem | `problem_user` | Profil instable côté application |
-| Performance glitch | `performance_glitch_user` | Profil lent côté application |
-| Error | `error_user` | Profil générant des erreurs applicatives |
-| Visual | `visual_user` | Profil utile pour les régressions visuelles |
+Exemple :
 
-Les données sont centralisées dans `fixtures/users.js`.
-
-## Produits
-
-Les produits, les sélecteurs et les prix attendus sont centralisés dans `fixtures/products.js`.
-
-## Checkout
-
-Les données client valides et les variantes négatives sont centralisées dans `fixtures/checkoutData.js`.
-
----
-
-# Couverture automatisée
-
-| Module | Tests couverts | Tags |
-|----------|----------------|------|
-| Authentification | Connexion valide, mot de passe invalide, utilisateur bloqué, champs obligatoires | `@login` `@smoke` `@regression` |
-| Catalogue | Affichage, ajout, retrait, multi-ajout, tri nom/prix | `@products` `@smoke` `@regression` |
-| Panier | Panier vide, contenu, suppression, retour catalogue | `@cart` `@regression` |
-| Checkout | Formulaire, champs obligatoires, récapitulatif, finalisation | `@checkout` `@regression` |
-| E2E | Achat complet multi-produits | `@e2e` `@critical` `@smoke` |
-
----
-
-# Installation
-
-```bash
-npm install
-npx playwright install
+```text
+TC-US03-AC02-05
 ```
 
----
+- `US03` : user story « Gestion du panier » ;
+- `AC02` : deuxième critère d’acceptation ;
+- `05` : cinquième cas de test du critère.
 
-# Exécution locale
+Certains tests automatisés couvrent plusieurs cas fonctionnels proches. La matrice précise alors le même test de référence pour chacun des cas couverts.
 
-Lancer toute la suite :
+## Configuration Playwright
 
-```bash
-npm test
-```
+Les principaux choix sont définis dans `playwright.config.js` :
 
-Mode navigateur visible :
+- `fullyParallel: true` ;
+- `forbidOnly` activé en CI ;
+- 2 retries en CI et aucun retry en local ;
+- un seul worker en CI ;
+- projet Chromium Desktop ;
+- `trace: 'on-first-retry'` ;
+- `screenshot: 'only-on-failure'` ;
+- `video: 'retain-on-failure'` ;
+- reporters console, HTML et Allure.
 
-```bash
-npm run test:headed
-```
+## Traçabilité et couverture
 
-Mode UI Playwright :
+Le référentiel contient 50 cas fonctionnels :
 
-```bash
-npm run test:ui
-```
+- **42 cas couverts par la suite automatisée** ;
+- **8 cas conservés en exécution manuelle** ;
+- **0 cas non retenu**.
 
-Afficher le rapport HTML :
+Les 42 cas automatisés sont couverts par 36 fonctions de test, certains scénarios regroupant plusieurs vérifications cohérentes d’un même parcours.
 
-```bash
-npm run report
-```
+Consulter la matrice complète : [`docs/03-traceability-matrix.md`](docs/03-traceability-matrix.md).
 
----
+## Intégration continue
 
-# Exécution par tags
+L’intégration au dépôt GitHub sera réalisée dans une prochaine étape. Le workflow devra au minimum :
 
-Scripts npm :
-
-```bash
-npm run test:smoke
-npm run test:critical
-npm run test:regression
-```
-
-Ou directement avec Playwright :
-
-```bash
-npx playwright test --grep @smoke
-npx playwright test --grep @critical
-npx playwright test --grep @regression
-```
-
----
-
-# Reporting
-
-La configuration Playwright génère automatiquement :
-
-- un rapport HTML ;
-- des captures d'écran en cas d'échec ;
-- des vidéos en cas d'échec ;
-- des traces lors du premier retry.
-
-Configuration :
-
-```javascript
-use: {
-  screenshot: 'only-on-failure',
-  video: 'retain-on-failure',
-  trace: 'on-first-retry',
-}
-```
-
----
-
-# Pipeline CI/CD
-
-Le workflow `.github/workflows/playwright.yml` exécute automatiquement les tests :
-
-- lors d'un **push** sur `main` ;
-- lors d'une **Pull Request** vers `main` ;
-- lors d'une exécution manuelle via `workflow_dispatch`.
-
-Étapes principales :
-
-1. Checkout du dépôt.
-2. Installation de Node.js.
-3. Installation des dépendances avec `npm ci`.
-4. Installation du navigateur Chromium.
-5. Exécution des tests Playwright.
-6. Publication du rapport HTML en artifact.
-7. Publication des résultats de test en artifact.
-
----
-
-# Bonnes pratiques appliquées
-
-- Architecture Page Object Model.
-- Tests indépendants.
-- Données de test centralisées.
-- Tags fonctionnels et métier.
-- Pas de `waitForTimeout`.
-- Assertions orientées comportement utilisateur.
-- Utilisation de sélecteurs `data-test`.
-- Utilisation des étapes Playwright pour documenter les parcours critiques.
-- Reporting et traces activés pour faciliter l'analyse des échecs.
-- Pipeline GitHub Actions prêt pour la CI/CD.
-
----
-
-# Commandes utiles
-
-```bash
-npm test
-npm run test:smoke
-npm run test:critical
-npm run test:regression
-npm run test:headed
-npm run test:ui
-npm run report
-npm run lint:syntax
-```
-
----
-
-# Critères d'acceptation du framework
-
-Le framework est considéré comme opérationnel lorsque :
-
-- tous les tests `@smoke` sont exécutés avec succès ;
-- le parcours `@critical` est validé ;
-- le rapport HTML est généré ;
-- les captures d'écran, vidéos et traces sont disponibles en cas d'échec ;
-- le pipeline GitHub Actions publie correctement les artifacts ;
-- les tests restent lisibles, indépendants et maintenables.
-
----
-
-Ce projet constitue une base d'automatisation de tests maintenable pour sécuriser les parcours critiques de l'application SauceDemo et accompagner les campagnes de non-régression.
+1. installer Node.js et les dépendances avec `npm ci` ;
+2. installer Chromium et ses dépendances ;
+3. exécuter `npx playwright test` ;
+4. publier `playwright-report/` et `allure-results/` comme artefacts, y compris en cas d’échec.
