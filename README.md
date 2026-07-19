@@ -296,3 +296,36 @@ Le workflow [`.github/workflows/playwright.yml`](.github/workflows/playwright.ym
 5. génère le rapport Allure ;
 6. publie les rapports Playwright et Allure comme artefacts pendant 30 jours ;
 7. déploie le rapport Allure sur GitHub Pages hors pull request.
+
+## 🚀 Roadmap
+
+Les évolutions suivantes sont prévues afin d'enrichir progressivement le projet :
+
+### Documentation QA
+
+- [ ] Ajouter un document de cadrage QA
+- [ ] Structurer les User Stories dans un document dédié
+- [ ] Isoler les critères d'acceptation par User Story
+- [ ] Formaliser les cas de tests au format ISTQB
+- [ ] Améliorer la matrice de couverture
+- [ ] Ajouter un rapport d'exécution type
+- [ ] Documenter le processus de gestion des anomalies
+- [ ] Centraliser la documentation dans un README QA
+
+### Couverture des tests
+
+- [ ] Automatiser les 8 cas de tests encore manuels
+- [ ] Étendre les scénarios de validation du checkout
+- [ ] Renforcer les assertions métier
+
+### Qualité technique
+
+- [ ] Ajouter ESLint
+- [ ] Ajouter Prettier
+- [ ] Rendre la configuration multi-environnements
+
+### CI/CD
+
+- [ ] Séparer les pipelines Smoke et Régression
+- [ ] Ajouter une exécution planifiée
+- [ ] Améliorer la gestion des rapports Allure
