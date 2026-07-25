@@ -59,6 +59,12 @@ test.describe('US04 - Checkout | Informations client', () => {
     await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
   });
 
+  test('TC-US04-AC02-05 annulation retourne au panier', async ({ page, checkoutPage }) => {
+    await checkoutPage.cancel();
+
+    await expect(page).toHaveURL(/\/cart\.html$/);
+  });
+
   test('TC-US04-AC02-01 données nominales valides', async ({ page, checkoutPage }) => {
     await checkoutPage.fillCustomer(validCustomer);
     await checkoutPage.continue();
