@@ -3,10 +3,16 @@ const { validCustomer } = require('../../src/data/checkout');
 const { products } = require('../../src/data/products');
 
 test.describe('US04 - Checkout | Informations client', () => {
-  test.beforeEach(async ({ authenticatedPage, inventoryPage, cartPage, page }) => {
+  test.beforeEach(async ({
+    authenticatedPage,
+    inventoryPage,
+    cartPage,
+    page,
+  }) => {
     await inventoryPage.add(products.backpack.slug);
     await inventoryPage.openCart();
     await cartPage.checkout();
+
     await expect(page).toHaveURL(/\/checkout-step-one\.html$/);
   });
 
@@ -15,9 +21,12 @@ test.describe('US04 - Checkout | Informations client', () => {
       lastName: validCustomer.lastName,
       postalCode: validCustomer.postalCode,
     });
+
     await checkoutPage.continue();
 
-    await expect(checkoutPage.error).toContainText('First Name is required');
+    await expect(checkoutPage.error).toContainText(
+      'First Name is required',
+    );
   });
 
   test('TC-US04-AC01-02 nom requis', async ({ checkoutPage }) => {
@@ -25,47 +34,74 @@ test.describe('US04 - Checkout | Informations client', () => {
       firstName: validCustomer.firstName,
       postalCode: validCustomer.postalCode,
     });
+
     await checkoutPage.continue();
 
-    await expect(checkoutPage.error).toContainText('Last Name is required');
+    await expect(checkoutPage.error).toContainText(
+      'Last Name is required',
+    );
   });
 
-  test('TC-US04-AC01-03 code postal requis', async ({ checkoutPage }) => {
+  test('TC-US04-AC01-03 code postal requis', async ({
+    checkoutPage,
+  }) => {
     await checkoutPage.fillCustomer({
       firstName: validCustomer.firstName,
       lastName: validCustomer.lastName,
     });
+
     await checkoutPage.continue();
 
-    await expect(checkoutPage.error).toContainText('Postal Code is required');
+    await expect(checkoutPage.error).toContainText(
+      'Postal Code is required',
+    );
   });
 
-  test('TC-US04-AC01-04 tous les champs vides', async ({ checkoutPage }) => {
-    await checkoutPage.continue();
-
-    await expect(checkoutPage.error).toContainText('First Name is required');
-  });
-
-  test('TC-US04-AC01-05 correction après erreur autorise la navigation', async ({
-    page,
+  test('TC-US04-AC01-04 tous les champs vides', async ({
     checkoutPage,
   }) => {
     await checkoutPage.continue();
-    await expect(checkoutPage.error).toContainText('First Name is required');
 
-    await checkoutPage.fillCustomer(validCustomer);
-    await checkoutPage.continue();
-
-    await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
+    await expect(checkoutPage.error).toContainText(
+      'First Name is required',
+    );
   });
 
-  test('TC-US04-AC02-05 annulation retourne au panier', async ({ page, checkoutPage }) => {
-    await checkoutPage.cancel();
+  test(
+    'TC-US04-AC01-05 correction après erreur autorise la navigation',
+    async ({ page, checkoutPage }) => {
+      await checkoutPage.continue();
 
-    await expect(page).toHaveURL(/\/cart\.html$/);
-  });
+      await expect(checkoutPage.error).toContainText(
+        'First Name is required',
+      );
 
-  test('TC-US04-AC02-01 données nominales valides', async ({ page, checkoutPage }) => {
+      await checkoutPage.fillCustomer(validCustomer);
+      await checkoutPage.continue();
+
+      await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
+    },
+  );
+
+  test(
+    'TC-US04-AC02-05 annulation retourne au panier',
+    async ({ page, checkoutPage }) => {
+      // Le beforeEach garantit déjà l'arrivée sur checkout-step-one.
+      await expect(page).toHaveURL(/\/checkout-step-one\.html$/);
+
+      // Diagnostic plus précis si le bouton est absent.
+      await expect(checkoutPage.cancelButton).toBeVisible();
+
+      await checkoutPage.cancel();
+
+      await expect(page).toHaveURL(/\/cart\.html$/);
+    },
+  );
+
+  test('TC-US04-AC02-01 données nominales valides', async ({
+    page,
+    checkoutPage,
+  }) => {
     await checkoutPage.fillCustomer(validCustomer);
     await checkoutPage.continue();
 
