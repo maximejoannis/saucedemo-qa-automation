@@ -33,6 +33,10 @@ class CheckoutPage {
     await this.finishButton.click();
   }
 
+  async cancel() {
+    await this.cancelButton.click();
+  }
+
   async backHome() {
     await this.backHomeButton.click();
   }
