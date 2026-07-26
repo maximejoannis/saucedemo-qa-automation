@@ -83,21 +83,6 @@ test.describe('US04 - Checkout | Informations client', () => {
     },
   );
 
-  test(
-    'TC-US04-AC02-05 annulation retourne au panier',
-    async ({ page, checkoutPage }) => {
-      // Le beforeEach garantit déjà l'arrivée sur checkout-step-one.
-      await expect(page).toHaveURL(/\/checkout-step-one\.html$/);
-
-      // Diagnostic plus précis si le bouton est absent.
-      await expect(checkoutPage.cancelButton).toBeVisible();
-
-      await checkoutPage.cancel();
-
-      await expect(page).toHaveURL(/\/cart\.html$/);
-    },
-  );
-
   test('TC-US04-AC02-01 données nominales valides', async ({
     page,
     checkoutPage,
@@ -107,4 +92,31 @@ test.describe('US04 - Checkout | Informations client', () => {
 
     await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
   });
+
+  test(
+    'TC-US04-AC02-02 nom avec tiret accepté',
+    async ({ page, checkoutPage }) => {
+      await checkoutPage.fillCustomer({
+        firstName: 'Jean-Pierre',
+        lastName: validCustomer.lastName,
+        postalCode: validCustomer.postalCode,
+      });
+
+      await checkoutPage.continue();
+
+      await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
+    },
+  );
+
+  test(
+    'TC-US04-AC02-05 annulation retourne au panier',
+    async ({ page, checkoutPage }) => {
+      await expect(page).toHaveURL(/\/checkout-step-one\.html$/);
+      await expect(checkoutPage.cancelButton).toBeVisible();
+
+      await checkoutPage.cancel();
+
+      await expect(page).toHaveURL(/\/cart\.html$/);
+    },
+  );
 });
