@@ -176,6 +176,32 @@ test.describe('US05 - Commande | Récapitulatif et finalisation', () => {
   );
 
   test(
+  'TC-US05-AC02-02 achat de trois produits',
+  async ({
+    authenticatedPage,
+    inventoryPage,
+    cartPage,
+    checkoutPage,
+    page,
+  }) => {
+    await reachOverviewWithProducts({
+      inventoryPage,
+      cartPage,
+      checkoutPage,
+      selectedProducts,
+    });
+
+    await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
+    await expect(checkoutPage.summaryItems).toHaveCount(3);
+
+    await checkoutPage.finish();
+
+    await expect(page).toHaveURL(/\/checkout-complete\.html$/);
+    await expect(checkoutPage.completeHeader).toBeVisible();
+  },
+);
+
+  test(
     'TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé',
     async ({
       authenticatedPage,
