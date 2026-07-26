@@ -2,12 +2,34 @@ const { test, expect } = require('../../src/fixtures/test');
 const { validCustomer } = require('../../src/data/checkout');
 const { products } = require('../../src/data/products');
 
+const selectedProducts = [
+  products.backpack,
+  products.bikeLight,
+  products.boltTShirt,
+];
+
 async function reachOverview({
   inventoryPage,
   cartPage,
   checkoutPage,
 }) {
   await inventoryPage.add(products.backpack.slug);
+  await inventoryPage.openCart();
+  await cartPage.checkout();
+  await checkoutPage.fillCustomer(validCustomer);
+  await checkoutPage.continue();
+}
+
+async function reachOverviewWithProducts({
+  inventoryPage,
+  cartPage,
+  checkoutPage,
+  selectedProducts,
+}) {
+  for (const product of selectedProducts) {
+    await inventoryPage.add(product.slug);
+  }
+
   await inventoryPage.openCart();
   await cartPage.checkout();
   await checkoutPage.fillCustomer(validCustomer);
@@ -52,6 +74,58 @@ test.describe('US05 - Commande | Récapitulatif et finalisation', () => {
 
       expect(subtotal).toBe(products.backpack.price);
       expect(Number((subtotal + tax).toFixed(2))).toBe(total);
+    },
+  );
+
+  test(
+    'TC-US05-AC01-02 récapitulatif avec trois produits',
+    async ({
+      authenticatedPage,
+      inventoryPage,
+      cartPage,
+      checkoutPage,
+      page,
+    }) => {
+      await reachOverviewWithProducts({
+        inventoryPage,
+        cartPage,
+        checkoutPage,
+        selectedProducts,
+      });
+
+      await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
+      await expect(checkoutPage.summaryItems).toHaveCount(3);
+
+      await expect(
+        checkoutPage.summaryNames,
+      ).toHaveText([
+        products.backpack.name,
+        products.bikeLight.name,
+        products.boltTShirt.name,
+      ]);
+
+      const expectedSubtotal = Number(
+        selectedProducts
+          .reduce((sum, product) => sum + product.price, 0)
+          .toFixed(2),
+      );
+
+      const displayedSubtotal = await checkoutPage.displayedAmount(
+        checkoutPage.subtotal,
+      );
+
+      const tax = await checkoutPage.displayedAmount(
+        checkoutPage.tax,
+      );
+
+      const total = await checkoutPage.displayedAmount(
+        checkoutPage.total,
+      );
+
+      expect(displayedSubtotal).toBe(expectedSubtotal);
+      expect(Number((displayedSubtotal + tax).toFixed(2))).toBe(
+        total,
+      );
     },
   );
 
