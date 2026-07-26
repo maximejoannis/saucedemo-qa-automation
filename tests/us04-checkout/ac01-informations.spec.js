@@ -109,6 +109,21 @@ test.describe('US04 - Checkout | Informations client', () => {
   );
 
   test(
+  'TC-US04-AC02-03 code postal alphanumérique accepté',
+  async ({ page, checkoutPage }) => {
+    await checkoutPage.fillCustomer({
+      firstName: validCustomer.firstName,
+      lastName: validCustomer.lastName,
+      postalCode: 'H2X 1Y4',
+    });
+
+    await checkoutPage.continue();
+
+    await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
+  },
+);
+
+  test(
     'TC-US04-AC02-05 annulation retourne au panier',
     async ({ page, checkoutPage }) => {
       await expect(page).toHaveURL(/\/checkout-step-one\.html$/);
