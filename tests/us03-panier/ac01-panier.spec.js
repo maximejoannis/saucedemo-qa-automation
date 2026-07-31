@@ -8,7 +8,9 @@ const selectedProducts = [
 ];
 
 test.describe('US03 - Panier', () => {
-  test.beforeEach(async ({ authenticatedPage }) => {});
+  test.beforeEach(
+  async ({ authenticatedPage: _authenticatedPage }) => {},
+);
 
   test('TC-US03-AC02-01 panier vide', async ({
     inventoryPage,
