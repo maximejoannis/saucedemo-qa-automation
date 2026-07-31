@@ -7,7 +7,7 @@ https://maximejoannis.github.io/saucedemo-qa-automation
 
 Suite de tests End-to-End du site **SauceDemo** réalisée avec **Playwright** en JavaScript.
 
-Le projet est structuré selon le pattern **Page Object Model (POM)** et s'appuie sur une documentation QA complète comprenant les User Stories, les critères d'acceptation, les cas de test fonctionnels ainsi que la matrice de traçabilité.
+Le projet est structuré selon le pattern **Page Object Model (POM)**. 
 
 ---
 
@@ -22,7 +22,6 @@ Le projet est structuré selon le pattern **Page Object Model (POM)** et s'appui
 - Exécution des tests
 - Rapports
 - Architecture
-- Documentation QA
 - Traçabilité
 - Configuration Playwright
 - Intégration Continue
@@ -93,14 +92,6 @@ Le projet comprend actuellement :
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml
-│
-├── docs/
-│   ├── cadrage-qa.md
-│   ├── strategie-de-test.md
-│   ├── 01-user-stories-acceptance-criteria.md
-│   ├── 02-test-cases.md
-│   └── 03-traceability-matrix.md
-│
 ├── src/
 │   ├── data/
 │   │   ├── checkout.js
@@ -127,8 +118,6 @@ Le projet comprend actuellement :
 ├── package.json
 └── README.md
 ```
-
----
 
 # Architecture
 
