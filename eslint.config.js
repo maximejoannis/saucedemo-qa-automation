@@ -1,13 +1,27 @@
 module.exports = [
   {
-    ignores: [
-      'node_modules/**',
-      'playwright-report/**',
-      'test-results/**',
-      'allure-results/**',
-      'allure-report/**',
-      'playwright/.auth/**',
-    ],
+   ignores: [
+    'node_modules/**',
+  
+    // Playwright
+    'playwright-report/**',
+    'test-results/**',
+    'blob-report/**',
+    'playwright/.auth/**',
+  
+    // Allure
+    'allure-results/**',
+    'allure-report/**',
+  
+    // Rapports qualité
+    'quality-report/**',
+    'pages-site/**',
+  
+    // Autres dossiers générés
+    'coverage/**',
+    'dist/**',
+    'build/**',
+],
   },
   {
     files: ['**/*.js'],
