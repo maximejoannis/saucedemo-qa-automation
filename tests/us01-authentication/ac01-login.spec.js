@@ -1,6 +1,8 @@
 const { test, expect } = require('../../src/fixtures/test');
 const users = require('../../src/data/users');
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test.describe('US01 - Authentification', () => {
   test('TC-US01-AC01-01 connexion standard valide @smoke', async ({
     page,
