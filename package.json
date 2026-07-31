@@ -10,15 +10,16 @@
     "allure:open": "allure open allure-report",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "quality": "npm run lint && npm run format:check"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.1.1",
     "allure-commandline": "^2.43.0",
     "allure-playwright": "^3.10.2",
-    "eslint": "^8.57.1",
-    "prettier": "^3.6.2"
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.5"
   }
 }
