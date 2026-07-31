@@ -63,7 +63,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
   });
 
   test("TC-US05-AC01-02 récapitulatif avec trois produits", async ({
-    authenticatedPage,
+    authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
     checkoutPage,
@@ -104,7 +104,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
   });
 
   test("TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue", async ({
-    authenticatedPage,
+    authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
     checkoutPage,
@@ -125,7 +125,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
   });
 
   test("TC-US05-AC02-01 achat d’un produit @smoke @critical", async ({
-    authenticatedPage,
+    authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
     checkoutPage,
@@ -144,7 +144,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
   });
 
   test("TC-US05-AC02-02 achat de trois produits", async ({
-    authenticatedPage,
+    authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
     checkoutPage,
@@ -167,7 +167,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
   });
 
   test("TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé", async ({
-    authenticatedPage,
+    authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
     checkoutPage,
