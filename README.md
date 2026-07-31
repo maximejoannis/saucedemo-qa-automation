@@ -373,25 +373,6 @@ Le rapport HTML est généré dans :
 allure-report/
 ```
 
----
-
-# Documentation QA
-
-Le projet contient :
-
-- Cadrage QA
-- Stratégie de test
-- User Stories
-- Critères d'acceptation
-- Catalogue de cas de test
-- Matrice de traçabilité
-
-```
-docs/
-```
-
----
-
 # Convention des identifiants
 
 Chaque cas de test suit le format :
@@ -424,7 +405,7 @@ Le référentiel contient :
 
 Les 42 cas automatisés sont couverts par :
 
-- 36 tests Playwright
+- 43 tests Playwright
 
 Certains scénarios automatisés couvrent plusieurs cas fonctionnels.
 
@@ -468,28 +449,6 @@ Le workflow GitHub Actions :
 
 ---
 
-# Roadmap
-
-## Couverture fonctionnelle
-
-- [ ] Automatiser les 8 cas de test encore manuels
-- [ ] Étendre les scénarios Checkout
-- [ ] Renforcer les assertions métier
-
-## Qualité technique
-
-- [ ] Ajouter ESLint
-- [ ] Ajouter Prettier
-- [ ] Mettre en place une configuration multi-environnements
-
-## CI/CD
-
-- [ ] Séparer les pipelines Smoke et Régression
-- [ ] Ajouter une exécution planifiée
-- [ ] Améliorer la publication des rapports Allure
-
----
-
 # Auteur
 
 Projet de démonstration QA Automation réalisé avec :
@@ -500,4 +459,4 @@ Projet de démonstration QA Automation réalisé avec :
 - GitHub Actions
 - Allure Report
 
-dans une démarche conforme aux bonnes pratiques ISTQB et d'automatisation des tests.
+dans une démarche conforme aux bonnes pratiques Playwright/ISTQB et d'automatisation des tests.
