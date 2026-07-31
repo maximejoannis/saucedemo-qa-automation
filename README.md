@@ -1,6 +1,7 @@
 # SauceDemo QA Automation
 
 [![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-ESLint%20%2B%20Prettier-4B32C3?logo=eslint)](https://maximejoannis.github.io/saucedemo-qa-automation/quality/)
 ![Node](https://img.shields.io/badge/Node-24.x-green)
 ![Playwright](https://img.shields.io/badge/Playwright-1.56-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
