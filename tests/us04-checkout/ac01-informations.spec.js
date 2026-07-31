@@ -4,7 +4,7 @@ const { products } = require('../../src/data/products');
 
 test.describe('US04 - Checkout | Informations client', () => {
   test.beforeEach(async ({
-    authenticatedPage,
+    authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
     page,
