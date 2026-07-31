@@ -7,33 +7,33 @@ module.exports = defineConfig({
   timeout: 30000,
 
   fullyParallel: true,
-
   forbidOnly: !!process.env.CI,
-
   retries: process.env.CI ? 2 : 0,
-
   workers: process.env.CI ? 1 : undefined,
 
   reporter: [
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['allure-playwright', {
-      resultsDir: 'allure-results',
-      detail: true,
-      suiteTitle: false,
-      environmentInfo: {
-        application: 'SauceDemo',
-        baseURL: 'https://www.saucedemo.com/',
-    storageState: 'playwright/.auth/user.json',
-        framework: 'Playwright',
-        platform: process.platform,
-        node: process.version,
+    [
+      'allure-playwright',
+      {
+        resultsDir: 'allure-results',
+        detail: true,
+        suiteTitle: false,
+        environmentInfo: {
+          application: 'SauceDemo',
+          baseURL: 'https://www.saucedemo.com/',
+          framework: 'Playwright',
+          platform: process.platform,
+          node: process.version,
+        },
       },
-    }],
+    ],
   ],
 
   use: {
     baseURL: 'https://www.saucedemo.com/',
+    storageState: 'playwright/.auth/user.json',
     headless: true,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
