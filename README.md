@@ -1,6 +1,10 @@
 # SauceDemo QA Automation
 
 [![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
+![CI](https://github.com/<user>/<repo>/actions/workflows/playwright.yml/badge.svg)
+![Node](https://img.shields.io/badge/Node-24.x-green)
+![Playwright](https://img.shields.io/badge/Playwright-1.56-blue)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 Rapport Allure publié :
 https://maximejoannis.github.io/saucedemo-qa-automation
