@@ -3,6 +3,7 @@ const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
+  globalSetup: require.resolve('./global-setup'),
   timeout: 30000,
 
   fullyParallel: true,
@@ -23,6 +24,7 @@ module.exports = defineConfig({
       environmentInfo: {
         application: 'SauceDemo',
         baseURL: 'https://www.saucedemo.com/',
+    storageState: 'playwright/.auth/user.json',
         framework: 'Playwright',
         platform: process.platform,
         node: process.version,
