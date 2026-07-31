@@ -12,7 +12,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "quality": "npm run lint && npm run format:check"
+    "quality": "npm run lint && npm run format:check",
+    "quality:report": "node scripts/generate-quality-report.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",

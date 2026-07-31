@@ -11,3 +11,7 @@ playwright/.auth/*
 # Allure
 /allure-results/
 /allure-report/
+
+# Code quality and GitHub Pages
+/quality-report/
+/pages-site/

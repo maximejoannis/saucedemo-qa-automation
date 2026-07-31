@@ -10,7 +10,7 @@ https://maximejoannis.github.io/saucedemo-qa-automation
 
 Suite de tests End-to-End du site **SauceDemo** réalisée avec **Playwright** en JavaScript.
 
-Le projet est structuré selon le pattern **Page Object Model (POM)**.
+Le projet est structuré selon le pattern **Page Object Model (POM)**. 
 
 ---
 
@@ -78,13 +78,13 @@ Le projet comprend actuellement :
 
 # Stack technique
 
-| Outil           | Version         |
-| --------------- | --------------- |
-| Node.js         | LTS recommandée |
-| Playwright      | 1.61.1          |
-| JavaScript      | ES6             |
-| Allure Reporter | oui             |
-| GitHub Actions  | oui             |
+| Outil | Version |
+|--------|----------|
+| Node.js | LTS recommandée |
+| Playwright | 1.61.1 |
+| JavaScript | ES6 |
+| Allure Reporter | oui |
+| GitHub Actions | oui |
 
 ---
 
@@ -452,3 +452,19 @@ Projet de démonstration QA Automation réalisé avec :
 - Allure Report
 
 dans une démarche conforme aux bonnes pratiques Playwright/ISTQB et d'automatisation des tests.
+
+## Rapport qualité du code
+
+Le pipeline GitHub Actions exécute ESLint et Prettier, génère un rapport HTML puis le publie sur GitHub Pages :
+
+- Rapport Allure : https://maximejoannis.github.io/saucedemo-qa-automation/
+- Rapport qualité : https://maximejoannis.github.io/saucedemo-qa-automation/quality/
+- Rapport ESLint détaillé : https://maximejoannis.github.io/saucedemo-qa-automation/quality/eslint-report.html
+
+Génération locale du rapport qualité :
+
+```bash
+npm run quality:report
+```
+
+Le rapport est créé dans `quality-report/`. ESLint et Prettier restent les contrôles bloquants du pipeline ; la génération HTML n'ajoute pas de quality gate supplémentaire.
