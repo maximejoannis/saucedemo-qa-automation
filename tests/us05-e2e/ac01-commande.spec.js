@@ -40,7 +40,7 @@ test.describe('US05 - Commande | Récapitulatif et finalisation', () => {
   test(
     'TC-US05-AC01-01/03/04 récapitulatif et montants cohérents',
     async ({
-      authenticatedPage,
+      authenticatedPage: _authenticatedPage,
       inventoryPage,
       cartPage,
       checkoutPage,
