@@ -11,7 +11,9 @@ const ascendingNames = [
 ];
 
 test.describe('US02 - Catalogue', () => {
+  test.beforeEach(
   async ({ authenticatedPage: _authenticatedPage }) => {},
+);
 
   test('TC-US02-AC01-01 six produits affichés', async ({ inventoryPage }) => {
     await expect(inventoryPage.items).toHaveCount(6);
