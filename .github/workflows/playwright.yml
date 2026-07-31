@@ -3,8 +3,10 @@ name: Playwright Tests
 on:
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
+
   workflow_dispatch:
 
 permissions:
@@ -33,11 +35,85 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Le script quality:report doit générer le dossier quality-report/
+      # ------------------------------------------------------
+      # QUALITÉ DU CODE
+      # ------------------------------------------------------
+
+      - name: Run ESLint
+        id: eslint
+        continue-on-error: true
+        run: npm run lint
+
+      - name: Check Prettier formatting
+        id: prettier
+        continue-on-error: true
+        run: npm run format:check
+
       - name: Generate code quality report
-        id: quality
+        id: quality_report
+        if: ${{ !cancelled() }}
         continue-on-error: true
         run: npm run quality:report
+
+      - name: Display code quality status
+        if: ${{ !cancelled() }}
+        run: |
+          echo "ESLint outcome: ${{ steps.eslint.outcome }}"
+          echo "Prettier outcome: ${{ steps.prettier.outcome }}"
+          echo "Quality report outcome: ${{ steps.quality_report.outcome }}"
+
+      # Crée un rapport minimal si le script de génération a échoué.
+      # Cela évite que la publication GitHub Pages échoue à cause
+      # d'un dossier quality-report absent.
+      - name: Ensure code quality report exists
+        if: ${{ !cancelled() }}
+        run: |
+          mkdir -p quality-report
+
+          if [ ! -f quality-report/index.html ]; then
+            cat > quality-report/index.html <<'EOF'
+          <!doctype html>
+          <html lang="fr">
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <title>Rapport qualité indisponible</title>
+              <style>
+                body {
+                  max-width: 800px;
+                  margin: 60px auto;
+                  padding: 0 24px;
+                  font-family: Arial, sans-serif;
+                  color: #24292f;
+                }
+
+                .error {
+                  padding: 24px;
+                  border: 1px solid #cf222e;
+                  border-radius: 8px;
+                  background: #ffebe9;
+                }
+              </style>
+            </head>
+
+            <body>
+              <h1>Rapport qualité du code</h1>
+
+              <section class="error">
+                <h2>Rapport indisponible</h2>
+                <p>
+                  La génération du rapport ESLint et Prettier a échoué.
+                  Consultez l'exécution GitHub Actions pour connaître la cause.
+                </p>
+              </section>
+            </body>
+          </html>
+          EOF
+          fi
+
+      # ------------------------------------------------------
+      # TESTS PLAYWRIGHT
+      # ------------------------------------------------------
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
@@ -45,9 +121,15 @@ jobs:
       - name: Run Playwright tests
         run: npm test
 
+      # Cette commande et ta gestion actuelle de l'historique
+      # Allure restent inchangées.
       - name: Generate Allure report
         if: ${{ !cancelled() }}
         run: npm run allure:generate
+
+      # ------------------------------------------------------
+      # ARTEFACTS GITHUB ACTIONS
+      # ------------------------------------------------------
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
@@ -56,6 +138,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+          if-no-files-found: warn
 
       - name: Upload Allure raw results
         if: ${{ !cancelled() }}
@@ -64,6 +147,7 @@ jobs:
           name: allure-results
           path: allure-results/
           retention-days: 30
+          if-no-files-found: warn
 
       - name: Upload Allure HTML report
         if: ${{ !cancelled() }}
@@ -72,6 +156,7 @@ jobs:
           name: allure-report
           path: allure-report/
           retention-days: 30
+          if-no-files-found: warn
 
       - name: Upload code quality report
         if: ${{ !cancelled() }}
@@ -80,16 +165,29 @@ jobs:
           name: code-quality-report
           path: quality-report/
           retention-days: 30
+          if-no-files-found: error
 
-      # Allure reste à la racine du site.
-      # Le rapport ESLint/Prettier est ajouté dans /quality/.
+      # ------------------------------------------------------
+      # PRÉPARATION DE GITHUB PAGES
+      # ------------------------------------------------------
+
+      # Allure reste à la racine du site afin de conserver
+      # l'URL actuelle et le fonctionnement de ses tendances.
+      #
+      # Le rapport qualité est publié dans /quality/.
       - name: Prepare GitHub Pages site
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         run: |
           rm -rf pages-site
+          mkdir -p pages-site
           mkdir -p pages-site/quality
 
-          cp -r allure-report/. pages-site/
+          if [ -d allure-report ]; then
+            cp -r allure-report/. pages-site/
+          else
+            echo "::warning::Le dossier allure-report est absent."
+          fi
+
           cp -r quality-report/. pages-site/quality/
 
       - name: Configure GitHub Pages
@@ -102,16 +200,48 @@ jobs:
         with:
           path: pages-site/
 
-      # Le rapport est généré et publié avant de faire échouer le job.
+      # ------------------------------------------------------
+      # QUALITY GATE
+      # Cette étape reste obligatoirement après les uploads.
+      # ------------------------------------------------------
+
       - name: Fail when code quality checks fail
-        if: ${{ !cancelled() && steps.quality.outcome == 'failure' }}
+        if: >-
+          ${{
+            !cancelled() &&
+            (
+              steps.eslint.outcome == 'failure' ||
+              steps.prettier.outcome == 'failure' ||
+              steps.quality_report.outcome == 'failure'
+            )
+          }}
         run: |
-          echo "ESLint ou Prettier a détecté un problème."
+          echo "::error::Le contrôle qualité du code a échoué."
+
+          if [ "${{ steps.eslint.outcome }}" = "failure" ]; then
+            echo "::error::ESLint a échoué. Consultez l'étape 'Run ESLint'."
+          fi
+
+          if [ "${{ steps.prettier.outcome }}" = "failure" ]; then
+            echo "::error::Prettier a échoué. Consultez l'étape 'Check Prettier formatting'."
+          fi
+
+          if [ "${{ steps.quality_report.outcome }}" = "failure" ]; then
+            echo "::error::La génération du rapport qualité a échoué. Consultez l'étape 'Generate code quality report'."
+          fi
+
           exit 1
 
   deploy:
     name: Publish reports
-    if: ${{ always() && github.event_name != 'pull_request' && needs.test.result != 'cancelled' }}
+
+    if: >-
+      ${{
+        always() &&
+        github.event_name != 'pull_request' &&
+        needs.test.result != 'cancelled'
+      }}
+
     needs: test
     runs-on: ubuntu-latest
 
