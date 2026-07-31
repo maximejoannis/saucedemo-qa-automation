@@ -57,6 +57,10 @@ jobs:
         continue-on-error: true
         run: npm run format:check
 
+      - name: Generate code quality report
+        if: ${{ !cancelled() }}
+        run: npm run quality:report
+
       - name: Display code quality status
         if: ${{ !cancelled() }}
         run: |
@@ -114,19 +118,36 @@ jobs:
           retention-days: 30
           if-no-files-found: warn
 
+      - name: Upload code quality report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-quality-report
+          path: quality-report/
+          retention-days: 30
+          if-no-files-found: error
+
       # ------------------------------------------------------
       # GITHUB PAGES
       # ------------------------------------------------------
+
+      - name: Prepare GitHub Pages site
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        run: |
+          rm -rf pages-site
+          mkdir -p pages-site/quality
+          cp -r allure-report/. pages-site/
+          cp -r quality-report/. pages-site/quality/
 
       - name: Configure GitHub Pages
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         uses: actions/configure-pages@v5
 
-      - name: Upload Allure report for GitHub Pages
+      - name: Upload reports for GitHub Pages
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         uses: actions/upload-pages-artifact@v4
         with:
-          path: allure-report/
+          path: pages-site/
 
       # ------------------------------------------------------
       # QUALITY GATE
@@ -156,7 +177,7 @@ jobs:
           exit 1
 
   deploy:
-    name: Publish Allure report
+    name: Publish reports
 
     if: >-
       ${{
@@ -177,6 +198,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy Allure report to GitHub Pages
+      - name: Deploy reports to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
