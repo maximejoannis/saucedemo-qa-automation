@@ -33,8 +33,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # Le script quality:report doit générer le dossier quality-report/
+      - name: Generate code quality report
+        id: quality
+        continue-on-error: true
+        run: npm run quality:report
+
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps 
+        run: npx playwright install --with-deps
 
       - name: Run Playwright tests
         run: npm test
@@ -67,18 +73,44 @@ jobs:
           path: allure-report/
           retention-days: 30
 
+      - name: Upload code quality report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-quality-report
+          path: quality-report/
+          retention-days: 30
+
+      # Allure reste à la racine du site.
+      # Le rapport ESLint/Prettier est ajouté dans /quality/.
+      - name: Prepare GitHub Pages site
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        run: |
+          rm -rf pages-site
+          mkdir -p pages-site/quality
+
+          cp -r allure-report/. pages-site/
+          cp -r quality-report/. pages-site/quality/
+
       - name: Configure GitHub Pages
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         uses: actions/configure-pages@v5
 
-      - name: Upload report for GitHub Pages
+      - name: Upload reports for GitHub Pages
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         uses: actions/upload-pages-artifact@v4
         with:
-          path: allure-report/
+          path: pages-site/
+
+      # Le rapport est généré et publié avant de faire échouer le job.
+      - name: Fail when code quality checks fail
+        if: ${{ !cancelled() && steps.quality.outcome == 'failure' }}
+        run: |
+          echo "ESLint ou Prettier a détecté un problème."
+          exit 1
 
   deploy:
-    name: Publish Allure report
+    name: Publish reports
     if: ${{ always() && github.event_name != 'pull_request' && needs.test.result != 'cancelled' }}
     needs: test
     runs-on: ubuntu-latest
@@ -92,6 +124,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy Allure report to GitHub Pages
+      - name: Deploy reports to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
