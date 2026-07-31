@@ -11,9 +11,7 @@ const ascendingNames = [
 ];
 
 test.describe('US02 - Catalogue', () => {
-  test.beforeEach(
-  async ({ authenticatedPage: _authenticatedPage }) => {},
-);
+  test.beforeEach(async ({ authenticatedPage: _authenticatedPage }) => {});
 
   test('TC-US02-AC01-01 six produits affichés', async ({ inventoryPage }) => {
     await expect(inventoryPage.items).toHaveCount(6);
@@ -66,27 +64,17 @@ test.describe('US02 - Catalogue', () => {
   test('TC-US02-AC02-03 tri prix croissant', async ({ inventoryPage }) => {
     await inventoryPage.selectSort('lohi');
 
-    await expect.poll(() => inventoryPage.productPrices()).toEqual([
-      7.99,
-      9.99,
-      15.99,
-      15.99,
-      29.99,
-      49.99,
-    ]);
+    await expect
+      .poll(() => inventoryPage.productPrices())
+      .toEqual([7.99, 9.99, 15.99, 15.99, 29.99, 49.99]);
   });
 
   test('TC-US02-AC02-04 tri prix décroissant', async ({ inventoryPage }) => {
     await inventoryPage.selectSort('hilo');
 
-    await expect.poll(() => inventoryPage.productPrices()).toEqual([
-      49.99,
-      29.99,
-      15.99,
-      15.99,
-      9.99,
-      7.99,
-    ]);
+    await expect
+      .poll(() => inventoryPage.productPrices())
+      .toEqual([49.99, 29.99, 15.99, 15.99, 9.99, 7.99]);
   });
 
   test('TC-US02-AC02-05 changement successif de tri', async ({ inventoryPage }) => {
@@ -94,13 +82,8 @@ test.describe('US02 - Catalogue', () => {
     await expect.poll(() => inventoryPage.productNames()).toEqual(ascendingNames);
 
     await inventoryPage.selectSort('hilo');
-    await expect.poll(() => inventoryPage.productPrices()).toEqual([
-      49.99,
-      29.99,
-      15.99,
-      15.99,
-      9.99,
-      7.99,
-    ]);
+    await expect
+      .poll(() => inventoryPage.productPrices())
+      .toEqual([49.99, 29.99, 15.99, 15.99, 9.99, 7.99]);
   });
 });

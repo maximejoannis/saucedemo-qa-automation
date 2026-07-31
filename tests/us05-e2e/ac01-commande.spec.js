@@ -1,12 +1,8 @@
-const { test, expect } = require("../../src/fixtures/test");
-const { validCustomer } = require("../../src/data/checkout");
-const { products } = require("../../src/data/products");
+const { test, expect } = require('../../src/fixtures/test');
+const { validCustomer } = require('../../src/data/checkout');
+const { products } = require('../../src/data/products');
 
-const selectedProducts = [
-  products.backpack,
-  products.bikeLight,
-  products.boltTShirt,
-];
+const selectedProducts = [products.backpack, products.bikeLight, products.boltTShirt];
 
 async function reachOverview({ inventoryPage, cartPage, checkoutPage }) {
   await inventoryPage.add(products.backpack.slug);
@@ -32,8 +28,8 @@ async function reachOverviewWithProducts({
   await checkoutPage.continue();
 }
 
-test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
-  test("TC-US05-AC01-01/03/04 récapitulatif et montants cohérents", async ({
+test.describe('US05 - Commande | Récapitulatif et finalisation', () => {
+  test('TC-US05-AC01-01/03/04 récapitulatif et montants cohérents', async ({
     authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
@@ -49,9 +45,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
     await expect(page).toHaveURL(/\/checkout-step-two\.html$/);
     await expect(checkoutPage.summaryItems).toHaveCount(1);
     await expect(checkoutPage.summaryNames).toHaveText(products.backpack.name);
-    await expect(checkoutPage.summaryPrices).toHaveText(
-      `$${products.backpack.price}`,
-    );
+    await expect(checkoutPage.summaryPrices).toHaveText(`$${products.backpack.price}`);
     await expect(checkoutPage.tax).toBeVisible();
 
     const subtotal = await checkoutPage.displayedAmount(checkoutPage.subtotal);
@@ -62,7 +56,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
     expect(Number((subtotal + tax).toFixed(2))).toBe(total);
   });
 
-  test("TC-US05-AC01-02 récapitulatif avec trois produits", async ({
+  test('TC-US05-AC01-02 récapitulatif avec trois produits', async ({
     authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
@@ -86,14 +80,10 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
     ]);
 
     const expectedSubtotal = Number(
-      selectedProducts
-        .reduce((sum, product) => sum + product.price, 0)
-        .toFixed(2),
+      selectedProducts.reduce((sum, product) => sum + product.price, 0).toFixed(2)
     );
 
-    const displayedSubtotal = await checkoutPage.displayedAmount(
-      checkoutPage.subtotal,
-    );
+    const displayedSubtotal = await checkoutPage.displayedAmount(checkoutPage.subtotal);
 
     const tax = await checkoutPage.displayedAmount(checkoutPage.tax);
 
@@ -103,7 +93,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
     expect(Number((displayedSubtotal + tax).toFixed(2))).toBe(total);
   });
 
-  test("TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue", async ({
+  test('TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue', async ({
     authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
@@ -124,7 +114,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
     await expect(page).toHaveURL(/\/inventory\.html$/);
   });
 
-  test("TC-US05-AC02-01 achat d’un produit @smoke @critical", async ({
+  test('TC-US05-AC02-01 achat d’un produit @smoke @critical', async ({
     authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
@@ -143,7 +133,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
     await expect(checkoutPage.completeHeader).toBeVisible();
   });
 
-  test("TC-US05-AC02-02 achat de trois produits", async ({
+  test('TC-US05-AC02-02 achat de trois produits', async ({
     authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
@@ -166,7 +156,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
     await expect(checkoutPage.completeHeader).toBeVisible();
   });
 
-  test("TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé", async ({
+  test('TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé', async ({
     authenticatedPage: _authenticatedPage,
     inventoryPage,
     cartPage,
@@ -181,7 +171,7 @@ test.describe("US05 - Commande | Récapitulatif et finalisation", () => {
 
     await checkoutPage.finish();
 
-    await expect(checkoutPage.completeText).toContainText("dispatched");
+    await expect(checkoutPage.completeText).toContainText('dispatched');
 
     await checkoutPage.backHome();
 

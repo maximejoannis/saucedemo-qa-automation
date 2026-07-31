@@ -30,10 +30,7 @@ class InventoryPage {
   }
 
   async openProduct(name) {
-    await this.page
-      .locator('[data-test$="-title-link"]')
-      .filter({ hasText: name })
-      .click();
+    await this.page.locator('[data-test$="-title-link"]').filter({ hasText: name }).click();
   }
 
   async backToProducts() {

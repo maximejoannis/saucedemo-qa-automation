@@ -41,11 +41,7 @@ class CheckoutPage {
     });
   }
 
-  async fillCustomer({
-    firstName = '',
-    lastName = '',
-    postalCode = '',
-  }) {
+  async fillCustomer({ firstName = '', lastName = '', postalCode = '' }) {
     await this.firstName.fill(firstName);
     await this.lastName.fill(lastName);
     await this.postalCode.fill(postalCode);

@@ -10,7 +10,7 @@ https://maximejoannis.github.io/saucedemo-qa-automation
 
 Suite de tests End-to-End du site **SauceDemo** réalisée avec **Playwright** en JavaScript.
 
-Le projet est structuré selon le pattern **Page Object Model (POM)**. 
+Le projet est structuré selon le pattern **Page Object Model (POM)**.
 
 ---
 
@@ -78,13 +78,13 @@ Le projet comprend actuellement :
 
 # Stack technique
 
-| Outil | Version |
-|--------|----------|
-| Node.js | LTS recommandée |
-| Playwright | 1.61.1 |
-| JavaScript | ES6 |
-| Allure Reporter | oui |
-| GitHub Actions | oui |
+| Outil           | Version         |
+| --------------- | --------------- |
+| Node.js         | LTS recommandée |
+| Playwright      | 1.61.1          |
+| JavaScript      | ES6             |
+| Allure Reporter | oui             |
+| GitHub Actions  | oui             |
 
 ---
 
