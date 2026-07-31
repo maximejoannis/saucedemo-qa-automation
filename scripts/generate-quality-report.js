@@ -18,10 +18,7 @@ function run(args) {
 }
 
 function escapeHtml(value = '') {
-  return value
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;');
+  return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 }
 
 function statusLabel(status) {
@@ -31,22 +28,15 @@ function statusLabel(status) {
 fs.rmSync(reportDirectory, { recursive: true, force: true });
 fs.mkdirSync(reportDirectory, { recursive: true });
 
-const eslintResult = run([
-  'eslint',
-  '.',
-  '--format',
-  'html',
-  '--output-file',
-  eslintReportPath,
-]);
+const eslintResult = run(['eslint', '.', '--format', 'html', '--output-file', eslintReportPath]);
 
 if (!fs.existsSync(eslintReportPath)) {
   fs.writeFileSync(
     eslintReportPath,
     `<!doctype html><html lang="fr"><meta charset="utf-8"><title>ESLint</title><body><h1>Rapport ESLint indisponible</h1><pre>${escapeHtml(
-      eslintResult.stderr || eslintResult.stdout || 'Aucune sortie disponible.',
+      eslintResult.stderr || eslintResult.stdout || 'Aucune sortie disponible.'
     )}</pre></body></html>`,
-    'utf8',
+    'utf8'
   );
 }
 
@@ -59,7 +49,7 @@ const prettierOutput = [prettierResult.stdout, prettierResult.stderr]
 fs.writeFileSync(
   prettierReportPath,
   prettierOutput || 'Tous les fichiers respectent le formatage Prettier.',
-  'utf8',
+  'utf8'
 );
 
 const generatedAt = new Date().toISOString();
