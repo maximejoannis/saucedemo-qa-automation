@@ -9,14 +9,21 @@ test('génère la cartographie fonctionnelle à partir du référentiel', () => 
   const result = runFeatureMapper();
 
   assert.equal(result.metadata.agent, 'AI Feature Mapper');
-  assert.equal(result.metadata.version, 'v2');
+  assert.equal(result.metadata.version, 'v3');
   assert.equal(result.metadata.schemaVersion, '1.1.0');
-  assert.deepEqual(result.metadata.sources, ['docs/functional-map.md', 'src/pages/']);
+  assert.deepEqual(result.metadata.sources, [
+    'docs/functional-map.md',
+    'src/pages/',
+    'tests/',
+  ]);
 
   assert.equal(result.summary.featuresAnalyzed, 14);
   assert.equal(result.features.length, 14);
   assert.equal(result.summary.pageObjectsAnalyzed, 4);
   assert.equal(result.repository.pageObjects.length, 4);
+  assert.equal(result.summary.testFilesAnalyzed, 5);
+  assert.equal(result.summary.testsAnalyzed, 43);
+  assert.equal(result.testAnalysis.tests.length, 43);
 
   assert.deepEqual(result.features[0], {
     id: 'F01',
@@ -43,6 +50,7 @@ test('écrit le résultat dans feature-map.json', () => {
   assert.equal(generatedReport.metadata.schemaVersion, config.schemaVersion);
   assert.equal(generatedReport.summary.featuresAnalyzed, result.summary.featuresAnalyzed);
   assert.deepEqual(generatedReport.features, result.features);
+  assert.deepEqual(generatedReport.testAnalysis, result.testAnalysis);
 });
 
 test('contient toutes les fonctionnalités attendues', () => {
