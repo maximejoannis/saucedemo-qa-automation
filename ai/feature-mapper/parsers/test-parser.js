@@ -1,6 +1,7 @@
 const path = require('node:path');
 
-const TEST_CALL_PATTERN = /\btest\s*\(\s*(['"`])([\s\S]*?)\1\s*,\s*async\s*\(\s*\{([\s\S]*?)\}\s*\)\s*=>\s*\{/g;
+const TEST_CALL_PATTERN =
+  /\btest\s*\(\s*(['"`])([\s\S]*?)\1\s*,\s*async\s*\(\s*\{([\s\S]*?)\}\s*\)\s*=>\s*\{/g;
 
 function lineNumberAt(source, index) {
   return source.slice(0, index).split('\n').length;
@@ -50,7 +51,8 @@ function parseFixtures(rawFixtures) {
 
 function parseDataSources(source, fileDirectory, projectRoot) {
   const dataSources = [];
-  const requirePattern = /const\s+(\{[^}]+\}|[A-Za-z_$][\w$]*)\s*=\s*require\((['"])([^'"]*src\/data\/[^'"]+)\2\)/g;
+  const requirePattern =
+    /const\s+(\{[^}]+\}|[A-Za-z_$][\w$]*)\s*=\s*require\((['"])([^'"]*src\/data\/[^'"]+)\2\)/g;
   let match;
 
   while ((match = requirePattern.exec(source)) !== null) {

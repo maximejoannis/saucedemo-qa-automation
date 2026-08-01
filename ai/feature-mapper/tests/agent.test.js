@@ -11,11 +11,7 @@ test('génère la cartographie fonctionnelle à partir du référentiel', () => 
   assert.equal(result.metadata.agent, 'AI Feature Mapper');
   assert.equal(result.metadata.version, 'v3');
   assert.equal(result.metadata.schemaVersion, '1.1.0');
-  assert.deepEqual(result.metadata.sources, [
-    'docs/functional-map.md',
-    'src/pages/',
-    'tests/',
-  ]);
+  assert.deepEqual(result.metadata.sources, ['docs/functional-map.md', 'src/pages/', 'tests/']);
 
   assert.equal(result.summary.featuresAnalyzed, 14);
   assert.equal(result.features.length, 14);

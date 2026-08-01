@@ -14,7 +14,9 @@ function validateTestAnalysis(analysis) {
   );
 
   if (invalidTest) {
-    throw new Error(`Scénario Playwright invalide dans ${invalidTest.file || 'un fichier inconnu'}.`);
+    throw new Error(
+      `Scénario Playwright invalide dans ${invalidTest.file || 'un fichier inconnu'}.`
+    );
   }
 }
 

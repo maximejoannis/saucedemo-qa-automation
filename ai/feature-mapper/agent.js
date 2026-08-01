@@ -49,9 +49,7 @@ function runFeatureMapper() {
       ),
       testFilesAnalyzed: testAnalysis.testFiles.length,
       testsAnalyzed: testAnalysis.tests.length,
-      fixturesReferenced: new Set(
-        testAnalysis.tests.flatMap((testCase) => testCase.fixtures)
-      ).size,
+      fixturesReferenced: new Set(testAnalysis.tests.flatMap((testCase) => testCase.fixtures)).size,
       methodCallsAnalyzed: testAnalysis.tests.reduce(
         (total, testCase) => total + testCase.methodCalls.length,
         0
