@@ -1,91 +1,159 @@
 # SauceDemo QA Automation
 
+> Framework d'automatisation End-to-End construit avec **Playwright**, conçu selon les bonnes pratiques QA modernes et destiné à évoluer vers un **framework QA intelligent** capable de cartographier les fonctionnalités de l'application et de mesurer automatiquement la couverture fonctionnelle des tests.
+
 [![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
 [![Code Quality](https://img.shields.io/badge/Code%20Quality-ESLint%20%2B%20Prettier-4B32C3?logo=eslint)](https://maximejoannis.github.io/saucedemo-qa-automation/quality/)
 ![Node](https://img.shields.io/badge/Node-24.x-green)
 ![Playwright](https://img.shields.io/badge/Playwright-1.56-blue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Rapport Allure publié :
-https://maximejoannis.github.io/saucedemo-qa-automation
-
-Suite de tests End-to-End du site **SauceDemo** réalisée avec **Playwright** en JavaScript.
-
-Le projet est structuré selon le pattern **Page Object Model (POM)**.
-
 ---
 
 # Sommaire
 
 - Présentation
-- Fonctionnalités
+- Objectifs
+- Fonctionnalités automatisées
+- Architecture
 - Stack technique
 - Structure du projet
-- Prérequis
 - Installation
-- Exécution des tests
-- Rapports
-- Architecture
-- Traçabilité
-- Configuration Playwright
+- Exécution
+- Reporting
+- Qualité du code
 - Intégration Continue
+- Vision IA
 - Roadmap
 
 ---
 
 # Présentation
 
-Cette suite automatise les principaux parcours fonctionnels de SauceDemo :
+Ce projet automatise les principaux parcours utilisateurs du site **SauceDemo** à l'aide de **Playwright Test**.
 
-- authentification
-- consultation du catalogue
-- tri des produits
-- ajout et suppression d'articles
-- gestion du panier
-- saisie des informations client
-- finalisation d'une commande
+Il applique les pratiques recommandées pour un framework QA moderne :
 
-Le projet a été conçu afin de démontrer une approche QA professionnelle basée sur :
-
-- Playwright
-- Page Object Model
+- Page Object Model (POM)
 - séparation des données de test
 - fixtures Playwright
-- documentation QA
-- traçabilité exigences ↔ cas de test ↔ automatisation
+- exécution parallèle
+- reporting HTML et Allure
+- intégration continue GitHub Actions
+- qualité de code avec ESLint et Prettier
+
+Le dépôt constitue également la base d'un futur **framework QA augmenté par l'IA**, capable d'analyser automatiquement les fonctionnalités couvertes par les tests.
 
 ---
 
-# Fonctionnalités
+# Objectifs
 
-Le projet comprend actuellement :
+Le framework poursuit plusieurs objectifs :
 
-- 43 tests Playwright
-- 5 fichiers de spécifications
-- exécution sur Chromium et Firefox
-- architecture Page Object Model
-- fixtures Playwright
-- données de test centralisées
-- rapport HTML Playwright
-- rapport Allure
-- exécution parallèle
-- retries configurés en CI
-- captures d'écran sur échec
-- vidéos sur échec
-- traces Playwright au premier retry
-- workflow GitHub Actions
+- automatiser les parcours critiques de l'application ;
+- produire des tests fiables, lisibles et maintenables ;
+- faciliter l'évolution des scénarios grâce au Page Object Model ;
+- fournir des rapports d'exécution détaillés ;
+- préparer l'intégration d'outils d'analyse assistés par IA.
+
+---
+
+# Fonctionnalités automatisées
+
+Les scénarios actuellement couverts concernent :
+
+| Domaine | Couverture |
+|----------|------------|
+| Authentification | ✅ |
+| Catalogue produits | ✅ |
+| Tri des produits | ✅ |
+| Ajout au panier | ✅ |
+| Suppression du panier | ✅ |
+| Consultation du panier | ✅ |
+| Checkout | ✅ |
+| Validation complète d'une commande | ✅ |
+
+## Statistiques actuelles
+
+| Élément | Valeur |
+|---------|--------|
+| Tests automatisés | **43** |
+| Suites de tests | **5** |
+| Navigateurs | Chromium, Firefox |
+| Page Objects | ✔ |
+| Fixtures | ✔ |
+| Global Setup | ✔ |
+| Storage State | ✔ |
+| Allure Report | ✔ |
+| HTML Report | ✔ |
+| GitHub Actions | ✔ |
+
+---
+
+# Architecture
+
+Le framework suit une architecture **Page Object Model**.
+
+```text
+                        GitHub Actions
+                               │
+                               ▼
+                       Playwright Runner
+                               │
+             ┌─────────────────┴─────────────────┐
+             ▼                                   ▼
+        Global Setup                        Fixtures
+             │                                   │
+             └──────────────┬────────────────────┘
+                            ▼
+                      Page Objects
+                            │
+                            ▼
+                       SauceDemo App
+                            │
+                            ▼
+                    HTML / Allure Reports
+
+                     (Roadmap)
+                  AI Quality Assistant
+```
+
+Chaque couche possède une responsabilité clairement définie.
+
+### Page Objects
+
+Les Page Objects encapsulent :
+
+- les locators ;
+- les actions utilisateur ;
+- les assertions réutilisables.
+
+### Fixtures
+
+Les fixtures injectent automatiquement les objets nécessaires aux scénarios afin d'éviter les duplications de code.
+
+### Données de test
+
+Les données sont centralisées dans `src/data` afin de séparer les scénarios métier des données manipulées.
+
+### Global Setup
+
+Le `global-setup.js` prépare l'environnement Playwright avant l'exécution des tests, notamment via la gestion de l'authentification persistée (`storageState`).
 
 ---
 
 # Stack technique
 
-| Outil           | Version         |
-| --------------- | --------------- |
-| Node.js         | LTS recommandée |
-| Playwright      | 1.61.1          |
-| JavaScript      | ES6             |
-| Allure Reporter | oui             |
-| GitHub Actions  | oui             |
+| Technologie | Utilisation |
+|-------------|-------------|
+| Playwright | Automatisation E2E |
+| JavaScript ES6 | Développement |
+| Node.js | Runtime |
+| Allure | Reporting |
+| HTML Reporter | Reporting natif |
+| ESLint | Analyse statique |
+| Prettier | Formatage |
+| GitHub Actions | Intégration continue |
 
 ---
 
@@ -95,138 +163,55 @@ Le projet comprend actuellement :
 .
 ├── .github/
 │   └── workflows/
-│       └── playwright.yml
+├── playwright/
+│   └── .auth/
+├── scripts/
 ├── src/
 │   ├── data/
-│   │   ├── checkout.js
-│   │   ├── products.js
-│   │   └── users.js
-│   │
 │   ├── fixtures/
-│   │   └── test.js
-│   │
 │   └── pages/
-│       ├── LoginPage.js
-│       ├── InventoryPage.js
-│       ├── CartPage.js
-│       └── CheckoutPage.js
-│
 ├── tests/
 │   ├── us01-authentication/
-│   ├── us02-catalogue/
-│   ├── us03-panier/
+│   ├── us02-catalog/
+│   ├── us03-cart/
 │   ├── us04-checkout/
 │   └── us05-e2e/
-│
+├── global-setup.js
 ├── playwright.config.js
-├── package.json
-└── README.md
+└── package.json
 ```
-
-# Architecture
-
-## Page Objects
-
-Les Page Objects centralisent :
-
-- les locators
-- les actions utilisateur
-- les assertions communes
-
-Cela permet :
-
-- une maintenance simplifiée
-- moins de duplication
-- une meilleure lisibilité
-
----
-
-## Fixtures
-
-Les fixtures exposent :
-
-- les différents Page Objects
-- une fixture `authenticatedPage` permettant de démarrer un scénario déjà connecté.
-
----
-
-## Données de test
-
-Les données sont isolées dans :
-
-```
-src/data/
-```
-
-On y retrouve :
-
-- utilisateurs
-- produits
-- informations de checkout
-
----
-
-# Prérequis
-
-Installer :
-
-- Node.js LTS
-- npm
-- Java (pour Allure)
-
-Le projet nécessite également un accès à :
-
-https://www.saucedemo.com/
 
 ---
 
 # Installation
 
-Installer les dépendances :
-
 ```bash
 npm ci
 ```
 
-Installer les navigateurs Playwright :
+Installation des navigateurs :
 
 ```bash
 npx playwright install
 ```
 
-Sous Linux :
-
-```bash
-npx playwright install --with-deps
-```
-
 ---
 
-# Exécution des tests
+# Exécution
 
-## Toute la suite
+Suite complète :
 
 ```bash
 npm test
 ```
 
-ou
-
-```bash
-npx playwright test
-```
-
----
-
-## Mode Headed
+Mode Headed :
 
 ```bash
 npm run test:headed
 ```
 
----
-
-## Interface Playwright
+Interface Playwright :
 
 ```bash
 npm run test:ui
@@ -234,238 +219,106 @@ npm run test:ui
 
 ---
 
-## Chromium
-
-```bash
-npx playwright test --project=chromium
-```
-
----
-
-## Firefox
-
-```bash
-npx playwright test --project=firefox
-```
-
----
-
-## Un fichier
-
-```bash
-npx playwright test tests/us01-authentication/ac01-login.spec.js
-```
-
----
-
-## Un seul test
-
-```bash
-npx playwright test -g "TC-US01-AC01-01"
-```
-
----
-
-## Tests Smoke
-
-```bash
-npx playwright test -g "@smoke"
-```
-
-Les tags disponibles sont :
-
-- @smoke
-- @critical
-
----
-
-## Vérification de stabilité
-
-Exécuter chaque test cinq fois :
-
-```bash
-npx playwright test --repeat-each=5
-```
-
-Utiliser quatre workers :
-
-```bash
-npx playwright test --workers=4
-```
-
----
-
-## Débogage
-
-```bash
-npx playwright test --debug
-```
-
-ou
-
-```bash
-PWDEBUG=1 npx playwright test
-```
-
-PowerShell :
-
-```powershell
-$env:PWDEBUG=1
-npx playwright test
-```
-
----
-
-# Rapports
+# Reporting
 
 ## Rapport HTML
-
-Après une exécution :
 
 ```bash
 npx playwright show-report
 ```
 
-Le rapport est généré dans :
-
-```
-playwright-report/
-```
-
----
-
 ## Rapport Allure
-
-Génération :
 
 ```bash
 npm run allure:generate
-```
-
-Ouverture :
-
-```bash
 npm run allure:open
 ```
 
-Ou directement :
+---
+
+# Qualité du code
+
+Analyse :
 
 ```bash
-npx allure serve allure-results
+npm run lint
 ```
 
-Les résultats sont générés dans :
+Correction automatique :
 
-```
-allure-results/
-```
-
-Le rapport HTML est généré dans :
-
-```
-allure-report/
+```bash
+npm run lint:fix
 ```
 
-# Convention des identifiants
+Formatage :
 
-Chaque cas de test suit le format :
-
-```
-TC-USxx-ACxx-nn
+```bash
+npm run format
 ```
 
-Exemple :
-
-```
-TC-US03-AC02-05
-```
-
-où :
-
-- US = User Story
-- AC = Acceptance Criteria
-- nn = numéro du cas
-
----
-
-# Traçabilité
-
-Le référentiel contient :
-
-- 50 cas de test fonctionnels
-- 42 cas automatisés
-- 8 cas manuels
-
-Les 42 cas automatisés sont couverts par :
-
-- 43 tests Playwright
-
-Certains scénarios automatisés couvrent plusieurs cas fonctionnels.
-
----
-
-# Configuration Playwright
-
-Le projet utilise notamment :
-
-- dossier de tests : `tests/`
-- timeout : 30 secondes
-- exécution parallèle
-- `forbidOnly` activé en CI
-- retries :
-  - 0 en local
-  - 2 en CI
-- 1 worker en CI
-- projets Chromium et Firefox
-- trace au premier retry
-- screenshot uniquement en cas d'échec
-- vidéo uniquement en cas d'échec
-- reporters :
-  - List
-  - HTML
-  - Allure
-
----
-
-# Intégration Continue
-
-Le workflow GitHub Actions :
-
-1. récupération du dépôt
-2. installation de Node.js LTS
-3. installation des dépendances
-4. installation des navigateurs Playwright
-5. exécution des tests
-6. génération du rapport Allure
-7. publication des artefacts
-8. déploiement du rapport Allure sur GitHub Pages (hors Pull Request)
-
----
-
-# Auteur
-
-Projet de démonstration QA Automation réalisé avec :
-
-- Playwright
-- JavaScript
-- Page Object Model
-- GitHub Actions
-- Allure Report
-
-dans une démarche conforme aux bonnes pratiques Playwright/ISTQB et d'automatisation des tests.
-
-## Rapport qualité du code
-
-Le pipeline GitHub Actions exécute ESLint et Prettier, génère un rapport HTML puis le publie sur GitHub Pages :
-
-- Rapport Allure : https://maximejoannis.github.io/saucedemo-qa-automation/
-- Rapport qualité : https://maximejoannis.github.io/saucedemo-qa-automation/quality/
-- Rapport ESLint détaillé : https://maximejoannis.github.io/saucedemo-qa-automation/quality/eslint-report.html
-
-Génération locale du rapport qualité :
+Rapport qualité :
 
 ```bash
 npm run quality:report
 ```
 
-Le rapport est créé dans `quality-report/`. ESLint et Prettier restent les contrôles bloquants du pipeline ; la génération HTML n'ajoute pas de quality gate supplémentaire.
+---
+
+# Intégration Continue
+
+Le projet s'appuie sur **GitHub Actions** afin de :
+
+- installer les dépendances ;
+- exécuter les tests Playwright ;
+- publier les rapports ;
+- garantir la stabilité du framework à chaque évolution.
+
+---
+
+# Vision IA
+
+Le framework est conçu pour évoluer vers une plateforme d'automatisation assistée par l'intelligence artificielle.
+
+L'objectif est de développer un **AI Quality Assistant** capable d'analyser automatiquement le dépôt afin de produire une vision fonctionnelle de l'application testée.
+
+À terme, cet assistant pourra :
+
+- cartographier automatiquement les fonctionnalités de l'application ;
+- identifier les User Stories couvertes ;
+- associer les fonctionnalités aux Page Objects et aux scénarios Playwright ;
+- calculer le taux de couverture fonctionnelle des tests ;
+- détecter les fonctionnalités non automatisées ;
+- proposer de nouveaux scénarios de tests ;
+- générer une matrice de traçabilité entre exigences et tests automatisés.
+
+Cette approche vise à transformer le framework en un outil d'aide à la décision pour les équipes QA, au-delà de la simple exécution des tests.
+
+---
+
+# Roadmap
+
+## Version actuelle
+
+- ✅ Framework Playwright
+- ✅ Page Object Model
+- ✅ Fixtures
+- ✅ Global Setup
+- ✅ HTML Report
+- ✅ Allure Report
+- ✅ GitHub Actions
+- ✅ ESLint & Prettier
+
+## Évolutions prévues
+
+- 🔄 AI Feature Mapper
+- 🔄 Functional Coverage Analyzer
+- 🔄 Requirements ↔ Tests Matrix
+- 🔄 AI Test Recommendations
+- 🔄 Dashboard de couverture fonctionnelle
+- 🔄 Génération assistée de scénarios Playwright
+
+---
+
+# Licence
+
+Ce projet est distribué sous licence **MIT**.
