@@ -2,9 +2,11 @@ const path = require('node:path');
 
 const CLASS_PATTERN = /class\s+([A-Za-z_$][\w$]*)\s*{/;
 const EXPORT_PATTERN = /module\.exports\s*=\s*{\s*([A-Za-z_$][\w$]*)\s*}/;
-const LOCATOR_PATTERN = /this\.([A-Za-z_$][\w$]*)\s*=\s*page\.(getBy[A-Za-z]+|locator)\s*\(([^;]+)\);/gs;
+const LOCATOR_PATTERN =
+  /this\.([A-Za-z_$][\w$]*)\s*=\s*page\.(getBy[A-Za-z]+|locator)\s*\(([^;]+)\);/gs;
 const METHOD_PATTERN = /\n\s*(async\s+)?([A-Za-z_$][\w$]*)\s*\(([^)]*)\)\s*{/g;
-const PLAYWRIGHT_ACTION_PATTERN = /\.(goto|click|fill|selectOption|waitFor|textContent|allTextContents)\s*\(/g;
+const PLAYWRIGHT_ACTION_PATTERN =
+  /\.(goto|click|fill|selectOption|waitFor|textContent|allTextContents)\s*\(/g;
 
 function getLineNumber(source, index) {
   return source.slice(0, index).split(/\r?\n/).length;
@@ -53,8 +55,11 @@ function extractMethods(source) {
 
     const openingBraceIndex = source.indexOf('{', match.index);
     const closingBraceIndex = findMatchingBrace(source, openingBraceIndex);
-    const body = closingBraceIndex === -1 ? '' : source.slice(openingBraceIndex + 1, closingBraceIndex);
-    const actions = [...body.matchAll(PLAYWRIGHT_ACTION_PATTERN)].map((actionMatch) => actionMatch[1]);
+    const body =
+      closingBraceIndex === -1 ? '' : source.slice(openingBraceIndex + 1, closingBraceIndex);
+    const actions = [...body.matchAll(PLAYWRIGHT_ACTION_PATTERN)].map(
+      (actionMatch) => actionMatch[1]
+    );
 
     methods.push({
       name,
