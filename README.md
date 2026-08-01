@@ -62,31 +62,31 @@ Le framework poursuit plusieurs objectifs :
 
 Les scénarios actuellement couverts concernent :
 
-| Domaine | Couverture |
-|----------|------------|
-| Authentification | ✅ |
-| Catalogue produits | ✅ |
-| Tri des produits | ✅ |
-| Ajout au panier | ✅ |
-| Suppression du panier | ✅ |
-| Consultation du panier | ✅ |
-| Checkout | ✅ |
-| Validation complète d'une commande | ✅ |
+| Domaine                            | Couverture |
+| ---------------------------------- | ---------- |
+| Authentification                   | ✅         |
+| Catalogue produits                 | ✅         |
+| Tri des produits                   | ✅         |
+| Ajout au panier                    | ✅         |
+| Suppression du panier              | ✅         |
+| Consultation du panier             | ✅         |
+| Checkout                           | ✅         |
+| Validation complète d'une commande | ✅         |
 
 ## Statistiques actuelles
 
-| Élément | Valeur |
-|---------|--------|
-| Tests automatisés | **43** |
-| Suites de tests | **5** |
-| Navigateurs | Chromium, Firefox |
-| Page Objects | ✔ |
-| Fixtures | ✔ |
-| Global Setup | ✔ |
-| Storage State | ✔ |
-| Allure Report | ✔ |
-| HTML Report | ✔ |
-| GitHub Actions | ✔ |
+| Élément           | Valeur            |
+| ----------------- | ----------------- |
+| Tests automatisés | **43**            |
+| Suites de tests   | **5**             |
+| Navigateurs       | Chromium, Firefox |
+| Page Objects      | ✔                 |
+| Fixtures          | ✔                 |
+| Global Setup      | ✔                 |
+| Storage State     | ✔                 |
+| Allure Report     | ✔                 |
+| HTML Report       | ✔                 |
+| GitHub Actions    | ✔                 |
 
 ---
 
@@ -144,15 +144,15 @@ Le `global-setup.js` prépare l'environnement Playwright avant l'exécution des 
 
 # Stack technique
 
-| Technologie | Utilisation |
-|-------------|-------------|
-| Playwright | Automatisation E2E |
-| JavaScript ES6 | Développement |
-| Node.js | Runtime |
-| Allure | Reporting |
-| HTML Reporter | Reporting natif |
-| ESLint | Analyse statique |
-| Prettier | Formatage |
+| Technologie    | Utilisation          |
+| -------------- | -------------------- |
+| Playwright     | Automatisation E2E   |
+| JavaScript ES6 | Développement        |
+| Node.js        | Runtime              |
+| Allure         | Reporting            |
+| HTML Reporter  | Reporting natif      |
+| ESLint         | Analyse statique     |
+| Prettier       | Formatage            |
 | GitHub Actions | Intégration continue |
 
 ---
