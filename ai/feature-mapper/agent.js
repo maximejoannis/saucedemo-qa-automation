@@ -29,6 +29,10 @@ const {
   CorrelationEngine,
 } = require('./reasoning/correlation-engine');
 
+const {
+  CoverageEngine,
+} = require('./reasoning/coverage-engine');
+
 function runFeatureMapper() {
   validateFunctionalMapFile(config.functionalMapPath);
 
@@ -63,15 +67,15 @@ function runFeatureMapper() {
     tests: testAnalysis.tests,
   });
 
-  const coveredFeatures = mapping.filter(
-    (feature) => feature.status === 'covered',
-  ).length;
+  const coverageEngine = new CoverageEngine();
+
+  const coverage = coverageEngine.calculate(mapping);
 
   const result = {
     metadata: {
       generatedAt: new Date().toISOString(),
       agent: 'AI Feature Mapper',
-      version: 'v4',
+      version: 'v5',
       schemaVersion: config.schemaVersion,
       sources: [
         'docs/functional-map.md',
@@ -82,21 +86,6 @@ function runFeatureMapper() {
 
     summary: {
       featuresAnalyzed: parsed.features.length,
-
-      coveredFeatures,
-
-      uncoveredFeatures:
-        parsed.features.length - coveredFeatures,
-
-      coverage:
-        parsed.features.length === 0
-          ? 0
-          : Number(
-              (
-                (coveredFeatures / parsed.features.length) *
-                100
-              ).toFixed(2),
-            ),
 
       pageObjectsAnalyzed: repository.pageObjects.length,
 
@@ -136,6 +125,8 @@ function runFeatureMapper() {
     testAnalysis,
 
     mapping,
+
+    coverage,
   };
 
   writeJsonReport(config.outputPath, result);
@@ -148,27 +139,33 @@ if (require.main === module) {
     const result = runFeatureMapper();
 
     console.log('');
-
     console.log('AI Feature Mapper');
-
     console.log('=================');
-
     console.log('');
 
     console.log(
       `Fonctionnalités : ${result.summary.featuresAnalyzed}`,
     );
 
+    console.log('');
+
+    console.log('Couverture fonctionnelle');
+    console.log('------------------------');
+
     console.log(
-      `Fonctionnalités couvertes : ${result.summary.coveredFeatures}`,
+      `Couvertes : ${result.coverage.summary.covered}`,
     );
 
     console.log(
-      `Fonctionnalités non couvertes : ${result.summary.uncoveredFeatures}`,
+      `Partiellement couvertes : ${result.coverage.summary.partiallyCovered}`,
     );
 
     console.log(
-      `Couverture : ${result.summary.coverage}%`,
+      `Non couvertes : ${result.coverage.summary.notCovered}`,
+    );
+
+    console.log(
+      `Taux de couverture : ${result.coverage.summary.coverage}%`,
     );
 
     console.log('');
@@ -177,13 +174,17 @@ if (require.main === module) {
       `Page Objects : ${result.summary.pageObjectsAnalyzed}`,
     );
 
-    console.log(`Tests : ${result.summary.testsAnalyzed}`);
+    console.log(
+      `Tests : ${result.summary.testsAnalyzed}`,
+    );
 
     console.log('');
 
     console.log(`Résultat : ${config.outputPath}`);
   } catch (error) {
-    console.error(`Échec de l'AI Feature Mapper : ${error.message}`);
+    console.error(
+      `Échec de l'AI Feature Mapper : ${error.message}`,
+    );
     process.exitCode = 1;
   }
 }
