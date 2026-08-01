@@ -3,9 +3,11 @@ const config = require('./config');
 const { parseFunctionalMap } = require('./parsers/functional-map-parser');
 const { writeJsonReport } = require('./reporters/json-reporter');
 const { analyzePageObjects } = require('./tools/repository-tool');
+const { analyzeTests } = require('./tools/test-analysis-tool');
 const { validateFunctionalMapFile } = require('./validators/input-validator');
 const { validateFeatureMap } = require('./validators/result-validator');
 const { validateRepositoryAnalysis } = require('./validators/repository-validator');
+const { validateTestAnalysis } = require('./validators/test-analysis-validator');
 
 function runFeatureMapper() {
   validateFunctionalMapFile(config.functionalMapPath);
@@ -20,13 +22,19 @@ function runFeatureMapper() {
   });
   validateRepositoryAnalysis(repository);
 
+  const testAnalysis = analyzeTests({
+    testsPath: config.testsPath,
+    projectRoot: config.projectRoot,
+  });
+  validateTestAnalysis(testAnalysis);
+
   const result = {
     metadata: {
       generatedAt: new Date().toISOString(),
       agent: 'AI Feature Mapper',
-      version: 'v2',
+      version: 'v3',
       schemaVersion: config.schemaVersion,
-      sources: ['docs/functional-map.md', 'src/pages/'],
+      sources: ['docs/functional-map.md', 'src/pages/', 'tests/'],
     },
     summary: {
       featuresAnalyzed: parsed.features.length,
@@ -39,9 +47,19 @@ function runFeatureMapper() {
         (total, pageObject) => total + pageObject.methods.length,
         0
       ),
+      testFilesAnalyzed: testAnalysis.testFiles.length,
+      testsAnalyzed: testAnalysis.tests.length,
+      fixturesReferenced: new Set(
+        testAnalysis.tests.flatMap((testCase) => testCase.fixtures)
+      ).size,
+      methodCallsAnalyzed: testAnalysis.tests.reduce(
+        (total, testCase) => total + testCase.methodCalls.length,
+        0
+      ),
     },
     features: parsed.features,
     repository,
+    testAnalysis,
   };
 
   writeJsonReport(config.outputPath, result);
@@ -52,8 +70,9 @@ if (require.main === module) {
   try {
     const result = runFeatureMapper();
     console.log(
-      `AI Feature Mapper V2 : ${result.summary.featuresAnalyzed} fonctionnalités et ` +
-        `${result.summary.pageObjectsAnalyzed} Page Objects exportés.`
+      `AI Feature Mapper V3 : ${result.summary.featuresAnalyzed} fonctionnalités, ` +
+        `${result.summary.pageObjectsAnalyzed} Page Objects et ` +
+        `${result.summary.testsAnalyzed} tests exportés.`
     );
     console.log(`Résultat : ${config.outputPath}`);
   } catch (error) {
