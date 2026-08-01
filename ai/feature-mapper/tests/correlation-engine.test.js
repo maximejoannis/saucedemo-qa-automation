@@ -165,7 +165,8 @@ test('should correlate several features independently', () => {
   assert.equal(mapping.length, 2);
 
   assert.equal(mapping[0].status, 'covered');
-  assert.equal(mapping[1].status, 'covered');
+  assert.equal(mapping[1].status, 'partially-covered');
+  assert.equal(mapping[1].confidence, 60);
 });
 
 test('should never return a confidence greater than 100', () => {
