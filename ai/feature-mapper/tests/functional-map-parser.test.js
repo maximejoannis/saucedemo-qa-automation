@@ -20,10 +20,7 @@ test('extrait les fonctionnalités du référentiel réel', () => {
       "L'utilisateur se trouve sur la page de connexion.",
       'Un compte valide est disponible.',
     ],
-    expectedResults: [
-      "L'utilisateur est authentifié.",
-      'Le catalogue des produits est affiché.',
-    ],
+    expectedResults: ["L'utilisateur est authentifié.", 'Le catalogue des produits est affiché.'],
   });
 });
 

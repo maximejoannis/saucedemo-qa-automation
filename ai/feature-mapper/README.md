@@ -6,9 +6,9 @@ Ce document décrit l’architecture technique interne de l’**AI Feature Mappe
 
 L’agent doit collecter, structurer et rapprocher les informations issues :
 
-* du référentiel fonctionnel ;
-* du framework Playwright ;
-* de l’exploration dynamique de l’application.
+- du référentiel fonctionnel ;
+- du framework Playwright ;
+- de l’exploration dynamique de l’application.
 
 Sa sortie est une cartographie descriptive des fonctionnalités. Il ne calcule aucun taux de couverture.
 
@@ -18,20 +18,20 @@ Sa sortie est une cartographie descriptive des fonctionnalités. Il ne calcule a
 
 L’AI Feature Mapper respecte les principes suivants :
 
-* séparation claire des responsabilités ;
-* indépendance vis-à-vis de l’exécution des tests ;
-* résultats structurés et versionnables ;
-* traçabilité des associations produites ;
-* possibilité de remplacer le fournisseur IA ;
-* validation systématique des sorties ;
-* absence de modification automatique du code source.
+- séparation claire des responsabilités ;
+- indépendance vis-à-vis de l’exécution des tests ;
+- résultats structurés et versionnables ;
+- traçabilité des associations produites ;
+- possibilité de remplacer le fournisseur IA ;
+- validation systématique des sorties ;
+- absence de modification automatique du code source.
 
 L’agent ne doit jamais modifier :
 
-* les tests Playwright ;
-* les Page Objects ;
-* les fixtures ;
-* le référentiel fonctionnel.
+- les tests Playwright ;
+- les Page Objects ;
+- les fixtures ;
+- le référentiel fonctionnel.
 
 ---
 
@@ -127,13 +127,13 @@ L’orchestrateur pilote l’exécution complète de l’agent.
 
 ### Responsabilités
 
-* charger la configuration ;
-* appeler les outils dans le bon ordre ;
-* centraliser les données collectées ;
-* déclencher les rapprochements ;
-* valider les résultats ;
-* générer la sortie finale ;
-* gérer les erreurs d’exécution.
+- charger la configuration ;
+- appeler les outils dans le bon ordre ;
+- centraliser les données collectées ;
+- déclencher les rapprochements ;
+- valider les résultats ;
+- générer la sortie finale ;
+- gérer les erreurs d’exécution.
 
 ### Ordre d’exécution
 
@@ -165,15 +165,15 @@ La configuration centralise les chemins et les paramètres de l’agent.
 
 Exemple de responsabilités :
 
-* emplacement de `docs/functional-map.md` ;
-* emplacement des User Stories ;
-* emplacement des règles métier ;
-* répertoire des Page Objects ;
-* répertoire des tests ;
-* URL de l’application ;
-* seuil minimal de confiance ;
-* activation ou désactivation de l’exploration dynamique ;
-* emplacement du fichier de sortie.
+- emplacement de `docs/functional-map.md` ;
+- emplacement des User Stories ;
+- emplacement des règles métier ;
+- répertoire des Page Objects ;
+- répertoire des tests ;
+- URL de l’application ;
+- seuil minimal de confiance ;
+- activation ou désactivation de l’exploration dynamique ;
+- emplacement du fichier de sortie.
 
 Aucun chemin important ne doit être codé directement dans les composants.
 
@@ -202,10 +202,10 @@ docs/glossary.md
 
 ### Responsabilités
 
-* lire les documents ;
-* appeler les parsers correspondants ;
-* vérifier les références entre documents ;
-* produire un modèle fonctionnel normalisé.
+- lire les documents ;
+- appeler les parsers correspondants ;
+- vérifier les références entre documents ;
+- produire un modèle fonctionnel normalisé.
 
 ### Sortie attendue
 
@@ -242,14 +242,14 @@ playwright.config.js
 
 ### Responsabilités
 
-* découvrir les fichiers concernés ;
-* identifier les Page Objects ;
-* extraire les méthodes publiques ;
-* identifier les tests et leurs titres ;
-* retrouver les imports et dépendances ;
-* identifier les fixtures utilisées ;
-* relever les locators et actions significatives ;
-* conserver les chemins et numéros de ligne utiles.
+- découvrir les fichiers concernés ;
+- identifier les Page Objects ;
+- extraire les méthodes publiques ;
+- identifier les tests et leurs titres ;
+- retrouver les imports et dépendances ;
+- identifier les fixtures utilisées ;
+- relever les locators et actions significatives ;
+- conserver les chemins et numéros de ligne utiles.
 
 Cet outil ne détermine pas seul qu’une fonctionnalité est couverte. Il fournit uniquement des éléments observables.
 
@@ -295,13 +295,13 @@ Il constitue le point d’intégration avec les capacités d’exploration Playw
 
 ### Responsabilités
 
-* lancer une session de navigation isolée ;
-* explorer les écrans accessibles ;
-* observer les éléments interactifs ;
-* identifier les transitions entre écrans ;
-* relever les comportements visibles ;
-* produire des observations structurées ;
-* conserver les preuves utiles à la cartographie.
+- lancer une session de navigation isolée ;
+- explorer les écrans accessibles ;
+- observer les éléments interactifs ;
+- identifier les transitions entre écrans ;
+- relever les comportements visibles ;
+- produire des observations structurées ;
+- conserver les preuves utiles à la cartographie.
 
 ### Exemples d’observations
 
@@ -309,11 +309,7 @@ Il constitue le point d’intégration avec les capacités d’exploration Playw
 {
   "page": "Inventory",
   "url": "https://www.saucedemo.com/inventory.html",
-  "actions": [
-    "trier les produits",
-    "ajouter un produit au panier",
-    "ouvrir le panier"
-  ],
+  "actions": ["trier les produits", "ajouter un produit au panier", "ouvrir le panier"],
   "source": "playwright-exploration"
 }
 ```
@@ -322,11 +318,11 @@ Il constitue le point d’intégration avec les capacités d’exploration Playw
 
 L’outil d’exploration ne doit pas :
 
-* modifier les fichiers du dépôt ;
-* générer automatiquement de nouveaux tests ;
-* réparer les tests existants ;
-* conclure seul à une association fonctionnelle ;
-* exécuter des actions destructrices hors du périmètre prévu.
+- modifier les fichiers du dépôt ;
+- générer automatiquement de nouveaux tests ;
+- réparer les tests existants ;
+- conclure seul à une association fonctionnelle ;
+- exécuter des actions destructrices hors du périmètre prévu.
 
 Le Planner apporte des observations et des parcours. La décision finale appartient au Feature Mapper.
 
@@ -342,31 +338,31 @@ Les parsers documentaires transforment les fichiers Markdown en objets structur�
 
 Extrait notamment :
 
-* l’identifiant de la fonctionnalité ;
-* son nom ;
-* son domaine ;
-* sa description ;
-* ses préconditions ;
-* ses résultats attendus.
+- l’identifiant de la fonctionnalité ;
+- son nom ;
+- son domaine ;
+- sa description ;
+- ses préconditions ;
+- ses résultats attendus.
 
 ### `user-stories-parser.js`
 
 Extrait :
 
-* l’identifiant de la User Story ;
-* son intitulé ;
-* le besoin utilisateur ;
-* les fonctionnalités associées ;
-* les critères d’acceptation.
+- l’identifiant de la User Story ;
+- son intitulé ;
+- le besoin utilisateur ;
+- les fonctionnalités associées ;
+- les critères d’acceptation.
 
 ### `business-rules-parser.js`
 
 Extrait :
 
-* l’identifiant de la règle ;
-* son intitulé ;
-* sa description ;
-* les fonctionnalités concernées.
+- l’identifiant de la règle ;
+- son intitulé ;
+- sa description ;
+- les fonctionnalités concernées.
 
 ---
 
@@ -376,24 +372,24 @@ Extrait :
 
 Extrait :
 
-* le nom de la classe ;
-* le fichier source ;
-* les locators ;
-* les méthodes ;
-* les appels Playwright ;
-* les assertions éventuelles.
+- le nom de la classe ;
+- le fichier source ;
+- les locators ;
+- les méthodes ;
+- les appels Playwright ;
+- les assertions éventuelles.
 
 ### `test-parser.js`
 
 Extrait :
 
-* les blocs `describe` ;
-* les titres des tests ;
-* les étapes éventuelles ;
-* les fixtures utilisées ;
-* les Page Objects appelés ;
-* les méthodes invoquées ;
-* les données de test employées.
+- les blocs `describe` ;
+- les titres des tests ;
+- les étapes éventuelles ;
+- les fixtures utilisées ;
+- les Page Objects appelés ;
+- les méthodes invoquées ;
+- les données de test employées.
 
 L’analyse doit reposer autant que possible sur la structure syntaxique JavaScript plutôt que sur de simples expressions régulières.
 
@@ -411,9 +407,7 @@ Une fonctionnalité provenant du référentiel.
   "name": "Ajouter un produit au panier",
   "domain": "Panier",
   "description": "Ajoute un produit au panier.",
-  "expectedResults": [
-    "Le produit apparaît dans le panier."
-  ]
+  "expectedResults": ["Le produit apparaît dans le panier."]
 }
 ```
 
@@ -434,12 +428,12 @@ Une référence vers un élément du framework.
 
 Types possibles :
 
-* `pageObject`;
-* `pageObjectMethod`;
-* `test`;
-* `fixture`;
-* `data`;
-* `configuration`.
+- `pageObject`;
+- `pageObjectMethod`;
+- `test`;
+- `fixture`;
+- `data`;
+- `configuration`.
 
 ---
 
@@ -509,13 +503,13 @@ Ce composant traite les associations qui peuvent être établies sans IA.
 
 ### Signaux exploitables
 
-* identifiants explicites ;
-* noms identiques ou proches ;
-* dossier de User Story ;
-* imports entre tests et Page Objects ;
-* appels directs de méthodes ;
-* correspondances issues du glossaire ;
-* relations explicites dans la documentation.
+- identifiants explicites ;
+- noms identiques ou proches ;
+- dossier de User Story ;
+- imports entre tests et Page Objects ;
+- appels directs de méthodes ;
+- correspondances issues du glossaire ;
+- relations explicites dans la documentation.
 
 ### Exemple
 
@@ -541,22 +535,22 @@ Le raisonnement IA intervient uniquement lorsque les règles déterministes sont
 
 ### Cas concernés
 
-* noms ambigus ;
-* méthodes génériques ;
-* test couvrant plusieurs comportements ;
-* fonctionnalité répartie sur plusieurs Page Objects ;
-* correspondance reposant sur le sens métier ;
-* divergence entre documentation, code et observation.
+- noms ambigus ;
+- méthodes génériques ;
+- test couvrant plusieurs comportements ;
+- fonctionnalité répartie sur plusieurs Page Objects ;
+- correspondance reposant sur le sens métier ;
+- divergence entre documentation, code et observation.
 
 ### Entrée transmise à l’IA
 
 L’IA reçoit uniquement le contexte utile :
 
-* la fonctionnalité concernée ;
-* les références de code candidates ;
-* les tests candidats ;
-* les observations Playwright ;
-* les termes pertinents du glossaire.
+- la fonctionnalité concernée ;
+- les références de code candidates ;
+- les tests candidats ;
+- les observations Playwright ;
+- les termes pertinents du glossaire.
 
 Elle ne reçoit pas inutilement l’intégralité du dépôt.
 
@@ -576,10 +570,10 @@ La réponse doit être structurée :
 
 Décisions possibles :
 
-* `matched` ;
-* `partially-matched` ;
-* `ambiguous` ;
-* `not-found`.
+- `matched` ;
+- `partially-matched` ;
+- `ambiguous` ;
+- `not-found`.
 
 Le statut `not-found` indique seulement qu’aucune correspondance n’a été identifiée. Il ne constitue pas encore un verdict de couverture.
 
@@ -591,11 +585,11 @@ Le statut `not-found` indique seulement qu’aucune correspondance n’a été i
 
 Le validateur d’entrée contrôle notamment :
 
-* l’unicité des identifiants de fonctionnalités ;
-* l’existence des documents requis ;
-* la validité des références entre documents ;
-* l’existence des dossiers configurés ;
-* la lisibilité des fichiers sources.
+- l’unicité des identifiants de fonctionnalités ;
+- l’existence des documents requis ;
+- la validité des références entre documents ;
+- l’existence des dossiers configurés ;
+- la lisibilité des fichiers sources.
 
 Une erreur bloquante doit interrompre proprement l’exécution.
 
@@ -605,12 +599,12 @@ Une erreur bloquante doit interrompre proprement l’exécution.
 
 Le validateur de résultat vérifie :
 
-* qu’aucune fonctionnalité n’a disparu ;
-* que chaque chemin de fichier existe ;
-* que les scores de confiance sont compris entre `0` et `1` ;
-* que chaque association comporte une preuve ;
-* que les valeurs de statut sont autorisées ;
-* qu’aucune sortie IA libre ne contourne le schéma attendu.
+- qu’aucune fonctionnalité n’a disparu ;
+- que chaque chemin de fichier existe ;
+- que les scores de confiance sont compris entre `0` et `1` ;
+- que chaque association comporte une preuve ;
+- que les valeurs de statut sont autorisées ;
+- qu’aucune sortie IA libre ne contourne le schéma attendu.
 
 Une sortie invalide ne doit pas être enregistrée comme résultat final.
 
@@ -650,9 +644,9 @@ La section `summary` décrit uniquement les résultats de cartographie.
 
 Elle ne doit contenir :
 
-* ni taux de couverture ;
-* ni verdict de qualité ;
-* ni recommandation de tests.
+- ni taux de couverture ;
+- ni verdict de qualité ;
+- ni recommandation de tests.
 
 ---
 
@@ -678,12 +672,12 @@ L’IA pense que cette fonctionnalité correspond à ce test.
 
 Elle doit être accompagnée d’éléments vérifiables :
 
-* nom du fichier ;
-* titre du test ;
-* méthode appelée ;
-* comportement observé ;
-* règle de correspondance ;
-* justification sémantique.
+- nom du fichier ;
+- titre du test ;
+- méthode appelée ;
+- comportement observé ;
+- règle de correspondance ;
+- justification sémantique.
 
 ---
 
@@ -710,18 +704,18 @@ L’agent doit distinguer :
 
 ## Erreurs bloquantes
 
-* référentiel fonctionnel absent ;
-* configuration invalide ;
-* fichier de sortie impossible à écrire ;
-* schéma de données invalide.
+- référentiel fonctionnel absent ;
+- configuration invalide ;
+- fichier de sortie impossible à écrire ;
+- schéma de données invalide.
 
 ## Erreurs non bloquantes
 
-* Page Object impossible à analyser ;
-* exploration d’un écran inaccessible ;
-* test ambigu ;
-* absence de correspondance ;
-* réponse IA invalide après validation.
+- Page Object impossible à analyser ;
+- exploration d’un écran inaccessible ;
+- test ambigu ;
+- absence de correspondance ;
+- réponse IA invalide après validation.
 
 Les erreurs non bloquantes doivent apparaître dans le résultat, sans être transformées en associations supposées.
 
@@ -739,10 +733,10 @@ Cette commande exécutera uniquement l’AI Feature Mapper.
 
 Elle ne lancera pas :
 
-* la suite complète des tests ;
-* le Coverage Analyzer ;
-* la génération de recommandations ;
-* le Dashboard.
+- la suite complète des tests ;
+- le Coverage Analyzer ;
+- la génération de recommandations ;
+- le Dashboard.
 
 ---
 
@@ -752,37 +746,37 @@ L’architecture sera implémentée progressivement.
 
 ## Version 1 — Référentiel
 
-* configuration ;
-* lecture de `functional-map.md` ;
-* parsing des fonctionnalités ;
-* validation ;
-* génération d’un premier JSON.
+- configuration ;
+- lecture de `functional-map.md` ;
+- parsing des fonctionnalités ;
+- validation ;
+- génération d’un premier JSON.
 
 ## Version 2 — Analyse statique
 
-* analyse des Page Objects ;
-* analyse des tests ;
-* création des références de code.
+- analyse des Page Objects ;
+- analyse des tests ;
+- création des références de code.
 
 ## Version 3 — Exploration Playwright
 
-* intégration de l’outil d’exploration ;
-* collecte des pages, actions et transitions ;
-* production d’observations structurées.
+- intégration de l’outil d’exploration ;
+- collecte des pages, actions et transitions ;
+- production d’observations structurées.
 
 ## Version 4 — Rapprochement
 
-* règles déterministes ;
-* raisonnement IA pour les cas ambigus ;
-* scores de confiance ;
-* preuves et justifications.
+- règles déterministes ;
+- raisonnement IA pour les cas ambigus ;
+- scores de confiance ;
+- preuves et justifications.
 
 ## Version 5 — Stabilisation
 
-* validation complète ;
-* tests unitaires de l’agent ;
-* gestion des erreurs ;
-* documentation d’utilisation.
+- validation complète ;
+- tests unitaires de l’agent ;
+- gestion des erreurs ;
+- documentation d’utilisation.
 
 ---
 
@@ -790,12 +784,11 @@ L’architecture sera implémentée progressivement.
 
 L’étape AI Feature Mapper sera considérée comme terminée lorsque :
 
-* toutes les fonctionnalités du référentiel sont présentes dans la sortie ;
-* le dépôt Playwright est analysé sans modification ;
-* l’application peut être explorée via Playwright ;
-* les associations sont structurées et justifiées ;
-* les cas ambigus restent explicitement identifiés ;
-* le fichier `feature-map.json` respecte un schéma stable ;
-* aucun taux de couverture n’est calculé ;
-* aucun test n’est généré ou modifié.
-
+- toutes les fonctionnalités du référentiel sont présentes dans la sortie ;
+- le dépôt Playwright est analysé sans modification ;
+- l’application peut être explorée via Playwright ;
+- les associations sont structurées et justifiées ;
+- les cas ambigus restent explicitement identifiés ;
+- le fichier `feature-map.json` respecte un schéma stable ;
+- aucun taux de couverture n’est calculé ;
+- aucun test n’est généré ou modifié.

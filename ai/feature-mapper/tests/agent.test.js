@@ -5,7 +5,7 @@ const test = require('node:test');
 const config = require('../config');
 const { runFeatureMapper } = require('../agent');
 
-test("génère la cartographie fonctionnelle à partir du référentiel", () => {
+test('génère la cartographie fonctionnelle à partir du référentiel', () => {
   const result = runFeatureMapper();
 
   assert.equal(result.metadata.agent, 'AI Feature Mapper');
@@ -26,10 +26,7 @@ test("génère la cartographie fonctionnelle à partir du référentiel", () => 
       "L'utilisateur se trouve sur la page de connexion.",
       'Un compte valide est disponible.',
     ],
-    expectedResults: [
-      "L'utilisateur est authentifié.",
-      'Le catalogue des produits est affiché.',
-    ],
+    expectedResults: ["L'utilisateur est authentifié.", 'Le catalogue des produits est affiché.'],
   });
 });
 
@@ -38,19 +35,11 @@ test('écrit le résultat dans feature-map.json', () => {
 
   assert.equal(fs.existsSync(config.outputPath), true);
 
-  const generatedReport = JSON.parse(
-    fs.readFileSync(config.outputPath, 'utf8'),
-  );
+  const generatedReport = JSON.parse(fs.readFileSync(config.outputPath, 'utf8'));
 
   assert.equal(generatedReport.metadata.agent, 'AI Feature Mapper');
-  assert.equal(
-    generatedReport.metadata.schemaVersion,
-    config.schemaVersion,
-  );
-  assert.equal(
-    generatedReport.summary.featuresAnalyzed,
-    result.summary.featuresAnalyzed,
-  );
+  assert.equal(generatedReport.metadata.schemaVersion, config.schemaVersion);
+  assert.equal(generatedReport.summary.featuresAnalyzed, result.summary.featuresAnalyzed);
   assert.deepEqual(generatedReport.features, result.features);
 });
 

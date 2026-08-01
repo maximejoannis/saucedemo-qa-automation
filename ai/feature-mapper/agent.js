@@ -34,7 +34,7 @@ if (require.main === module) {
   try {
     const result = runFeatureMapper();
     console.log(
-      `AI Feature Mapper V1 : ${result.summary.featuresAnalyzed} fonctionnalités exportées.`,
+      `AI Feature Mapper V1 : ${result.summary.featuresAnalyzed} fonctionnalités exportées.`
     );
     console.log(`Résultat : ${config.outputPath}`);
   } catch (error) {

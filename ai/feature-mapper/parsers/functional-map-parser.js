@@ -38,7 +38,9 @@ function finalizeFeature(feature, sectionBuffers) {
 
 function parseFunctionalMap(markdown) {
   if (typeof markdown !== 'string' || markdown.trim() === '') {
-    throw new TypeError('Le contenu de la cartographie fonctionnelle doit être une chaîne non vide.');
+    throw new TypeError(
+      'Le contenu de la cartographie fonctionnelle doit être une chaîne non vide.'
+    );
   }
 
   const features = [];
