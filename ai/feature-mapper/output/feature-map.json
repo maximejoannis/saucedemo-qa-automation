@@ -1,19 +1,24 @@
 {
   "metadata": {
-    "generatedAt": "2026-08-01T19:24:11.455Z",
+    "generatedAt": "2026-08-01T19:32:44.236Z",
     "agent": "AI Feature Mapper",
-    "version": "v2",
+    "version": "v3",
     "schemaVersion": "1.1.0",
     "sources": [
       "docs/functional-map.md",
-      "src/pages/"
+      "src/pages/",
+      "tests/"
     ]
   },
   "summary": {
     "featuresAnalyzed": 14,
     "pageObjectsAnalyzed": 4,
     "locatorsAnalyzed": 39,
-    "methodsAnalyzed": 23
+    "methodsAnalyzed": 23,
+    "testFilesAnalyzed": 5,
+    "testsAnalyzed": 43,
+    "fixturesReferenced": 6,
+    "methodCallsAnalyzed": 80
   },
   "features": [
     {
@@ -664,6 +669,2432 @@
               "click"
             ],
             "line": 19
+          }
+        ]
+      }
+    ]
+  },
+  "testAnalysis": {
+    "testFiles": [
+      {
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "suites": [
+          "US01 - Authentification"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ],
+        "tests": [
+          {
+            "title": "TC-US01-AC01-01 connexion standard valide @smoke",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 7,
+            "fixtures": [
+              "page",
+              "loginPage",
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.login"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC01-02 connexion problem_user autorisée",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 19,
+            "fixtures": [
+              "page",
+              "loginPage",
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.login"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC01-03 connexion performance_glitch_user autorisée",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 31,
+            "fixtures": [
+              "page",
+              "loginPage",
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.login"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC01-05 déconnexion puis nouvelle connexion",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 44,
+            "fixtures": [
+              "page",
+              "loginPage",
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "loginPage",
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.login",
+              "inventoryPage.logout"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC02-01 mot de passe invalide",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 60,
+            "fixtures": [
+              "loginPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.login"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC02-02 utilisateur bloqué",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 67,
+            "fixtures": [
+              "loginPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.login"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC02-03 username obligatoire",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 74,
+            "fixtures": [
+              "loginPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.submit"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC02-04 password obligatoire",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 82,
+            "fixtures": [
+              "loginPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.submit"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US01-AC02-05 deux champs vides",
+            "suite": "US01 - Authentification",
+            "file": "tests/us01-authentication/ac01-login.spec.js",
+            "line": 90,
+            "fixtures": [
+              "loginPage"
+            ],
+            "pageObjects": [
+              "loginPage"
+            ],
+            "methodCalls": [
+              "loginPage.goto",
+              "loginPage.submit"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/users.js",
+                "imports": [
+                  "users"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "suites": [
+          "US02 - Catalogue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ],
+        "tests": [
+          {
+            "title": "TC-US02-AC01-01 six produits affichés",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 16,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [],
+            "methodCalls": [],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC01-02 chaque produit affiche nom, description et prix",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 20,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [],
+            "methodCalls": [],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 34,
+            "fixtures": [
+              "page",
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.openProduct",
+              "inventoryPage.backToProducts"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC01-05 un bouton Add to cart par produit",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 49,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [],
+            "methodCalls": [],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC02-01 tri A-Z",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 53,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.selectSort",
+              "inventoryPage.productNames"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC02-02 tri Z-A",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 58,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.selectSort",
+              "inventoryPage.productNames"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC02-03 tri prix croissant",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 64,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.selectSort",
+              "inventoryPage.productPrices"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC02-04 tri prix décroissant",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 72,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.selectSort",
+              "inventoryPage.productPrices"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US02-AC02-05 changement successif de tri",
+            "suite": "US02 - Catalogue",
+            "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+            "line": 80,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.selectSort",
+              "inventoryPage.productNames",
+              "inventoryPage.productPrices"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "suites": [
+          "US03 - Panier"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ],
+        "tests": [
+          {
+            "title": "TC-US03-AC02-01 panier vide",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 9,
+            "fixtures": [
+              "inventoryPage",
+              "cartPage",
+              "page"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.openCart"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC01-01 ajout un produit",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 16,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC01-02 ajout trois produits",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 25,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC01-03 retrait depuis catalogue",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 33,
+            "fixtures": [
+              "inventoryPage"
+            ],
+            "pageObjects": [
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add",
+              "inventoryPage.remove"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC01-04 retrait depuis panier",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 40,
+            "fixtures": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "pageObjects": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add",
+              "inventoryPage.openCart",
+              "cartPage.remove"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC01-05 retrait partiel conserve deux produits",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 48,
+            "fixtures": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "pageObjects": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add",
+              "inventoryPage.openCart",
+              "cartPage.remove",
+              "cartPage.names"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC02-02 contenu exact de deux produits",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 66,
+            "fixtures": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "pageObjects": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add",
+              "inventoryPage.openCart",
+              "cartPage.names"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC02-03 contenu du panier conservé pendant la navigation",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 78,
+            "fixtures": [
+              "page",
+              "inventoryPage",
+              "cartPage"
+            ],
+            "pageObjects": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add",
+              "inventoryPage.openCart",
+              "cartPage.names",
+              "cartPage.continueShopping"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC02-04 continuer les achats revient au catalogue",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 110,
+            "fixtures": [
+              "page",
+              "inventoryPage",
+              "cartPage"
+            ],
+            "pageObjects": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.openCart",
+              "cartPage.continueShopping"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US03-AC02-05 accès au checkout depuis un panier non vide",
+            "suite": "US03 - Panier",
+            "file": "tests/us03-panier/ac01-panier.spec.js",
+            "line": 122,
+            "fixtures": [
+              "page",
+              "inventoryPage",
+              "cartPage"
+            ],
+            "pageObjects": [
+              "inventoryPage",
+              "cartPage"
+            ],
+            "methodCalls": [
+              "inventoryPage.add",
+              "inventoryPage.openCart",
+              "cartPage.checkout"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "suites": [
+          "US04 - Checkout | Informations client"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ],
+        "tests": [
+          {
+            "title": "TC-US04-AC01-01 prénom requis",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 16,
+            "fixtures": [
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.fillCustomer",
+              "checkoutPage.continue"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC01-02 nom requis",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 27,
+            "fixtures": [
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.fillCustomer",
+              "checkoutPage.continue"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC01-03 code postal requis",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 38,
+            "fixtures": [
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.fillCustomer",
+              "checkoutPage.continue"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC01-04 tous les champs vides",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 49,
+            "fixtures": [
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.continue"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC01-05 correction après erreur autorise la navigation",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 55,
+            "fixtures": [
+              "page",
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.continue",
+              "checkoutPage.fillCustomer"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC02-01 données nominales valides",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 69,
+            "fixtures": [
+              "page",
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.fillCustomer",
+              "checkoutPage.continue"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC02-02 nom avec tiret accepté",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 76,
+            "fixtures": [
+              "page",
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.fillCustomer",
+              "checkoutPage.continue"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC02-03 code postal alphanumérique accepté",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 88,
+            "fixtures": [
+              "page",
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.fillCustomer",
+              "checkoutPage.continue"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US04-AC02-05 annulation retourne au panier",
+            "suite": "US04 - Checkout | Informations client",
+            "file": "tests/us04-checkout/ac01-informations.spec.js",
+            "line": 100,
+            "fixtures": [
+              "page",
+              "checkoutPage"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.cancel"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "tests/us05-e2e/ac01-commande.spec.js",
+        "suites": [
+          "US05 - Commande | Récapitulatif et finalisation"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ],
+        "tests": [
+          {
+            "title": "TC-US05-AC01-01/03/04 récapitulatif et montants cohérents",
+            "suite": "US05 - Commande | Récapitulatif et finalisation",
+            "file": "tests/us05-e2e/ac01-commande.spec.js",
+            "line": 32,
+            "fixtures": [
+              "authenticatedPage",
+              "inventoryPage",
+              "cartPage",
+              "checkoutPage",
+              "page"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.displayedAmount"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US05-AC01-02 récapitulatif avec trois produits",
+            "suite": "US05 - Commande | Récapitulatif et finalisation",
+            "file": "tests/us05-e2e/ac01-commande.spec.js",
+            "line": 59,
+            "fixtures": [
+              "authenticatedPage",
+              "inventoryPage",
+              "cartPage",
+              "checkoutPage",
+              "page"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.displayedAmount"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue",
+            "suite": "US05 - Commande | Récapitulatif et finalisation",
+            "file": "tests/us05-e2e/ac01-commande.spec.js",
+            "line": 96,
+            "fixtures": [
+              "authenticatedPage",
+              "inventoryPage",
+              "cartPage",
+              "checkoutPage",
+              "page"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.cancel"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US05-AC02-01 achat d’un produit @smoke @critical",
+            "suite": "US05 - Commande | Récapitulatif et finalisation",
+            "file": "tests/us05-e2e/ac01-commande.spec.js",
+            "line": 117,
+            "fixtures": [
+              "authenticatedPage",
+              "inventoryPage",
+              "cartPage",
+              "checkoutPage",
+              "page"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.finish"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US05-AC02-02 achat de trois produits",
+            "suite": "US05 - Commande | Récapitulatif et finalisation",
+            "file": "tests/us05-e2e/ac01-commande.spec.js",
+            "line": 136,
+            "fixtures": [
+              "authenticatedPage",
+              "inventoryPage",
+              "cartPage",
+              "checkoutPage",
+              "page"
+            ],
+            "pageObjects": [
+              "checkoutPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.finish"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé",
+            "suite": "US05 - Commande | Récapitulatif et finalisation",
+            "file": "tests/us05-e2e/ac01-commande.spec.js",
+            "line": 159,
+            "fixtures": [
+              "authenticatedPage",
+              "inventoryPage",
+              "cartPage",
+              "checkoutPage",
+              "page"
+            ],
+            "pageObjects": [
+              "checkoutPage",
+              "inventoryPage"
+            ],
+            "methodCalls": [
+              "checkoutPage.finish",
+              "checkoutPage.backHome",
+              "inventoryPage.openCart"
+            ],
+            "dataSources": [
+              {
+                "file": "src/data/checkout.js",
+                "imports": [
+                  "validCustomer"
+                ]
+              },
+              {
+                "file": "src/data/products.js",
+                "imports": [
+                  "products"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "tests": [
+      {
+        "title": "TC-US01-AC01-01 connexion standard valide @smoke",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 7,
+        "fixtures": [
+          "page",
+          "loginPage",
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.login"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC01-02 connexion problem_user autorisée",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 19,
+        "fixtures": [
+          "page",
+          "loginPage",
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.login"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC01-03 connexion performance_glitch_user autorisée",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 31,
+        "fixtures": [
+          "page",
+          "loginPage",
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.login"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC01-05 déconnexion puis nouvelle connexion",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 44,
+        "fixtures": [
+          "page",
+          "loginPage",
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "loginPage",
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.login",
+          "inventoryPage.logout"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC02-01 mot de passe invalide",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 60,
+        "fixtures": [
+          "loginPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.login"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC02-02 utilisateur bloqué",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 67,
+        "fixtures": [
+          "loginPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.login"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC02-03 username obligatoire",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 74,
+        "fixtures": [
+          "loginPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.submit"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC02-04 password obligatoire",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 82,
+        "fixtures": [
+          "loginPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.submit"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US01-AC02-05 deux champs vides",
+        "suite": "US01 - Authentification",
+        "file": "tests/us01-authentication/ac01-login.spec.js",
+        "line": 90,
+        "fixtures": [
+          "loginPage"
+        ],
+        "pageObjects": [
+          "loginPage"
+        ],
+        "methodCalls": [
+          "loginPage.goto",
+          "loginPage.submit"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/users.js",
+            "imports": [
+              "users"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC01-01 six produits affichés",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 16,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [],
+        "methodCalls": [],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC01-02 chaque produit affiche nom, description et prix",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 20,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [],
+        "methodCalls": [],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 34,
+        "fixtures": [
+          "page",
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.openProduct",
+          "inventoryPage.backToProducts"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC01-05 un bouton Add to cart par produit",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 49,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [],
+        "methodCalls": [],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC02-01 tri A-Z",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 53,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.selectSort",
+          "inventoryPage.productNames"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC02-02 tri Z-A",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 58,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.selectSort",
+          "inventoryPage.productNames"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC02-03 tri prix croissant",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 64,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.selectSort",
+          "inventoryPage.productPrices"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC02-04 tri prix décroissant",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 72,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.selectSort",
+          "inventoryPage.productPrices"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US02-AC02-05 changement successif de tri",
+        "suite": "US02 - Catalogue",
+        "file": "tests/us02-catalogue/ac01-catalogue.spec.js",
+        "line": 80,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.selectSort",
+          "inventoryPage.productNames",
+          "inventoryPage.productPrices"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC02-01 panier vide",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 9,
+        "fixtures": [
+          "inventoryPage",
+          "cartPage",
+          "page"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.openCart"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC01-01 ajout un produit",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 16,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC01-02 ajout trois produits",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 25,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC01-03 retrait depuis catalogue",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 33,
+        "fixtures": [
+          "inventoryPage"
+        ],
+        "pageObjects": [
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add",
+          "inventoryPage.remove"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC01-04 retrait depuis panier",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 40,
+        "fixtures": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "pageObjects": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add",
+          "inventoryPage.openCart",
+          "cartPage.remove"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC01-05 retrait partiel conserve deux produits",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 48,
+        "fixtures": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "pageObjects": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add",
+          "inventoryPage.openCart",
+          "cartPage.remove",
+          "cartPage.names"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC02-02 contenu exact de deux produits",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 66,
+        "fixtures": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "pageObjects": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add",
+          "inventoryPage.openCart",
+          "cartPage.names"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC02-03 contenu du panier conservé pendant la navigation",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 78,
+        "fixtures": [
+          "page",
+          "inventoryPage",
+          "cartPage"
+        ],
+        "pageObjects": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add",
+          "inventoryPage.openCart",
+          "cartPage.names",
+          "cartPage.continueShopping"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC02-04 continuer les achats revient au catalogue",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 110,
+        "fixtures": [
+          "page",
+          "inventoryPage",
+          "cartPage"
+        ],
+        "pageObjects": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.openCart",
+          "cartPage.continueShopping"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US03-AC02-05 accès au checkout depuis un panier non vide",
+        "suite": "US03 - Panier",
+        "file": "tests/us03-panier/ac01-panier.spec.js",
+        "line": 122,
+        "fixtures": [
+          "page",
+          "inventoryPage",
+          "cartPage"
+        ],
+        "pageObjects": [
+          "inventoryPage",
+          "cartPage"
+        ],
+        "methodCalls": [
+          "inventoryPage.add",
+          "inventoryPage.openCart",
+          "cartPage.checkout"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC01-01 prénom requis",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 16,
+        "fixtures": [
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.fillCustomer",
+          "checkoutPage.continue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC01-02 nom requis",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 27,
+        "fixtures": [
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.fillCustomer",
+          "checkoutPage.continue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC01-03 code postal requis",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 38,
+        "fixtures": [
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.fillCustomer",
+          "checkoutPage.continue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC01-04 tous les champs vides",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 49,
+        "fixtures": [
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.continue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC01-05 correction après erreur autorise la navigation",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 55,
+        "fixtures": [
+          "page",
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.continue",
+          "checkoutPage.fillCustomer"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC02-01 données nominales valides",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 69,
+        "fixtures": [
+          "page",
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.fillCustomer",
+          "checkoutPage.continue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC02-02 nom avec tiret accepté",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 76,
+        "fixtures": [
+          "page",
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.fillCustomer",
+          "checkoutPage.continue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC02-03 code postal alphanumérique accepté",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 88,
+        "fixtures": [
+          "page",
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.fillCustomer",
+          "checkoutPage.continue"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US04-AC02-05 annulation retourne au panier",
+        "suite": "US04 - Checkout | Informations client",
+        "file": "tests/us04-checkout/ac01-informations.spec.js",
+        "line": 100,
+        "fixtures": [
+          "page",
+          "checkoutPage"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.cancel"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US05-AC01-01/03/04 récapitulatif et montants cohérents",
+        "suite": "US05 - Commande | Récapitulatif et finalisation",
+        "file": "tests/us05-e2e/ac01-commande.spec.js",
+        "line": 32,
+        "fixtures": [
+          "authenticatedPage",
+          "inventoryPage",
+          "cartPage",
+          "checkoutPage",
+          "page"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.displayedAmount"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US05-AC01-02 récapitulatif avec trois produits",
+        "suite": "US05 - Commande | Récapitulatif et finalisation",
+        "file": "tests/us05-e2e/ac01-commande.spec.js",
+        "line": 59,
+        "fixtures": [
+          "authenticatedPage",
+          "inventoryPage",
+          "cartPage",
+          "checkoutPage",
+          "page"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.displayedAmount"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue",
+        "suite": "US05 - Commande | Récapitulatif et finalisation",
+        "file": "tests/us05-e2e/ac01-commande.spec.js",
+        "line": 96,
+        "fixtures": [
+          "authenticatedPage",
+          "inventoryPage",
+          "cartPage",
+          "checkoutPage",
+          "page"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.cancel"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US05-AC02-01 achat d’un produit @smoke @critical",
+        "suite": "US05 - Commande | Récapitulatif et finalisation",
+        "file": "tests/us05-e2e/ac01-commande.spec.js",
+        "line": 117,
+        "fixtures": [
+          "authenticatedPage",
+          "inventoryPage",
+          "cartPage",
+          "checkoutPage",
+          "page"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.finish"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US05-AC02-02 achat de trois produits",
+        "suite": "US05 - Commande | Récapitulatif et finalisation",
+        "file": "tests/us05-e2e/ac01-commande.spec.js",
+        "line": 136,
+        "fixtures": [
+          "authenticatedPage",
+          "inventoryPage",
+          "cartPage",
+          "checkoutPage",
+          "page"
+        ],
+        "pageObjects": [
+          "checkoutPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.finish"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé",
+        "suite": "US05 - Commande | Récapitulatif et finalisation",
+        "file": "tests/us05-e2e/ac01-commande.spec.js",
+        "line": 159,
+        "fixtures": [
+          "authenticatedPage",
+          "inventoryPage",
+          "cartPage",
+          "checkoutPage",
+          "page"
+        ],
+        "pageObjects": [
+          "checkoutPage",
+          "inventoryPage"
+        ],
+        "methodCalls": [
+          "checkoutPage.finish",
+          "checkoutPage.backHome",
+          "inventoryPage.openCart"
+        ],
+        "dataSources": [
+          {
+            "file": "src/data/checkout.js",
+            "imports": [
+              "validCustomer"
+            ]
+          },
+          {
+            "file": "src/data/products.js",
+            "imports": [
+              "products"
+            ]
           }
         ]
       }
