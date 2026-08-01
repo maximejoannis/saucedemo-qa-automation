@@ -9,7 +9,7 @@ class CorrelationEngine {
       const keywords = this.extractKeywords(feature);
 
       const matchingPageObjects = pageObjects.filter((pageObject) =>
-        this.matches(pageObject.name, keywords),
+        this.matches(pageObject.name, keywords)
       );
 
       const matchingTests = tests.filter((test) => {
@@ -22,15 +22,10 @@ class CorrelationEngine {
           .join(' ')
           .toLowerCase();
 
-        return keywords.some((keyword) =>
-          searchableText.includes(keyword),
-        );
+        return keywords.some((keyword) => searchableText.includes(keyword));
       });
 
-      const confidence = this.computeConfidence(
-        matchingPageObjects,
-        matchingTests,
-      );
+      const confidence = this.computeConfidence(matchingPageObjects, matchingTests);
 
       return {
         featureId: feature.id,

@@ -1,9 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const {
-  CoverageEngine,
-} = require('../reasoning/coverage-engine');
+const { CoverageEngine } = require('../reasoning/coverage-engine');
 
 test('should calculate global coverage correctly', () => {
   const engine = new CoverageEngine();

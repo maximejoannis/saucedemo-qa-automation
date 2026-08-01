@@ -17,10 +17,7 @@ class BrowserExplorationTool {
     await explorer.start();
 
     try {
-      await explorer.login(
-        this.config.username,
-        this.config.password,
-      );
+      await explorer.login(this.config.username, this.config.password);
 
       const observations = await explorer.explore();
 
@@ -29,11 +26,7 @@ class BrowserExplorationTool {
       });
 
       for (let i = 0; i < observations.length - 1; i++) {
-        graph.addTransition(
-          observations[i].url,
-          "navigation",
-          observations[i + 1].url,
-        );
+        graph.addTransition(observations[i].url, 'navigation', observations[i + 1].url);
       }
 
       return {

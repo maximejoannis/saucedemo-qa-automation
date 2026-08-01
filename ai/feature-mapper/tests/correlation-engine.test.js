@@ -1,9 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 
-const {
-  CorrelationEngine,
-} = require('../reasoning/correlation-engine');
+const { CorrelationEngine } = require('../reasoning/correlation-engine');
 
 test('should correlate a feature with a matching Page Object and test', () => {
   const engine = new CorrelationEngine();
@@ -45,9 +43,7 @@ test('should correlate a feature with a matching Page Object and test', () => {
 
   assert.deepEqual(feature.pageObjects, ['LoginPage']);
 
-  assert.deepEqual(feature.tests, [
-    'permet à un utilisateur valide de se connecter',
-  ]);
+  assert.deepEqual(feature.tests, ['permet à un utilisateur valide de se connecter']);
 });
 
 test('should return not-covered when nothing matches', () => {

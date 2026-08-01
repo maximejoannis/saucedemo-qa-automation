@@ -46,9 +46,7 @@ class CoverageEngine {
     });
 
     if (summary.features > 0) {
-      summary.coverage = Number(
-        ((summary.covered / summary.features) * 100).toFixed(2),
-      );
+      summary.coverage = Number(((summary.covered / summary.features) * 100).toFixed(2));
     }
 
     return {

@@ -31,13 +31,9 @@ class PlaywrightExplorer {
   async login(username, password) {
     await this.page.goto('/');
 
-    await this.page
-      .getByRole('textbox', { name: 'Username' })
-      .fill(username);
+    await this.page.getByRole('textbox', { name: 'Username' }).fill(username);
 
-    await this.page
-      .getByRole('textbox', { name: 'Password' })
-      .fill(password);
+    await this.page.getByRole('textbox', { name: 'Password' }).fill(password);
 
     await this.page
       .getByRole('button', {
@@ -55,19 +51,11 @@ class PlaywrightExplorer {
 
     const buttons = await this.page
       .locator('button')
-      .evaluateAll((elements) =>
-        elements
-          .map((button) => button.innerText.trim())
-          .filter(Boolean),
-      );
+      .evaluateAll((elements) => elements.map((button) => button.innerText.trim()).filter(Boolean));
 
     const links = await this.page
       .locator('a')
-      .evaluateAll((elements) =>
-        elements
-          .map((link) => link.innerText.trim())
-          .filter(Boolean),
-      );
+      .evaluateAll((elements) => elements.map((link) => link.innerText.trim()).filter(Boolean));
 
     const inputs = await this.page
       .locator('input')
@@ -77,9 +65,9 @@ class PlaywrightExplorer {
             (input) =>
               input.getAttribute('placeholder') ||
               input.getAttribute('name') ||
-              input.getAttribute('id'),
+              input.getAttribute('id')
           )
-          .filter(Boolean),
+          .filter(Boolean)
       );
 
     return {

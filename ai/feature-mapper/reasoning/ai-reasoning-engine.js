@@ -57,11 +57,7 @@ Retourne un tableau JSON au format :
   }
 
   save(outputPath, mapping) {
-    fs.writeFileSync(
-      outputPath,
-      JSON.stringify(mapping, null, 2),
-      'utf8',
-    );
+    fs.writeFileSync(outputPath, JSON.stringify(mapping, null, 2), 'utf8');
   }
 }
 

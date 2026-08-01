@@ -27,9 +27,7 @@ class NavigationGraph {
 
     const exists = this.transitions.some(
       (transition) =>
-        transition.from === from &&
-        transition.to === to &&
-        transition.action === action,
+        transition.from === from && transition.to === to && transition.action === action
     );
 
     if (!exists) {
