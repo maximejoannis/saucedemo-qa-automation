@@ -9,12 +9,14 @@ test('génère la cartographie fonctionnelle à partir du référentiel', () => 
   const result = runFeatureMapper();
 
   assert.equal(result.metadata.agent, 'AI Feature Mapper');
-  assert.equal(result.metadata.version, 'v1');
-  assert.equal(result.metadata.schemaVersion, '1.0.0');
-  assert.equal(result.metadata.source, 'docs/functional-map.md');
+  assert.equal(result.metadata.version, 'v2');
+  assert.equal(result.metadata.schemaVersion, '1.1.0');
+  assert.deepEqual(result.metadata.sources, ['docs/functional-map.md', 'src/pages/']);
 
   assert.equal(result.summary.featuresAnalyzed, 14);
   assert.equal(result.features.length, 14);
+  assert.equal(result.summary.pageObjectsAnalyzed, 4);
+  assert.equal(result.repository.pageObjects.length, 4);
 
   assert.deepEqual(result.features[0], {
     id: 'F01',
