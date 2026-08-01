@@ -30,27 +30,18 @@ class CorrelationEngine {
       const keywords = this.extractKeywords(feature);
 
       const matchingPageObjects = pageObjects.filter((pageObject) =>
-        this.matchesPageObject(pageObject, keywords),
+        this.matchesPageObject(pageObject, keywords)
       );
 
-      const matchingTests = tests.filter((testCase) =>
-        this.matchesTest(testCase, keywords),
-      );
+      const matchingTests = tests.filter((testCase) => this.matchesTest(testCase, keywords));
 
-      const confidence = this.computeConfidence(
-        matchingPageObjects,
-        matchingTests,
-      );
+      const confidence = this.computeConfidence(matchingPageObjects, matchingTests);
 
       return {
         featureId: feature.id,
         featureName: feature.name,
-        pageObjects: matchingPageObjects.map(
-          (pageObject) => pageObject.name,
-        ),
-        tests: matchingTests.map(
-          (testCase) => testCase.title,
-        ),
+        pageObjects: matchingPageObjects.map((pageObject) => pageObject.name),
+        tests: matchingTests.map((testCase) => testCase.title),
         confidence,
         status: this.determineStatus(confidence),
       };
@@ -58,11 +49,7 @@ class CorrelationEngine {
   }
 
   extractKeywords(feature) {
-    const text = [
-      feature.name,
-      feature.description || '',
-      feature.domain || '',
-    ].join(' ');
+    const text = [feature.name, feature.description || '', feature.domain || ''].join(' ');
 
     const baseKeywords = this.tokenize(text);
     const expandedKeywords = new Set(baseKeywords);
@@ -97,10 +84,10 @@ class CorrelationEngine {
     const searchableText = [
       pageObject.name,
       ...(pageObject.methods || []).map((method) =>
-        typeof method === 'string' ? method : method.name,
+        typeof method === 'string' ? method : method.name
       ),
       ...(pageObject.locators || []).map((locator) =>
-        typeof locator === 'string' ? locator : locator.name,
+        typeof locator === 'string' ? locator : locator.name
       ),
     ].join(' ');
 
@@ -120,13 +107,7 @@ class CorrelationEngine {
           return methodCall;
         }
 
-        return [
-          methodCall.object,
-          methodCall.method,
-          methodCall.name,
-        ]
-          .filter(Boolean)
-          .join(' ');
+        return [methodCall.object, methodCall.method, methodCall.name].filter(Boolean).join(' ');
       }),
     ].join(' ');
 
@@ -136,9 +117,7 @@ class CorrelationEngine {
   matches(value, keywords) {
     const normalizedValue = this.normalize(value);
 
-    return keywords.some((keyword) =>
-      normalizedValue.includes(this.normalize(keyword)),
-    );
+    return keywords.some((keyword) => normalizedValue.includes(this.normalize(keyword)));
   }
 
   computeConfidence(pageObjects, tests) {
