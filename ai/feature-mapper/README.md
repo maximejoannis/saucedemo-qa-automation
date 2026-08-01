@@ -792,3 +792,18 @@ L’étape AI Feature Mapper sera considérée comme terminée lorsque :
 - le fichier `feature-map.json` respecte un schéma stable ;
 - aucun taux de couverture n’est calculé ;
 - aucun test n’est généré ou modifié.
+
+## Version 2
+
+La V2 enrichit le modèle avec une analyse statique des Page Objects présents dans `src/pages/`.
+
+Pour chaque Page Object, l'agent extrait :
+
+- le nom de la classe ;
+- le chemin du fichier ;
+- son export CommonJS ;
+- les locators déclarés dans le constructeur ;
+- les méthodes publiques ;
+- les principales actions Playwright utilisées.
+
+Cette version ne fait encore aucun rapprochement entre fonctionnalités et Page Objects et ne calcule aucun taux de couverture.
