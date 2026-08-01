@@ -152,14 +152,14 @@ Capacité à relier les fonctionnalités, les règles métier, les User Stories 
 
 # Acronymes
 
-| Acronyme | Signification |
-|----------|---------------|
-| QA | Quality Assurance |
-| E2E | End-to-End |
-| POM | Page Object Model |
-| CI | Continuous Integration |
-| AI | Artificial Intelligence |
-| HTML | HyperText Markup Language |
+| Acronyme | Signification             |
+| -------- | ------------------------- |
+| QA       | Quality Assurance         |
+| E2E      | End-to-End                |
+| POM      | Page Object Model         |
+| CI       | Continuous Integration    |
+| AI       | Artificial Intelligence   |
+| HTML     | HyperText Markup Language |
 
 ---
 
