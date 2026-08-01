@@ -1,1 +1,166 @@
-
+{
+  "metadata": {
+    "generatedAt": "2026-08-01T14:49:52.430Z",
+    "agent": "AI Feature Mapper",
+    "version": "v1",
+    "schemaVersion": "1.0.0",
+    "source": "docs/functional-map.md"
+  },
+  "summary": {
+    "featuresAnalyzed": 14
+  },
+  "features": [
+    {
+      "id": "F01",
+      "name": "Connexion utilisateur",
+      "domain": "Authentification",
+      "description": "Permet à un utilisateur valide de s'authentifier afin d'accéder au catalogue des produits.",
+      "preconditions": [
+        "L'utilisateur se trouve sur la page de connexion.",
+        "Un compte valide est disponible."
+      ],
+      "expectedResults": [
+        "L'utilisateur est authentifié.",
+        "Le catalogue des produits est affiché."
+      ]
+    },
+    {
+      "id": "F02",
+      "name": "Refus d'accès pour un utilisateur bloqué",
+      "domain": "Authentification",
+      "description": "Empêche un utilisateur bloqué d'accéder à l'application.",
+      "preconditions": [
+        "L'utilisateur possède un compte marqué comme bloqué."
+      ],
+      "expectedResults": [
+        "L'authentification est refusée.",
+        "Un message d'erreur est affiché."
+      ]
+    },
+    {
+      "id": "F03",
+      "name": "Refus d'accès avec des identifiants invalides",
+      "domain": "Authentification",
+      "description": "Empêche l'authentification lorsqu'un identifiant ou un mot de passe est incorrect.",
+      "preconditions": [
+        "L'utilisateur saisit des identifiants invalides."
+      ],
+      "expectedResults": [
+        "L'accès est refusé.",
+        "Un message d'erreur est affiché."
+      ]
+    },
+    {
+      "id": "F10",
+      "name": "Consultation du catalogue",
+      "domain": "Catalogue",
+      "description": "Affiche la liste des produits disponibles.",
+      "preconditions": [
+        "L'utilisateur est authentifié."
+      ],
+      "expectedResults": [
+        "Tous les produits sont visibles."
+      ]
+    },
+    {
+      "id": "F11",
+      "name": "Tri des produits",
+      "domain": "Catalogue",
+      "description": "Permet de modifier l'ordre d'affichage des produits.",
+      "preconditions": [],
+      "expectedResults": [
+        "Les produits sont triés selon le critère sélectionné."
+      ]
+    },
+    {
+      "id": "F12",
+      "name": "Consultation d'un produit",
+      "domain": "Catalogue",
+      "description": "Permet de consulter les informations d'un produit.",
+      "preconditions": [],
+      "expectedResults": [
+        "Les informations détaillées du produit sont affichées."
+      ]
+    },
+    {
+      "id": "F20",
+      "name": "Ajouter un produit au panier",
+      "domain": "Panier",
+      "description": "Ajoute un produit au panier.",
+      "preconditions": [],
+      "expectedResults": [
+        "Le produit apparaît dans le panier."
+      ]
+    },
+    {
+      "id": "F21",
+      "name": "Retirer un produit du panier",
+      "domain": "Panier",
+      "description": "Supprime un produit du panier.",
+      "preconditions": [],
+      "expectedResults": [
+        "Le produit n'apparaît plus dans le panier."
+      ]
+    },
+    {
+      "id": "F22",
+      "name": "Consulter le panier",
+      "domain": "Panier",
+      "description": "Affiche le contenu actuel du panier.",
+      "preconditions": [],
+      "expectedResults": [
+        "Les produits ajoutés sont visibles."
+      ]
+    },
+    {
+      "id": "F23",
+      "name": "Continuer les achats",
+      "domain": "Panier",
+      "description": "Permet de revenir au catalogue depuis le panier.",
+      "preconditions": [],
+      "expectedResults": [
+        "Le catalogue est réaffiché."
+      ]
+    },
+    {
+      "id": "F30",
+      "name": "Saisie des informations client",
+      "domain": "Checkout",
+      "description": "Permet de renseigner les informations nécessaires à la commande.",
+      "preconditions": [],
+      "expectedResults": [
+        "Les informations sont enregistrées et l'utilisateur passe à l'étape suivante."
+      ]
+    },
+    {
+      "id": "F31",
+      "name": "Consultation du récapitulatif",
+      "domain": "Checkout",
+      "description": "Présente un résumé de la commande avant validation.",
+      "preconditions": [],
+      "expectedResults": [
+        "Le récapitulatif affiche les produits, les montants et les informations client."
+      ]
+    },
+    {
+      "id": "F32",
+      "name": "Validation de la commande",
+      "domain": "Checkout",
+      "description": "Finalise la commande.",
+      "preconditions": [],
+      "expectedResults": [
+        "La commande est enregistrée."
+      ]
+    },
+    {
+      "id": "F33",
+      "name": "Confirmation de commande",
+      "domain": "Checkout",
+      "description": "Affiche la confirmation de commande après validation.",
+      "preconditions": [],
+      "expectedResults": [
+        "L'utilisateur visualise le message de confirmation."
+      ]
+    }
+  ]
+}
