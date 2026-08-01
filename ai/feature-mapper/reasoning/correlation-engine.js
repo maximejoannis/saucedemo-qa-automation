@@ -1,55 +1,144 @@
-/**
- * CorrelationEngine
- *
- * Associe automatiquement les fonctionnalités aux artefacts Playwright.
- */
 class CorrelationEngine {
+  constructor() {
+    this.aliases = {
+      connexion: ['login', 'authenticate', 'authentication'],
+      authentification: ['login', 'authenticate', 'authentication'],
+      utilisateur: ['user'],
+
+      catalogue: ['inventory', 'product', 'products'],
+      produit: ['product', 'inventory'],
+      produits: ['product', 'inventory'],
+      tri: ['sort', 'filter'],
+
+      panier: ['cart'],
+      ajouter: ['add'],
+      retirer: ['remove'],
+      supprimer: ['remove'],
+      consulter: ['view', 'open', 'display'],
+
+      commande: ['checkout', 'order'],
+      validation: ['finish', 'complete', 'checkout'],
+      confirmation: ['complete', 'confirmation'],
+      informations: ['information', 'customer'],
+      client: ['customer'],
+      récapitulatif: ['overview', 'summary'],
+    };
+  }
+
   correlate({ features, pageObjects, tests }) {
     return features.map((feature) => {
       const keywords = this.extractKeywords(feature);
 
       const matchingPageObjects = pageObjects.filter((pageObject) =>
-        this.matches(pageObject.name, keywords)
+        this.matchesPageObject(pageObject, keywords),
       );
 
-      const matchingTests = tests.filter((test) => {
-        const searchableText = [
-          test.title,
-          test.suite,
-          ...(test.pageObjects || []),
-          ...(test.methods || []),
-        ]
-          .join(' ')
-          .toLowerCase();
+      const matchingTests = tests.filter((testCase) =>
+        this.matchesTest(testCase, keywords),
+      );
 
-        return keywords.some((keyword) => searchableText.includes(keyword));
-      });
-
-      const confidence = this.computeConfidence(matchingPageObjects, matchingTests);
+      const confidence = this.computeConfidence(
+        matchingPageObjects,
+        matchingTests,
+      );
 
       return {
         featureId: feature.id,
         featureName: feature.name,
-        pageObjects: matchingPageObjects.map((p) => p.name),
-        tests: matchingTests.map((t) => t.title),
+        pageObjects: matchingPageObjects.map(
+          (pageObject) => pageObject.name,
+        ),
+        tests: matchingTests.map(
+          (testCase) => testCase.title,
+        ),
         confidence,
-        status: confidence >= 80 ? 'covered' : 'not-covered',
+        status: this.determineStatus(confidence),
       };
     });
   }
 
   extractKeywords(feature) {
-    return `${feature.id} ${feature.name} ${feature.description || ''}`
-      .toLowerCase()
-      .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    const text = [
+      feature.name,
+      feature.description || '',
+      feature.domain || '',
+    ].join(' ');
+
+    const baseKeywords = this.tokenize(text);
+    const expandedKeywords = new Set(baseKeywords);
+
+    for (const keyword of baseKeywords) {
+      const aliases = this.aliases[keyword] || [];
+
+      for (const alias of aliases) {
+        expandedKeywords.add(alias);
+      }
+    }
+
+    return [...expandedKeywords];
+  }
+
+  tokenize(value) {
+    return this.normalize(value)
       .split(/\s+/)
       .filter((word) => word.length >= 3);
   }
 
-  matches(value, keywords) {
-    const text = value.toLowerCase();
+  normalize(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+      .trim();
+  }
 
-    return keywords.some((keyword) => text.includes(keyword));
+  matchesPageObject(pageObject, keywords) {
+    const searchableText = [
+      pageObject.name,
+      ...(pageObject.methods || []).map((method) =>
+        typeof method === 'string' ? method : method.name,
+      ),
+      ...(pageObject.locators || []).map((locator) =>
+        typeof locator === 'string' ? locator : locator.name,
+      ),
+    ].join(' ');
+
+    return this.matches(searchableText, keywords);
+  }
+
+  matchesTest(testCase, keywords) {
+    const methodCalls = testCase.methodCalls || testCase.methods || [];
+
+    const searchableText = [
+      testCase.title,
+      testCase.suite,
+      ...(testCase.fixtures || []),
+      ...(testCase.pageObjects || []),
+      ...methodCalls.map((methodCall) => {
+        if (typeof methodCall === 'string') {
+          return methodCall;
+        }
+
+        return [
+          methodCall.object,
+          methodCall.method,
+          methodCall.name,
+        ]
+          .filter(Boolean)
+          .join(' ');
+      }),
+    ].join(' ');
+
+    return this.matches(searchableText, keywords);
+  }
+
+  matches(value, keywords) {
+    const normalizedValue = this.normalize(value);
+
+    return keywords.some((keyword) =>
+      normalizedValue.includes(this.normalize(keyword)),
+    );
   }
 
   computeConfidence(pageObjects, tests) {
@@ -63,7 +152,19 @@ class CorrelationEngine {
       score += 60;
     }
 
-    return score;
+    return Math.min(score, 100);
+  }
+
+  determineStatus(confidence) {
+    if (confidence >= 80) {
+      return 'covered';
+    }
+
+    if (confidence >= 40) {
+      return 'partially-covered';
+    }
+
+    return 'not-covered';
   }
 }
 
