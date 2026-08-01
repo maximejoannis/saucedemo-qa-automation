@@ -1,13 +1,19 @@
 {
   "metadata": {
-    "generatedAt": "2026-08-01T14:49:52.430Z",
+    "generatedAt": "2026-08-01T17:32:21.099Z",
     "agent": "AI Feature Mapper",
-    "version": "v1",
-    "schemaVersion": "1.0.0",
-    "source": "docs/functional-map.md"
+    "version": "v2",
+    "schemaVersion": "1.1.0",
+    "sources": [
+      "docs/functional-map.md",
+      "src/pages/"
+    ]
   },
   "summary": {
-    "featuresAnalyzed": 14
+    "featuresAnalyzed": 14,
+    "pageObjectsAnalyzed": 4,
+    "locatorsAnalyzed": 39,
+    "methodsAnalyzed": 23
   },
   "features": [
     {
@@ -29,24 +35,38 @@
       "name": "Refus d'accès pour un utilisateur bloqué",
       "domain": "Authentification",
       "description": "Empêche un utilisateur bloqué d'accéder à l'application.",
-      "preconditions": ["L'utilisateur possède un compte marqué comme bloqué."],
-      "expectedResults": ["L'authentification est refusée.", "Un message d'erreur est affiché."]
+      "preconditions": [
+        "L'utilisateur possède un compte marqué comme bloqué."
+      ],
+      "expectedResults": [
+        "L'authentification est refusée.",
+        "Un message d'erreur est affiché."
+      ]
     },
     {
       "id": "F03",
       "name": "Refus d'accès avec des identifiants invalides",
       "domain": "Authentification",
       "description": "Empêche l'authentification lorsqu'un identifiant ou un mot de passe est incorrect.",
-      "preconditions": ["L'utilisateur saisit des identifiants invalides."],
-      "expectedResults": ["L'accès est refusé.", "Un message d'erreur est affiché."]
+      "preconditions": [
+        "L'utilisateur saisit des identifiants invalides."
+      ],
+      "expectedResults": [
+        "L'accès est refusé.",
+        "Un message d'erreur est affiché."
+      ]
     },
     {
       "id": "F10",
       "name": "Consultation du catalogue",
       "domain": "Catalogue",
       "description": "Affiche la liste des produits disponibles.",
-      "preconditions": ["L'utilisateur est authentifié."],
-      "expectedResults": ["Tous les produits sont visibles."]
+      "preconditions": [
+        "L'utilisateur est authentifié."
+      ],
+      "expectedResults": [
+        "Tous les produits sont visibles."
+      ]
     },
     {
       "id": "F11",
@@ -54,7 +74,9 @@
       "domain": "Catalogue",
       "description": "Permet de modifier l'ordre d'affichage des produits.",
       "preconditions": [],
-      "expectedResults": ["Les produits sont triés selon le critère sélectionné."]
+      "expectedResults": [
+        "Les produits sont triés selon le critère sélectionné."
+      ]
     },
     {
       "id": "F12",
@@ -62,7 +84,9 @@
       "domain": "Catalogue",
       "description": "Permet de consulter les informations d'un produit.",
       "preconditions": [],
-      "expectedResults": ["Les informations détaillées du produit sont affichées."]
+      "expectedResults": [
+        "Les informations détaillées du produit sont affichées."
+      ]
     },
     {
       "id": "F20",
@@ -70,7 +94,9 @@
       "domain": "Panier",
       "description": "Ajoute un produit au panier.",
       "preconditions": [],
-      "expectedResults": ["Le produit apparaît dans le panier."]
+      "expectedResults": [
+        "Le produit apparaît dans le panier."
+      ]
     },
     {
       "id": "F21",
@@ -78,7 +104,9 @@
       "domain": "Panier",
       "description": "Supprime un produit du panier.",
       "preconditions": [],
-      "expectedResults": ["Le produit n'apparaît plus dans le panier."]
+      "expectedResults": [
+        "Le produit n'apparaît plus dans le panier."
+      ]
     },
     {
       "id": "F22",
@@ -86,7 +114,9 @@
       "domain": "Panier",
       "description": "Affiche le contenu actuel du panier.",
       "preconditions": [],
-      "expectedResults": ["Les produits ajoutés sont visibles."]
+      "expectedResults": [
+        "Les produits ajoutés sont visibles."
+      ]
     },
     {
       "id": "F23",
@@ -94,7 +124,9 @@
       "domain": "Panier",
       "description": "Permet de revenir au catalogue depuis le panier.",
       "preconditions": [],
-      "expectedResults": ["Le catalogue est réaffiché."]
+      "expectedResults": [
+        "Le catalogue est réaffiché."
+      ]
     },
     {
       "id": "F30",
@@ -122,7 +154,9 @@
       "domain": "Checkout",
       "description": "Finalise la commande.",
       "preconditions": [],
-      "expectedResults": ["La commande est enregistrée."]
+      "expectedResults": [
+        "La commande est enregistrée."
+      ]
     },
     {
       "id": "F33",
@@ -130,7 +164,509 @@
       "domain": "Checkout",
       "description": "Affiche la confirmation de commande après validation.",
       "preconditions": [],
-      "expectedResults": ["L'utilisateur visualise le message de confirmation."]
+      "expectedResults": [
+        "L'utilisateur visualise le message de confirmation."
+      ]
     }
-  ]
+  ],
+  "repository": {
+    "pageObjects": [
+      {
+        "name": "CartPage",
+        "file": "src/pages/CartPage.js",
+        "exported": true,
+        "locators": [
+          {
+            "name": "items",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item\"]'",
+            "line": 4
+          },
+          {
+            "name": "itemNames",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-name\"]'",
+            "line": 5
+          },
+          {
+            "name": "itemQuantities",
+            "strategy": "locator",
+            "expression": "'[data-test=\"item-quantity\"]'",
+            "line": 6
+          },
+          {
+            "name": "checkoutButton",
+            "strategy": "getByRole",
+            "expression": "'button', { name: 'Checkout', exact: true }",
+            "line": 7
+          },
+          {
+            "name": "continueShoppingButton",
+            "strategy": "locator",
+            "expression": "'[data-test=\"continue-shopping\"]'",
+            "line": 8
+          }
+        ],
+        "methods": [
+          {
+            "name": "remove",
+            "async": true,
+            "parameters": [
+              "productSlug"
+            ],
+            "actions": [
+              "click"
+            ],
+            "line": 9
+          },
+          {
+            "name": "checkout",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 13
+          },
+          {
+            "name": "continueShopping",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 17
+          },
+          {
+            "name": "names",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "allTextContents"
+            ],
+            "line": 21
+          }
+        ]
+      },
+      {
+        "name": "CheckoutPage",
+        "file": "src/pages/CheckoutPage.js",
+        "exported": true,
+        "locators": [
+          {
+            "name": "firstName",
+            "strategy": "getByPlaceholder",
+            "expression": "'First Name'",
+            "line": 5
+          },
+          {
+            "name": "lastName",
+            "strategy": "getByPlaceholder",
+            "expression": "'Last Name'",
+            "line": 6
+          },
+          {
+            "name": "postalCode",
+            "strategy": "getByPlaceholder",
+            "expression": "'Zip/Postal Code'",
+            "line": 7
+          },
+          {
+            "name": "continueButton",
+            "strategy": "getByRole",
+            "expression": "'button', { name: 'Continue', exact: true, }",
+            "line": 9
+          },
+          {
+            "name": "finishButton",
+            "strategy": "getByRole",
+            "expression": "'button', { name: 'Finish', exact: true, }",
+            "line": 14
+          },
+          {
+            "name": "cancelButton",
+            "strategy": "locator",
+            "expression": "'[data-test=\"cancel\"]'",
+            "line": 20
+          },
+          {
+            "name": "error",
+            "strategy": "locator",
+            "expression": "'[data-test=\"error\"]'",
+            "line": 22
+          },
+          {
+            "name": "summaryItems",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item\"]'",
+            "line": 24
+          },
+          {
+            "name": "summaryNames",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-name\"]'",
+            "line": 25
+          },
+          {
+            "name": "summaryPrices",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-price\"]'",
+            "line": 26
+          },
+          {
+            "name": "subtotal",
+            "strategy": "locator",
+            "expression": "'[data-test=\"subtotal-label\"]'",
+            "line": 28
+          },
+          {
+            "name": "tax",
+            "strategy": "locator",
+            "expression": "'[data-test=\"tax-label\"]'",
+            "line": 29
+          },
+          {
+            "name": "total",
+            "strategy": "locator",
+            "expression": "'[data-test=\"total-label\"]'",
+            "line": 30
+          },
+          {
+            "name": "completeHeader",
+            "strategy": "getByText",
+            "expression": "'Thank you for your order!', { exact: true, }",
+            "line": 32
+          },
+          {
+            "name": "completeText",
+            "strategy": "locator",
+            "expression": "'[data-test=\"complete-text\"]'",
+            "line": 36
+          },
+          {
+            "name": "backHomeButton",
+            "strategy": "getByRole",
+            "expression": "'button', { name: 'Back Home', exact: true, }",
+            "line": 38
+          }
+        ],
+        "methods": [
+          {
+            "name": "fillCustomer",
+            "async": true,
+            "parameters": [
+              "{ firstName = ''",
+              "lastName = ''",
+              "postalCode = '' }"
+            ],
+            "actions": [],
+            "line": 42
+          },
+          {
+            "name": "continue",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 48
+          },
+          {
+            "name": "finish",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 52
+          },
+          {
+            "name": "cancel",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 56
+          },
+          {
+            "name": "backHome",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 60
+          },
+          {
+            "name": "displayedAmount",
+            "async": true,
+            "parameters": [
+              "locator"
+            ],
+            "actions": [
+              "textContent"
+            ],
+            "line": 64
+          },
+          {
+            "name": "if",
+            "async": false,
+            "parameters": [
+              "!match"
+            ],
+            "actions": [],
+            "line": 68
+          }
+        ]
+      },
+      {
+        "name": "InventoryPage",
+        "file": "src/pages/InventoryPage.js",
+        "exported": true,
+        "locators": [
+          {
+            "name": "title",
+            "strategy": "getByText",
+            "expression": "'Products', { exact: true }",
+            "line": 4
+          },
+          {
+            "name": "items",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item\"]'",
+            "line": 5
+          },
+          {
+            "name": "cartBadge",
+            "strategy": "locator",
+            "expression": "'[data-test=\"shopping-cart-badge\"]'",
+            "line": 6
+          },
+          {
+            "name": "cartLink",
+            "strategy": "locator",
+            "expression": "'[data-test=\"shopping-cart-link\"]'",
+            "line": 7
+          },
+          {
+            "name": "sort",
+            "strategy": "locator",
+            "expression": "'[data-test=\"product-sort-container\"]'",
+            "line": 8
+          },
+          {
+            "name": "names",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-name\"]'",
+            "line": 9
+          },
+          {
+            "name": "descriptions",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-desc\"]'",
+            "line": 10
+          },
+          {
+            "name": "prices",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-price\"]'",
+            "line": 11
+          },
+          {
+            "name": "addButtons",
+            "strategy": "getByRole",
+            "expression": "'button', { name: 'Add to cart', exact: true }",
+            "line": 12
+          },
+          {
+            "name": "menuButton",
+            "strategy": "getByRole",
+            "expression": "'button', { name: 'Open Menu', exact: true }",
+            "line": 13
+          },
+          {
+            "name": "logoutLink",
+            "strategy": "locator",
+            "expression": "'[data-test=\"logout-sidebar-link\"]'",
+            "line": 14
+          },
+          {
+            "name": "detailName",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-name\"]'",
+            "line": 15
+          },
+          {
+            "name": "detailPrice",
+            "strategy": "locator",
+            "expression": "'[data-test=\"inventory-item-price\"]'",
+            "line": 16
+          },
+          {
+            "name": "backToProductsButton",
+            "strategy": "locator",
+            "expression": "'[data-test=\"back-to-products\"]'",
+            "line": 17
+          }
+        ],
+        "methods": [
+          {
+            "name": "add",
+            "async": true,
+            "parameters": [
+              "productSlug"
+            ],
+            "actions": [
+              "click"
+            ],
+            "line": 18
+          },
+          {
+            "name": "remove",
+            "async": true,
+            "parameters": [
+              "productSlug"
+            ],
+            "actions": [
+              "click"
+            ],
+            "line": 22
+          },
+          {
+            "name": "openCart",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 26
+          },
+          {
+            "name": "openProduct",
+            "async": true,
+            "parameters": [
+              "name"
+            ],
+            "actions": [
+              "click"
+            ],
+            "line": 30
+          },
+          {
+            "name": "backToProducts",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 34
+          },
+          {
+            "name": "logout",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 38
+          },
+          {
+            "name": "selectSort",
+            "async": true,
+            "parameters": [
+              "option"
+            ],
+            "actions": [
+              "selectOption"
+            ],
+            "line": 43
+          },
+          {
+            "name": "productNames",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "allTextContents"
+            ],
+            "line": 47
+          },
+          {
+            "name": "productPrices",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "allTextContents"
+            ],
+            "line": 51
+          }
+        ]
+      },
+      {
+        "name": "LoginPage",
+        "file": "src/pages/LoginPage.js",
+        "exported": true,
+        "locators": [
+          {
+            "name": "username",
+            "strategy": "getByRole",
+            "expression": "'textbox', { name: 'Username' }",
+            "line": 4
+          },
+          {
+            "name": "password",
+            "strategy": "getByRole",
+            "expression": "'textbox', { name: 'Password' }",
+            "line": 5
+          },
+          {
+            "name": "loginButton",
+            "strategy": "getByRole",
+            "expression": "'button', { name: 'Login', exact: true }",
+            "line": 6
+          },
+          {
+            "name": "error",
+            "strategy": "locator",
+            "expression": "'[data-test=\"error\"]'",
+            "line": 7
+          }
+        ],
+        "methods": [
+          {
+            "name": "goto",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "goto",
+              "waitFor"
+            ],
+            "line": 8
+          },
+          {
+            "name": "login",
+            "async": true,
+            "parameters": [
+              "username",
+              "password"
+            ],
+            "actions": [
+              "fill",
+              "click"
+            ],
+            "line": 13
+          },
+          {
+            "name": "submit",
+            "async": true,
+            "parameters": [],
+            "actions": [
+              "click"
+            ],
+            "line": 19
+          }
+        ]
+      }
+    ]
+  }
 }
