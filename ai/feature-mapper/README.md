@@ -11,22 +11,22 @@ Son objectif est de transformer un référentiel fonctionnel, des Page
 Objects et des tests Playwright en un rapport de couverture
 fonctionnelle explicable.
 
-------------------------------------------------------------------------
+---
 
 # Objectifs
 
--   Cartographier les fonctionnalités métier
--   Analyser les Page Objects
--   Analyser les tests Playwright
--   Corréler les fonctionnalités avec les tests
--   Calculer la couverture fonctionnelle
--   Générer un rapport HTML et JSON
+- Cartographier les fonctionnalités métier
+- Analyser les Page Objects
+- Analyser les tests Playwright
+- Corréler les fonctionnalités avec les tests
+- Calculer la couverture fonctionnelle
+- Générer un rapport HTML et JSON
 
-------------------------------------------------------------------------
+---
 
 # Architecture
 
-``` text
+```text
 Référentiel fonctionnel
         │
         ▼
@@ -51,11 +51,11 @@ Execution Evidence Analyzer (optionnel)
 Coverage Report Generator
 ```
 
-------------------------------------------------------------------------
+---
 
 # Structure
 
-``` text
+```text
 feature-mapper/
 ├── analyzers/
 ├── execution/
@@ -67,7 +67,7 @@ feature-mapper/
 └── config.js
 ```
 
-------------------------------------------------------------------------
+---
 
 # Fonctionnement
 
@@ -79,58 +79,58 @@ feature-mapper/
 6.  Calcul de la couverture.
 7.  Lecture des résultats Playwright (optionnelle).
 8.  Génération de :
-    -   feature-map.json
-    -   coverage-report.json
-    -   coverage-report.html
+    - feature-map.json
+    - coverage-report.json
+    - coverage-report.html
 
-------------------------------------------------------------------------
+---
 
 # Correlation Engine
 
 Le moteur de corrélation associe les fonctionnalités aux tests à partir
 des informations disponibles dans le dépôt :
 
--   identifiants fonctionnels ;
--   domaines métier ;
--   mots-clés ;
--   Page Objects utilisés ;
--   méthodes appelées ;
--   titres des tests.
+- identifiants fonctionnels ;
+- domaines métier ;
+- mots-clés ;
+- Page Objects utilisés ;
+- méthodes appelées ;
+- titres des tests.
 
 Les associations sont déterministes et reproductibles.
 
-------------------------------------------------------------------------
+---
 
 # Coverage Engine
 
 Le moteur calcule :
 
--   le nombre de fonctionnalités recensées ;
--   le nombre de fonctionnalités couvertes ;
--   le nombre de fonctionnalités non couvertes ;
--   la couverture globale ;
--   la couverture par domaine.
+- le nombre de fonctionnalités recensées ;
+- le nombre de fonctionnalités couvertes ;
+- le nombre de fonctionnalités non couvertes ;
+- la couverture globale ;
+- la couverture par domaine.
 
 Le rapport explique toujours la formule utilisée.
 
-------------------------------------------------------------------------
+---
 
 # Résultats d'exécution Playwright
 
 Lorsque les résultats Playwright sont disponibles, l'agent distingue :
 
--   tests associés ;
--   tests exécutés ;
--   tests réussis ;
--   tests échoués.
+- tests associés ;
+- tests exécutés ;
+- tests réussis ;
+- tests échoués.
 
 Cette étape enrichit le rapport avec des preuves d'exécution.
 
-------------------------------------------------------------------------
+---
 
 # Commandes
 
-``` bash
+```bash
 npm run ai:map-features
 npm run test:ai
 npm run ai:coverage-report
@@ -139,15 +139,15 @@ npm run test:coverage
 npm run ai:report:executed
 ```
 
-------------------------------------------------------------------------
+---
 
 # Livrables
 
--   feature-map.json
--   coverage-report.json
--   coverage-report.html
+- feature-map.json
+- coverage-report.json
+- coverage-report.html
 
-------------------------------------------------------------------------
+---
 
 # Limites
 
@@ -158,10 +158,10 @@ résultats Playwright.
 Il ne remplace pas une revue QA et n'utilise pas de modèle de langage
 (LLM).
 
-------------------------------------------------------------------------
+---
 
 # Évolutions
 
--   amélioration des règles de corrélation ;
--   enrichissement des preuves d'exécution ;
--   traçabilité plus fine entre fonctionnalités, Page Objects et tests.
+- amélioration des règles de corrélation ;
+- enrichissement des preuves d'exécution ;
+- traçabilité plus fine entre fonctionnalités, Page Objects et tests.
