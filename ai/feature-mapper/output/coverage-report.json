@@ -5,11 +5,7 @@
     "application": "SauceDemo",
     "sourceGeneratedAt": "2026-08-02T11:03:15.183Z",
     "sourceAgentVersion": "v5",
-    "sources": [
-      "docs/functional-map.md",
-      "src/pages/",
-      "tests/"
-    ],
+    "sources": ["docs/functional-map.md", "src/pages/", "tests/"],
     "calculationMode": "corrélation statique",
     "executionResultsAvailable": false,
     "executionSource": null
@@ -378,10 +374,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "InventoryPage",
-        "LoginPage"
-      ],
+      "pageObjects": ["InventoryPage", "LoginPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -952,9 +945,7 @@
         }
       ],
       "pageObjectCount": 1,
-      "pageObjects": [
-        "LoginPage"
-      ],
+      "pageObjects": ["LoginPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -1313,10 +1304,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "InventoryPage",
-        "LoginPage"
-      ],
+      "pageObjects": ["InventoryPage", "LoginPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -1807,9 +1795,7 @@
         }
       ],
       "pageObjectCount": 1,
-      "pageObjects": [
-        "InventoryPage"
-      ],
+      "pageObjects": ["InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -2444,9 +2430,7 @@
         }
       ],
       "pageObjectCount": 1,
-      "pageObjects": [
-        "InventoryPage"
-      ],
+      "pageObjects": ["InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -3123,10 +3107,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "CheckoutPage",
-        "InventoryPage"
-      ],
+      "pageObjects": ["CheckoutPage", "InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -3819,10 +3800,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "CartPage",
-        "InventoryPage"
-      ],
+      "pageObjects": ["CartPage", "InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -4419,10 +4397,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "CartPage",
-        "InventoryPage"
-      ],
+      "pageObjects": ["CartPage", "InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -4956,11 +4931,7 @@
         }
       ],
       "pageObjectCount": 3,
-      "pageObjects": [
-        "CartPage",
-        "CheckoutPage",
-        "InventoryPage"
-      ],
+      "pageObjects": ["CartPage", "CheckoutPage", "InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -5463,10 +5434,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "CartPage",
-        "InventoryPage"
-      ],
+      "pageObjects": ["CartPage", "InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -6010,11 +5978,7 @@
         }
       ],
       "pageObjectCount": 3,
-      "pageObjects": [
-        "CartPage",
-        "CheckoutPage",
-        "InventoryPage"
-      ],
+      "pageObjects": ["CartPage", "CheckoutPage", "InventoryPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -6381,10 +6345,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "CartPage",
-        "CheckoutPage"
-      ],
+      "pageObjects": ["CartPage", "CheckoutPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -6715,10 +6676,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "CartPage",
-        "CheckoutPage"
-      ],
+      "pageObjects": ["CartPage", "CheckoutPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",
@@ -7063,10 +7021,7 @@
         }
       ],
       "pageObjectCount": 2,
-      "pageObjects": [
-        "CartPage",
-        "CheckoutPage"
-      ],
+      "pageObjects": ["CartPage", "CheckoutPage"],
       "execution": {
         "available": false,
         "status": "non-disponible",

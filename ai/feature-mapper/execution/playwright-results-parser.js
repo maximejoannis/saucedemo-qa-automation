@@ -2,7 +2,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 function normalizeFile(file) {
-  return String(file || '').split(path.sep).join('/').replace(/^\.\//, '');
+  return String(file || '')
+    .split(path.sep)
+    .join('/')
+    .replace(/^\.\//, '');
 }
 
 function finalStatus(results) {
@@ -19,7 +22,9 @@ function walkSuite(suite, inheritedTitles, output) {
       const status = finalStatus(results);
       const attachments = results.flatMap((result) => result.attachments || []);
       const tracePaths = attachments
-        .filter((attachment) => attachment.name === 'trace' || /trace\.zip$/i.test(attachment.path || ''))
+        .filter(
+          (attachment) => attachment.name === 'trace' || /trace\.zip$/i.test(attachment.path || '')
+        )
         .map((attachment) => attachment.path)
         .filter(Boolean);
 
@@ -34,7 +39,8 @@ function walkSuite(suite, inheritedTitles, output) {
         passed: status === 'passed',
         failed: ['failed', 'timedOut', 'interrupted'].includes(status),
         skipped: status === 'skipped',
-        flaky: status === 'passed' && results.slice(0, -1).some((result) => result.status !== 'passed'),
+        flaky:
+          status === 'passed' && results.slice(0, -1).some((result) => result.status !== 'passed'),
         attempts: results.length,
         duration: results.reduce((total, result) => total + (result.duration || 0), 0),
         traceAvailable: tracePaths.length > 0,

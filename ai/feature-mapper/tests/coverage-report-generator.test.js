@@ -102,7 +102,6 @@ test('génère les fichiers JSON et HTML en français', () => {
   assert.match(html, /Détail du calcul/);
 });
 
-
 test('enrichit le rapport avec la dernière exécution Playwright', () => {
   const featureMap = createFeatureMap();
   featureMap.mapping[0].testReferences = [

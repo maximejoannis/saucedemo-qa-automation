@@ -45,7 +45,9 @@ function calculateRate(covered, total) {
 }
 
 function normalizeFile(file) {
-  return String(file || '').replaceAll('\\', '/').replace(/^\.\//, '');
+  return String(file || '')
+    .replaceAll('\\', '/')
+    .replace(/^\.\//, '');
 }
 
 function executionKey(file, title) {
@@ -90,9 +92,7 @@ function aggregateExecutions(executionData) {
 }
 
 function buildCoverageReport(featureMap, executionData = null) {
-  const featuresById = new Map(
-    (featureMap.features || []).map((feature) => [feature.id, feature])
-  );
+  const featuresById = new Map((featureMap.features || []).map((feature) => [feature.id, feature]));
   const executionIndex = aggregateExecutions(executionData);
   const executionAvailable = Boolean(executionData);
 
@@ -108,18 +108,20 @@ function buildCoverageReport(featureMap, executionData = null) {
       const candidates = [...executionIndex.values()].filter(
         (item) => item.title === reference.title
       );
-      return candidates.length === 1 ? { ...candidates[0], line: reference.line || null } : {
-        title: reference.title,
-        file: reference.file || null,
-        line: reference.line || null,
-        projects: [],
-        executed: false,
-        passed: false,
-        failed: false,
-        skipped: false,
-        flaky: false,
-        traceAvailable: false,
-      };
+      return candidates.length === 1
+        ? { ...candidates[0], line: reference.line || null }
+        : {
+            title: reference.title,
+            file: reference.file || null,
+            line: reference.line || null,
+            projects: [],
+            executed: false,
+            passed: false,
+            failed: false,
+            skipped: false,
+            flaky: false,
+            traceAvailable: false,
+          };
     });
 
     const covered = tests.length > 0;
@@ -188,12 +190,14 @@ function buildCoverageReport(featureMap, executionData = null) {
     domainGroups.set(feature.domain, domain);
   }
 
-  const domains = [...domainGroups.values()].map((domain) => ({
-    ...domain,
-    coverage: calculateRate(domain.covered, domain.total),
-    executionCoverage: calculateRate(domain.executed, domain.total),
-    validatedCoverage: calculateRate(domain.validated, domain.total),
-  })).sort((a, b) => a.domain.localeCompare(b.domain, 'fr'));
+  const domains = [...domainGroups.values()]
+    .map((domain) => ({
+      ...domain,
+      coverage: calculateRate(domain.covered, domain.total),
+      executionCoverage: calculateRate(domain.executed, domain.total),
+      validatedCoverage: calculateRate(domain.validated, domain.total),
+    }))
+    .sort((a, b) => a.domain.localeCompare(b.domain, 'fr'));
 
   const total = details.length;
   const covered = details.filter((feature) => feature.covered).length;
@@ -233,7 +237,7 @@ function buildCoverageReport(featureMap, executionData = null) {
         available: executionAvailable,
       },
       validated: {
-        rule: "Une fonctionnalité est validée lorsque tous ses tests associés observés dans la dernière exécution sont exécutés sans échec.",
+        rule: 'Une fonctionnalité est validée lorsque tous ses tests associés observés dans la dernière exécution sont exécutés sans échec.',
         numerator: validated,
         denominator: total,
         formula: `${validated} / ${total} × 100`,
@@ -266,21 +270,21 @@ function buildCoverageReport(featureMap, executionData = null) {
     failedFeatures: details.filter((feature) => feature.execution.status === 'en-échec'),
     limitations: executionAvailable
       ? [
-          "La relation entre fonctionnalité et test reste issue de la corrélation statique.",
+          'La relation entre fonctionnalité et test reste issue de la corrélation statique.',
           "Les résultats Playwright confirment l'exécution et le statut des tests associés, mais ne prouvent pas encore quelle assertion correspond précisément à chaque fonctionnalité.",
           "Les traces sont signalées lorsqu'elles existent ; elles ne sont pas encore analysées action par action.",
         ]
       : [
           "Aucun rapport JSON Playwright n'a été trouvé : seules les associations statiques sont affichées.",
-          "Exécuter npm run ai:report:executed pour enrichir le rapport avec les statuts réels.",
+          'Exécuter npm run ai:report:executed pour enrichir le rapport avec les statuts réels.',
         ],
     evolution: {
       title: "Évolution fondée sur l'exécution Playwright",
       current: executionAvailable
-        ? "Le rapport relie désormais les tests associés à leur dernière exécution Playwright, leur statut par navigateur et la présence de traces."
-        : "Le rapport peut être enrichi par une exécution Playwright au format JSON.",
+        ? 'Le rapport relie désormais les tests associés à leur dernière exécution Playwright, leur statut par navigateur et la présence de traces.'
+        : 'Le rapport peut être enrichi par une exécution Playwright au format JSON.',
       future: [
-        "Analyser les étapes et assertions des traces pour attribuer une preuve précise à chaque fonctionnalité.",
+        'Analyser les étapes et assertions des traces pour attribuer une preuve précise à chaque fonctionnalité.',
         "Historiser les exécutions pour mesurer l'évolution de la couverture et de la stabilité.",
       ],
     },
@@ -376,9 +380,10 @@ function buildHtml(report) {
   const uncovered = report.uncoveredFeatures.length
     ? report.uncoveredFeatures
         .map(
-          (feature) => `<li><strong>${escapeHtml(feature.id)}</strong> — ${escapeHtml(
-            feature.name
-          )} <span>${escapeHtml(feature.domain)}</span></li>`
+          (feature) =>
+            `<li><strong>${escapeHtml(feature.id)}</strong> — ${escapeHtml(
+              feature.name
+            )} <span>${escapeHtml(feature.domain)}</span></li>`
         )
         .join('')
     : '<li>Aucune fonctionnalité sans test associé dans le résultat actuel.</li>';
