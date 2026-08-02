@@ -14,6 +14,9 @@ module.exports = defineConfig({
   reporter: [
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ...(process.env.AI_COVERAGE_EXECUTION === 'true'
+      ? [['json', { outputFile: 'ai/feature-mapper/output/playwright-results.json' }]]
+      : []),
     [
       'allure-playwright',
       {

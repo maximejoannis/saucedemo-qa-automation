@@ -15,7 +15,11 @@
     "quality": "npm run lint && npm run format:check",
     "quality:report": "node scripts/generate-quality-report.js",
     "ai:map-features": "node ai/feature-mapper/agent.js",
-    "test:ai": "node --test \"ai/feature-mapper/tests/*.test.js\""
+    "test:ai": "node --test \"ai/feature-mapper/tests/*.test.js\"",
+    "ai:coverage-report": "node ai/feature-mapper/report/generate-coverage-report.js",
+    "ai:report": "npm run ai:map-features && npm run ai:coverage-report",
+    "test:coverage": "node ai/feature-mapper/execution/run-playwright-with-evidence.js",
+    "ai:report:executed": "node ai/feature-mapper/execution/generate-executed-report.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
