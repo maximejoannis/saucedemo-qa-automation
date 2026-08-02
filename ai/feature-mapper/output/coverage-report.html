@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rapport de couverture fonctionnelle des tests automatisés</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#667085; --line:#d9dee8; --panel:#f7f9fc; --accent:#2457d6; --ok:#16794b; --bad:#b42318; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:var(--ink); background:#eef2f7; line-height:1.5; }
+    main { width:min(1180px, calc(100% - 32px)); margin:32px auto; background:white; border:1px solid var(--line); box-shadow:0 18px 50px rgba(23,32,51,.08); }
+    header { padding:48px; border-bottom:1px solid var(--line); background:linear-gradient(135deg,#172033,#28447d); color:white; }
+    header p { margin:8px 0 0; color:#d8e1f5; }
+    .meta { display:flex; flex-wrap:wrap; gap:12px 28px; margin-top:28px; font-size:.92rem; }
+    .content { padding:40px 48px 56px; }
+    section.block { margin-bottom:44px; }
+    h1 { margin:0; font-size:clamp(2rem,4vw,3.1rem); line-height:1.12; }
+    h2 { margin:0 0 18px; font-size:1.45rem; border-bottom:2px solid var(--ink); padding-bottom:10px; }
+    h3, h4 { margin-top:0; }
+    .cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .card { border:1px solid var(--line); border-radius:12px; padding:20px; background:var(--panel); }
+    .card .label { color:var(--muted); font-size:.86rem; }
+    .card .value { display:block; margin-top:8px; font-size:1.8rem; font-weight:750; }
+    .coverage-card { border-color:#adc3fa; background:#eef4ff; }
+    .calculation { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:20px; padding:24px; border:1px solid var(--line); border-radius:12px; background:var(--panel); text-align:center; }
+    .calculation strong { display:block; font-size:2rem; }
+    .formula { margin-top:18px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:1.05rem; color:var(--accent); }
+    table { width:100%; border-collapse:collapse; font-size:.94rem; }
+    th { text-align:left; background:#172033; color:white; padding:12px 10px; }
+    td { padding:11px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+    tbody tr:not(.detail-row):hover { background:#f7f9fc; }
+    .number { text-align:right; font-variant-numeric:tabular-nums; }
+    .strong { font-weight:750; }
+    .code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-weight:700; }
+    .status { display:inline-block; padding:4px 9px; border-radius:999px; font-size:.8rem; font-weight:700; }
+    .covered { color:var(--ok); background:#e7f6ee; }
+    .uncovered { color:var(--bad); background:#feeceb; }
+    .detail-row td { padding:0 10px 10px; background:#fbfcfe; }
+    details { border-left:3px solid #b8c7e8; padding:8px 12px; }
+    summary { cursor:pointer; font-weight:700; color:var(--accent); }
+    .details-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; padding:18px 0 6px; }
+    ul { padding-left:20px; margin-bottom:0; }
+    li { margin:6px 0; }
+    .empty, .note { color:var(--muted); }
+    .warning { padding:18px 20px; border-left:4px solid #e49b0f; background:#fff8e7; }
+    .uncovered-list li { display:flex; gap:8px; align-items:baseline; }
+    .uncovered-list span { color:var(--muted); }
+    footer { padding:22px 48px; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
+    @media (max-width:850px) { .cards { grid-template-columns:repeat(2,1fr); } .details-grid { grid-template-columns:1fr; } .content, header, footer { padding-left:24px; padding-right:24px; } .table-wrap { overflow:auto; } }
+    @media print { body { background:white; } main { width:100%; margin:0; border:0; box-shadow:none; } details { break-inside:avoid; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Rapport de couverture fonctionnelle des tests automatisés</h1>
+    <p>SauceDemo — corrélation statique.</p>
+    <div class="meta">
+      <span>Généré le 02/08/2026 11:03:15</span>
+      <span>Version source : v5</span>
+      <span>Mode : corrélation statique</span>
+    </div>
+  </header>
+  <div class="content">
+    <section class="block">
+      <h2>1. Synthèse globale</h2>
+      <div class="cards">
+        <div class="card"><span class="label">Fonctionnalités recensées</span><span class="value">14</span></div>
+        <div class="card"><span class="label">Fonctionnalités couvertes</span><span class="value">14</span></div>
+        <div class="card"><span class="label">Fonctionnalités non couvertes</span><span class="value">0</span></div>
+        <div class="card coverage-card"><span class="label">Couverture statique</span><span class="value">100 %</span></div>
+        <div class="card"><span class="label">Fonctionnalités exécutées</span><span class="value">N/D</span></div>
+        <div class="card"><span class="label">Fonctionnalités validées</span><span class="value">N/D</span></div>
+        <div class="card"><span class="label">Fonctionnalités en échec</span><span class="value">N/D</span></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>2. Détail du calcul</h2>
+      <p>Une fonctionnalité est couverte lorsqu&#039;au moins un test automatisé distinct lui est associé.</p>
+      <div class="calculation">
+        <div><span>Fonctionnalités couvertes</span><strong>14</strong></div>
+        <div>÷</div>
+        <div><span>Fonctionnalités recensées</span><strong>14</strong></div>
+      </div>
+      <p class="formula">14 / 14 × 100 = 100 %</p>
+      <div class="warning">La couverture statique indique les fonctionnalités auxquelles au moins un test est associé. Aucun résultat Playwright n’est disponible pour confirmer l’exécution.</div>
+      
+    </section>
+
+    <section class="block">
+      <h2>3. Couverture par domaine</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Domaine</th><th class="number">Fonctionnalités</th><th class="number">Couvertes</th><th class="number">Non couvertes</th><th class="number">Associations de tests</th><th class="number">Couverture statique</th><th class="number">Exécutée</th><th class="number">Validée</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>Authentification</td>
+          <td class="number">3</td>
+          <td class="number">3</td>
+          <td class="number">0</td>
+          <td class="number">72</td>
+          <td class="number strong">100 %</td>
+          <td class="number strong">N/D</td>
+          <td class="number strong">N/D</td>
+        </tr>
+        <tr>
+          <td>Catalogue</td>
+          <td class="number">3</td>
+          <td class="number">3</td>
+          <td class="number">0</td>
+          <td class="number">102</td>
+          <td class="number strong">100 %</td>
+          <td class="number strong">N/D</td>
+          <td class="number strong">N/D</td>
+        </tr>
+        <tr>
+          <td>Checkout</td>
+          <td class="number">4</td>
+          <td class="number">4</td>
+          <td class="number">0</td>
+          <td class="number">69</td>
+          <td class="number strong">100 %</td>
+          <td class="number strong">N/D</td>
+          <td class="number strong">N/D</td>
+        </tr>
+        <tr>
+          <td>Panier</td>
+          <td class="number">4</td>
+          <td class="number">4</td>
+          <td class="number">0</td>
+          <td class="number">113</td>
+          <td class="number strong">100 %</td>
+          <td class="number strong">N/D</td>
+          <td class="number strong">N/D</td>
+        </tr></tbody>
+      </table></div>
+    </section>
+
+    <section class="block">
+      <h2>4. Détail par fonctionnalité</h2>
+      <p class="note">La colonne « Tests » indique le nombre de titres de tests distincts associés à la fonctionnalité.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>ID</th><th>Fonctionnalité</th><th>Domaine</th><th>Couverture statique</th><th class="number">Tests associés</th><th class="number">Exécutés</th><th class="number">Réussis</th><th>Statut exécution</th><th class="number">Page Objects</th></tr></thead>
+        <tbody>
+        <tr>
+          <td class="code">F01</td>
+          <td>Connexion utilisateur</td>
+          <td>Authentification</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">36</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F01</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Permet à un utilisateur valide de s&#039;authentifier afin d&#039;accéder au catalogue des produits.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (36)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US01-AC02-01 mot de passe invalide</li><li>TC-US01-AC02-02 utilisateur bloqué</li><li>TC-US01-AC02-03 username obligatoire</li><li>TC-US01-AC02-04 password obligatoire</li><li>TC-US01-AC02-05 deux champs vides</li><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US02-AC02-01 tri A-Z</li><li>TC-US02-AC02-02 tri Z-A</li><li>TC-US02-AC02-03 tri prix croissant</li><li>TC-US02-AC02-04 tri prix décroissant</li><li>TC-US02-AC02-05 changement successif de tri</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>InventoryPage</li><li>LoginPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F02</td>
+          <td>Refus d&#039;accès pour un utilisateur bloqué</td>
+          <td>Authentification</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">16</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">1</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F02</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Empêche un utilisateur bloqué d&#039;accéder à l&#039;application.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (16)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US01-AC02-01 mot de passe invalide</li><li>TC-US01-AC02-02 utilisateur bloqué</li><li>TC-US01-AC02-03 username obligatoire</li><li>TC-US01-AC02-04 password obligatoire</li><li>TC-US01-AC02-05 deux champs vides</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (1)</h4>
+                  <ul><li>LoginPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F03</td>
+          <td>Refus d&#039;accès avec des identifiants invalides</td>
+          <td>Authentification</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">20</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F03</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Empêche l&#039;authentification lorsqu&#039;un identifiant ou un mot de passe est incorrect.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (20)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US01-AC02-01 mot de passe invalide</li><li>TC-US01-AC02-02 utilisateur bloqué</li><li>TC-US01-AC02-03 username obligatoire</li><li>TC-US01-AC02-04 password obligatoire</li><li>TC-US01-AC02-05 deux champs vides</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US04-AC02-02 nom avec tiret accepté</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>InventoryPage</li><li>LoginPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F10</td>
+          <td>Consultation du catalogue</td>
+          <td>Catalogue</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">32</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">1</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F10</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Affiche la liste des produits disponibles.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (32)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US01-AC02-05 deux champs vides</li><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US02-AC02-01 tri A-Z</li><li>TC-US02-AC02-02 tri Z-A</li><li>TC-US02-AC02-03 tri prix croissant</li><li>TC-US02-AC02-04 tri prix décroissant</li><li>TC-US02-AC02-05 changement successif de tri</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (1)</h4>
+                  <ul><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F11</td>
+          <td>Tri des produits</td>
+          <td>Catalogue</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">32</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">1</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F11</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Permet de modifier l&#039;ordre d&#039;affichage des produits.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (32)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US01-AC02-05 deux champs vides</li><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US02-AC02-01 tri A-Z</li><li>TC-US02-AC02-02 tri Z-A</li><li>TC-US02-AC02-03 tri prix croissant</li><li>TC-US02-AC02-04 tri prix décroissant</li><li>TC-US02-AC02-05 changement successif de tri</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (1)</h4>
+                  <ul><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F12</td>
+          <td>Consultation d&#039;un produit</td>
+          <td>Catalogue</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">38</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F12</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Permet de consulter les informations d&#039;un produit.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (38)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US02-AC02-01 tri A-Z</li><li>TC-US02-AC02-02 tri Z-A</li><li>TC-US02-AC02-03 tri prix croissant</li><li>TC-US02-AC02-04 tri prix décroissant</li><li>TC-US02-AC02-05 changement successif de tri</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-01 prénom requis</li><li>TC-US04-AC01-02 nom requis</li><li>TC-US04-AC01-03 code postal requis</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC01-05 correction après erreur autorise la navigation</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US04-AC02-02 nom avec tiret accepté</li><li>TC-US04-AC02-03 code postal alphanumérique accepté</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>CheckoutPage</li><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F20</td>
+          <td>Ajouter un produit au panier</td>
+          <td>Panier</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">30</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F20</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Ajoute un produit au panier.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (30)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US02-AC02-01 tri A-Z</li><li>TC-US02-AC02-02 tri Z-A</li><li>TC-US02-AC02-03 tri prix croissant</li><li>TC-US02-AC02-04 tri prix décroissant</li><li>TC-US02-AC02-05 changement successif de tri</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>CartPage</li><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F21</td>
+          <td>Retirer un produit du panier</td>
+          <td>Panier</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">30</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F21</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Supprime un produit du panier.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (30)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US02-AC02-01 tri A-Z</li><li>TC-US02-AC02-02 tri Z-A</li><li>TC-US02-AC02-03 tri prix croissant</li><li>TC-US02-AC02-04 tri prix décroissant</li><li>TC-US02-AC02-05 changement successif de tri</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>CartPage</li><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F22</td>
+          <td>Consulter le panier</td>
+          <td>Panier</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">21</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">3</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F22</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Affiche le contenu actuel du panier.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (21)</h4>
+                  <ul><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (3)</h4>
+                  <ul><li>CartPage</li><li>CheckoutPage</li><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F23</td>
+          <td>Continuer les achats</td>
+          <td>Panier</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">32</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F23</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Permet de revenir au catalogue depuis le panier.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (32)</h4>
+                  <ul><li>TC-US01-AC01-01 connexion standard valide @smoke</li><li>TC-US01-AC01-02 connexion problem_user autorisée</li><li>TC-US01-AC01-03 connexion performance_glitch_user autorisée</li><li>TC-US01-AC01-05 déconnexion puis nouvelle connexion</li><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US02-AC01-03 lien détail puis TC-US02-AC01-04 retour catalogue</li><li>TC-US02-AC01-05 un bouton Add to cart par produit</li><li>TC-US02-AC02-01 tri A-Z</li><li>TC-US02-AC02-02 tri Z-A</li><li>TC-US02-AC02-03 tri prix croissant</li><li>TC-US02-AC02-04 tri prix décroissant</li><li>TC-US02-AC02-05 changement successif de tri</li><li>TC-US03-AC02-01 panier vide</li><li>TC-US03-AC01-01 ajout un produit</li><li>TC-US03-AC01-02 ajout trois produits</li><li>TC-US03-AC01-03 retrait depuis catalogue</li><li>TC-US03-AC01-04 retrait depuis panier</li><li>TC-US03-AC01-05 retrait partiel conserve deux produits</li><li>TC-US03-AC02-02 contenu exact de deux produits</li><li>TC-US03-AC02-03 contenu du panier conservé pendant la navigation</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>CartPage</li><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F30</td>
+          <td>Saisie des informations client</td>
+          <td>Checkout</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">19</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">3</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F30</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Permet de renseigner les informations nécessaires à la commande.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (19)</h4>
+                  <ul><li>TC-US01-AC02-05 deux champs vides</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US03-AC02-04 continuer les achats revient au catalogue</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-01 prénom requis</li><li>TC-US04-AC01-02 nom requis</li><li>TC-US04-AC01-03 code postal requis</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC01-05 correction après erreur autorise la navigation</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US04-AC02-02 nom avec tiret accepté</li><li>TC-US04-AC02-03 code postal alphanumérique accepté</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (3)</h4>
+                  <ul><li>CartPage</li><li>CheckoutPage</li><li>InventoryPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F31</td>
+          <td>Consultation du récapitulatif</td>
+          <td>Checkout</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">16</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F31</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Présente un résumé de la commande avant validation.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (16)</h4>
+                  <ul><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-01 prénom requis</li><li>TC-US04-AC01-02 nom requis</li><li>TC-US04-AC01-03 code postal requis</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC01-05 correction après erreur autorise la navigation</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US04-AC02-02 nom avec tiret accepté</li><li>TC-US04-AC02-03 code postal alphanumérique accepté</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>CartPage</li><li>CheckoutPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F32</td>
+          <td>Validation de la commande</td>
+          <td>Checkout</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">16</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F32</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Finalise la commande.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (16)</h4>
+                  <ul><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-01 prénom requis</li><li>TC-US04-AC01-02 nom requis</li><li>TC-US04-AC01-03 code postal requis</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC01-05 correction après erreur autorise la navigation</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US04-AC02-02 nom avec tiret accepté</li><li>TC-US04-AC02-03 code postal alphanumérique accepté</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>CartPage</li><li>CheckoutPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr>
+        <tr>
+          <td class="code">F33</td>
+          <td>Confirmation de commande</td>
+          <td>Checkout</td>
+          <td><span class="status covered">Couverte</span></td>
+          <td class="number strong">18</td>
+          <td class="number">N/D</td>
+          <td class="number">N/D</td>
+          <td>N/D</td>
+          <td class="number">2</td>
+        </tr>
+        <tr class="detail-row">
+          <td colspan="9">
+            <details>
+              <summary>Détail de F33</summary>
+              <div class="details-grid">
+                <section>
+                  <h4>Description</h4>
+                  <p>Affiche la confirmation de commande après validation.</p>
+                </section>
+                <section>
+                  <h4>Tests associés (18)</h4>
+                  <ul><li>TC-US02-AC01-01 six produits affichés</li><li>TC-US02-AC01-02 chaque produit affiche nom, description et prix</li><li>TC-US03-AC02-05 accès au checkout depuis un panier non vide</li><li>TC-US04-AC01-01 prénom requis</li><li>TC-US04-AC01-02 nom requis</li><li>TC-US04-AC01-03 code postal requis</li><li>TC-US04-AC01-04 tous les champs vides</li><li>TC-US04-AC01-05 correction après erreur autorise la navigation</li><li>TC-US04-AC02-01 données nominales valides</li><li>TC-US04-AC02-02 nom avec tiret accepté</li><li>TC-US04-AC02-03 code postal alphanumérique accepté</li><li>TC-US04-AC02-05 annulation retourne au panier</li><li>TC-US05-AC01-01/03/04 récapitulatif et montants cohérents</li><li>TC-US05-AC01-02 récapitulatif avec trois produits</li><li>TC-US05-AC01-05 annulation depuis le récapitulatif retourne au catalogue</li><li>TC-US05-AC02-01 achat d’un produit @smoke @critical</li><li>TC-US05-AC02-02 achat de trois produits</li><li>TC-US05-AC02-03/04/05 confirmation, retour et panier réinitialisé</li></ul>
+                </section>
+                <section>
+                  <h4>Exécution Playwright</h4>
+                  <p>Statut : <strong>non-disponible</strong></p>
+                  <p>Exécutés : 0 — Réussis : 0 — Échoués : 0 — Traces : 0</p>
+                </section>
+                <section>
+                  <h4>Page Objects associés (2)</h4>
+                  <ul><li>CartPage</li><li>CheckoutPage</li></ul>
+                </section>
+              </div>
+            </details>
+          </td>
+        </tr></tbody>
+      </table></div>
+    </section>
+
+    <section class="block">
+      <h2>5. Fonctionnalités non couvertes</h2>
+      <ul class="uncovered-list"><li>Aucune fonctionnalité sans test associé dans le résultat actuel.</li></ul>
+    </section>
+
+    <section class="block">
+      <h2>6. Périmètre technique analysé</h2>
+      <div class="cards">
+        <div class="card"><span class="label">Tests Playwright</span><span class="value">43</span></div>
+        <div class="card"><span class="label">Fichiers de tests</span><span class="value">5</span></div>
+        <div class="card"><span class="label">Page Objects</span><span class="value">4</span></div>
+        <div class="card"><span class="label">Méthodes analysées</span><span class="value">23</span></div>
+        <div class="card"><span class="label">Locators analysés</span><span class="value">39</span></div>
+        <div class="card"><span class="label">Fixtures référencées</span><span class="value">6</span></div>
+        <div class="card"><span class="label">Appels de méthodes</span><span class="value">80</span></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>7. Limites de la mesure actuelle</h2>
+      <ul><li>Aucun rapport JSON Playwright n&#039;a été trouvé : seules les associations statiques sont affichées.</li><li>Exécuter npm run ai:report:executed pour enrichir le rapport avec les statuts réels.</li></ul>
+    </section>
+
+    <section class="block">
+      <h2>8. Évolution fondée sur l&#039;exécution Playwright</h2>
+      <p>Le rapport peut être enrichi par une exécution Playwright au format JSON.</p>
+      <ul><li>Analyser les étapes et assertions des traces pour attribuer une preuve précise à chaque fonctionnalité.</li><li>Historiser les exécutions pour mesurer l&#039;évolution de la couverture et de la stabilité.</li></ul>
+    </section>
+  </div>
+  <footer>Sources : docs/functional-map.md, src/pages/, tests/.</footer>
+</main>
+</body>
+</html>
