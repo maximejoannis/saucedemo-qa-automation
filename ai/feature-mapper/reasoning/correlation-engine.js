@@ -41,7 +41,13 @@ class CorrelationEngine {
         featureId: feature.id,
         featureName: feature.name,
         pageObjects: matchingPageObjects.map((pageObject) => pageObject.name),
-        tests: matchingTests.map((testCase) => testCase.title),
+        tests: [...new Set(matchingTests.map((testCase) => testCase.title))],
+        testReferences: matchingTests.map((testCase) => ({
+          title: testCase.title,
+          suite: testCase.suite || null,
+          file: testCase.file || null,
+          line: testCase.line || null,
+        })),
         confidence,
         status: this.determineStatus(confidence),
       };
