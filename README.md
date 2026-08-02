@@ -1,5 +1,7 @@
 # 🚀 Automatisation avec Playwright de l'application web open source sauce demo intégrant un agent de cartographie fonctionnelle
 
+[![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-ESLint%20%2B%20Prettier-4B32C3?logo=eslint)](https://maximejoannis.github.io/saucedemo-qa-automation/quality/)
 [![Playwright](https://img.shields.io/badge/Playwright-1.61.1-2EAD33?logo=playwright\&logoColor=white)](https://playwright.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js\&logoColor=white)](https://nodejs.org/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES2023-F7DF1E?logo=javascript\&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
