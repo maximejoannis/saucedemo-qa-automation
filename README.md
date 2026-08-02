@@ -1,4 +1,4 @@
-# 🚀 Automatisation de l'application web open source sauce demo intégrant un agent de cartographie fonctionnelle
+# 🚀 Automatisation avec Playwright de l'application web open source sauce demo intégrant un agent de cartographie fonctionnelle
 
 [![Playwright](https://img.shields.io/badge/Playwright-1.61.1-2EAD33?logo=playwright\&logoColor=white)](https://playwright.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-22.x-339933?logo=node.js\&logoColor=white)](https://nodejs.org/)
@@ -180,18 +180,33 @@ npm run test:coverage
 npm run ai:report:executed
 ```
 
----
+## 🌐 Rapports en ligne
 
-# 📁 Rapports générés
+Les principaux rapports du projet sont accessibles directement depuis GitHub Pages :
 
-| Rapport                      | Emplacement                                     |
-| ---------------------------- | ----------------------------------------------- |
-| Rapport Playwright           | `playwright-report/`                            |
-| Rapport Allure               | `allure-report/index.html`                      |
-| Rapport qualité              | `reports/quality-report.html`                   |
-| Cartographie fonctionnelle   | `ai/feature-mapper/output/feature-map.json`     |
-| Rapport de couverture (HTML) | `ai/feature-mapper/output/coverage-report.html` |
-| Rapport de couverture (JSON) | `ai/feature-mapper/output/coverage-report.json` |
+* 📈 **Rapport Allure** : https://maximejoannis.github.io/saucedemo-qa-automation/
+* 🛠️ **Rapport Qualité** : https://maximejoannis.github.io/saucedemo-qa-automation/quality/
+* 🧹 **Rapport ESLint** : https://maximejoannis.github.io/saucedemo-qa-automation/quality/eslint-report.html
+
+Ces rapports sont mis à jour automatiquement à chaque publication du projet.
+
+
+## 📊 Rapports disponibles
+
+Le projet publie automatiquement plusieurs rapports permettant d'analyser la qualité du framework et la couverture fonctionnelle des tests automatisés.
+
+| Rapport                                | Description                                     | Accès                                                                              |
+| -------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
+| 🧪 Rapport Playwright                  | Rapport HTML généré après l'exécution des tests | Local (`playwright-report/`)                                                       |
+| 📈 Rapport Allure                      | Rapport détaillé des exécutions Playwright      | https://maximejoannis.github.io/saucedemo-qa-automation/                           |
+| 🛠️ Rapport Qualité                    | Rapport global ESLint / Prettier                | https://maximejoannis.github.io/saucedemo-qa-automation/quality/                   |
+| 🧹 Rapport ESLint                      | Analyse détaillée de la qualité du code         | https://maximejoannis.github.io/saucedemo-qa-automation/quality/eslint-report.html |
+| 🤖 Cartographie fonctionnelle          | Cartographie générée par l'AI Feature Mapper    | `ai/feature-mapper/output/feature-map.json`                                        |
+| 📑 Rapport de couverture fonctionnelle | Rapport HTML de couverture fonctionnelle        | `ai/feature-mapper/output/coverage-report.html`                                    |
+| 📄 Rapport JSON de couverture          | Rapport exploitable par d'autres outils         | `ai/feature-mapper/output/coverage-report.json`                                    |
+
+> **Remarque :** les rapports Allure, Qualité et ESLint sont publiés automatiquement via **GitHub Pages**. Les rapports de couverture fonctionnelle sont générés localement par l'AI Feature Mapper et peuvent également être publiés selon le même principe.
+
 
 ---
 
