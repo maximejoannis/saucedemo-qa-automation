@@ -95,4 +95,18 @@ module.exports = [
       'prefer-const': 'error',
     },
   },
+  {
+    files: ['reports/**/*.js'],
+    languageOptions: {
+      sourceType: 'script',
+      globals: {
+        document: 'readonly',
+        window: 'readonly',
+        localStorage: 'readonly',
+        IntersectionObserver: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+      },
+    },
+  },
 ];

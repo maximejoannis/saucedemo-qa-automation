@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "reports/**"
-      - ".github/workflows/deploy-pages.yml"
+      - 'reports/**'
+      - '.github/workflows/deploy-pages.yml'
 
   workflow_dispatch:
 
