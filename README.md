@@ -1,549 +1,670 @@
-# SauceDemo QA Automation
+# SauceDemo QA Automation & Functional Coverage
 
 [![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
-[![Deploy QA Reports](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/deploy-pages.yml)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Reports-222222?logo=github)](https://maximejoannis.github.io/saucedemo-qa-automation/)
 [![Playwright](https://img.shields.io/badge/Playwright-1.61.1-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES2023-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
-[![ESLint](https://img.shields.io/badge/ESLint-10.8.0-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
-[![Prettier](https://img.shields.io/badge/Prettier-3.9.5-F7B93E?logo=prettier&logoColor=black)](https://prettier.io/)
-[![Allure](https://img.shields.io/badge/Allure-2.43.0-orange)](https://allurereport.org/)
+[![ESLint](https://img.shields.io/badge/ESLint-Quality-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
+[![Prettier](https://img.shields.io/badge/Prettier-Formatting-F7B93E?logo=prettier&logoColor=black)](https://prettier.io/)
+[![Allure](https://img.shields.io/badge/Allure-Test%20Report-orange)](https://allurereport.org/)
 
-Framework d'automatisation End-to-End pour [SauceDemo](https://www.saucedemo.com/), construit avec Playwright et enrichi d'un moteur déterministe de cartographie fonctionnelle.
+Framework d’automatisation QA basé sur **Playwright**, appliqué à l’application web de démonstration [SauceDemo](https://www.saucedemo.com/).
 
-Le projet relie trois niveaux de preuve :
+Le projet associe tests End-to-End, Page Object Model, reporting Allure, contrôle qualité du code et analyse de la couverture fonctionnelle par User Story.
 
-- le référentiel métier : User Stories, critères d'acceptation, fonctionnalités et règles métier ;
-- l'implémentation : Page Objects, fixtures, données et scénarios Playwright ;
-- les résultats : rapports Playwright, Allure, qualité du code et couverture fonctionnelle.
+> Ce dépôt est un projet open source à vocation pédagogique et démonstrative. Il n’est ni affilié à Sauce Labs ni maintenu par les propriétaires de SauceDemo.
 
-> **Contexte public et pédagogique**  
-> Ce dépôt d'automatisation est destiné au partage et à l'apprentissage autour d'une application publique de démonstration. Il ne manipule aucune donnée personnelle, confidentielle ou issue d'un environnement de production.
+---
 
 ## Sommaire
 
-- [Vue d'ensemble](#vue-densemble)
-- [Résultats clés](#résultats-clés)
-- [Périmètre fonctionnel](#périmètre-fonctionnel)
+- [Présentation](#présentation)
+- [Objectifs](#objectifs)
+- [Fonctionnalités testées](#fonctionnalités-testées)
+- [Indicateurs de couverture](#indicateurs-de-couverture)
+- [Rapports disponibles](#rapports-disponibles)
 - [Architecture](#architecture)
-- [Prérequis](#prérequis)
 - [Installation](#installation)
-- [Exécuter les tests](#exécuter-les-tests)
+- [Exécution des tests](#exécution-des-tests)
+- [Agent de cartographie fonctionnelle](#agent-de-cartographie-fonctionnelle)
 - [Qualité du code](#qualité-du-code)
-- [Rapports](#rapports)
-- [AI Feature Mapper](#ai-feature-mapper)
 - [Intégration continue](#intégration-continue)
-- [Ajouter un scénario](#ajouter-un-scénario)
-- [Conventions](#conventions)
-- [Limites connues](#limites-connues)
-- [Roadmap](#roadmap)
+- [Publication GitHub Pages](#publication-github-pages)
+- [Ajouter de nouveaux tests](#ajouter-de-nouveaux-tests)
+- [Limites de l’analyse](#limites-de-lanalyse)
 - [Contribution](#contribution)
-- [Licence](#licence)
 
-## Vue d'ensemble
+---
 
-Le dépôt automatise les principaux parcours e-commerce de SauceDemo :
+## Présentation
 
-- authentification et refus de connexion ;
-- consultation et tri du catalogue ;
-- consultation d'une fiche produit ;
-- ajout, consultation et suppression d'articles dans le panier ;
-- saisie des informations client ;
-- contrôle du récapitulatif et des montants ;
-- validation et confirmation d'une commande ;
-- parcours d'achat complets avec un ou plusieurs produits.
+Ce projet automatise les principaux parcours fonctionnels de SauceDemo avec **Playwright** et JavaScript.
 
-L'architecture suit le modèle **Page Object Model**. L'état authentifié commun est préparé une fois par le `globalSetup`, puis réutilisé par les suites qui en ont besoin.
+Il contient également un agent d’analyse capable de parcourir :
 
-Le moteur **AI Feature Mapper** — malgré son nom historique — n'appelle actuellement aucun modèle de langage. Son analyse est locale, déterministe et reproductible.
+- la documentation fonctionnelle ;
+- les User Stories et leurs critères d’acceptation ;
+- les Page Objects ;
+- les fichiers de tests Playwright ;
+- les résultats d’exécution disponibles.
 
-## Résultats clés
+L’agent met ensuite en relation les exigences métier et les tests automatisés afin de produire une cartographie de couverture.
 
-Les chiffres suivants ont été vérifiés dans la version actuelle du dépôt :
+L’objectif est de répondre à plusieurs questions :
 
-| Indicateur                        | Valeur | Signification                                                        |
-| --------------------------------- | -----: | -------------------------------------------------------------------- |
-| User Stories                      |      5 | Parcours décrits dans [`docs/user-stories.md`](docs/user-stories.md) |
-| Critères d'acceptation            |     16 | Critères recensés dans les 5 User Stories                            |
-| Fonctionnalités                   |     14 | Fonctionnalités Fxx du référentiel                                   |
-| Règles métier                     |     12 | Règles BRxx documentées                                              |
-| Scénarios Playwright              |     43 | Tests distincts dans 5 fichiers `.spec.js`                           |
-| Navigateurs                       |      2 | Chromium et Firefox                                                  |
-| Exécutions configurées            |     86 | 43 scénarios × 2 navigateurs                                         |
-| Tests unitaires du Feature Mapper |     26 | Tests Node.js du moteur d'analyse                                    |
-| Page Objects                      |      4 | Login, catalogue, panier et checkout                                 |
+- Quelles fonctionnalités sont automatisées ?
+- Quelles règles métier sont réellement vérifiées ?
+- Quels critères d’acceptation disposent d’un scénario associé ?
+- Dispose-t-on de cas passants, non passants et de cas d’erreur ?
+- Quels sont les principaux angles morts de la stratégie de test ?
 
-### Indicateurs de couverture
+---
 
-| Mesure                                   |    Résultat actuel | Périmètre mesuré                                                    |
-| ---------------------------------------- | -----------------: | ------------------------------------------------------------------- |
-| Couverture des fonctionnalités déclarées |  **14/14 — 100 %** | Au moins un test associé à chaque fonctionnalité du référentiel     |
-| Couverture stricte des règles métier     | **10/12 — 83,3 %** | Règles démontrées par un scénario et une assertion explicites       |
-| Critères d'acceptation avec une preuve   |  **16/16 — 100 %** | Au moins un test pertinent pour chaque critère                      |
-| Critères avec un cas passant             | **14/16 — 87,5 %** | Parcours nominal ou résultat valide                                 |
-| Critères avec un cas non passant         |  **3/16 — 18,8 %** | Refus métier ou validation attendue                                 |
-| Critères avec un cas d'erreur technique  |     **0/16 — 0 %** | Défaillance technique ou comportement dégradé explicitement vérifié |
+## Objectifs
 
-Ces pourcentages répondent à des questions différentes. Ils ne doivent ni être additionnés ni être interprétés comme une mesure unique de qualité.
+Le dépôt poursuit quatre objectifs principaux :
 
-Le dernier fichier d'exécution conservé dans le dépôt indique **86 exécutions réussies sur 86**, sans échec, test ignoré ou test instable. Ce résultat est un instantané daté du **2 août 2026** ; le statut courant reste celui du dernier workflow GitHub Actions exécuté.
+1. Automatiser les parcours critiques de SauceDemo.
+2. Structurer les tests par User Story et critère d’acceptation.
+3. Mesurer la couverture fonctionnelle au-delà du nombre de tests.
+4. Publier automatiquement les résultats dans un portail GitHub Pages unique.
 
-## Périmètre fonctionnel
+---
 
-| User Story | Domaine          | Fonctionnalités principales                                      | Scénarios |
-| ---------- | ---------------- | ---------------------------------------------------------------- | --------: |
-| US01       | Authentification | Connexion valide, utilisateur bloqué, identifiants invalides     |         9 |
-| US02       | Catalogue        | Liste des produits, détail produit, quatre tris                  |         9 |
-| US03       | Panier           | Panier vide, ajouts, retraits, persistance et navigation         |        10 |
-| US04       | Checkout         | Champs obligatoires, corrections, formats acceptés et annulation |         9 |
-| US05       | Parcours E2E     | Récapitulatif, montants, annulation, achat et confirmation       |         6 |
-| **Total**  |                  |                                                                  |    **43** |
+## Fonctionnalités testées
 
-Le référentiel complet se trouve dans :
+Le framework couvre actuellement cinq ensembles fonctionnels.
 
-- [`docs/user-stories.md`](docs/user-stories.md) ;
-- [`docs/functional-map.md`](docs/functional-map.md) ;
-- [`docs/business-rules.md`](docs/business-rules.md) ;
-- [`docs/glossary.md`](docs/glossary.md).
+| User Story | Domaine | Exemples de comportements vérifiés |
+|---|---|---|
+| US01 | Authentification | Connexion valide, identifiants invalides et utilisateurs particuliers |
+| US02 | Catalogue | Affichage des produits, informations produit et tri |
+| US03 | Panier | Ajout, suppression, compteur et conservation des articles |
+| US04 | Checkout | Informations client, validations et récapitulatif |
+| US05 | Parcours E2E | Commande complète, de la connexion à la confirmation |
+
+Les tests sont organisés dans des répertoires correspondant aux User Stories :
+
+```text
+tests/
+├── us01-authentication/
+├── us02-catalogue/
+├── us03-panier/
+├── us04-checkout/
+└── us05-e2e/
+```
+
+---
+
+## Indicateurs de couverture
+
+Le projet distingue plusieurs niveaux de couverture afin d’éviter de résumer toute la qualité à un seul pourcentage.
+
+### Couverture des règles métier
+
+Le premier rapport identifie :
+
+- **12 règles métier analysées** ;
+- **10 règles couvertes par les tests** ;
+- **2 règles sans preuve suffisante** ;
+- une couverture fonctionnelle estimée à **83,3 %**.
+
+Le taux de **83,3 %** correspond donc à la couverture des règles métier détectées. Il ne signifie pas que 83,3 % de toutes les combinaisons, erreurs techniques ou conditions limites possibles sont testées.
+
+### Couverture des critères d’acceptation
+
+L’analyse détaillée des User Stories porte un regard différent sur la profondeur des scénarios :
+
+| Type de scénario | Couverture observée |
+|---|---:|
+| Cas passants | 14/16 — 87,5 % |
+| Cas non passants | 3/16 — 18,8 % |
+| Cas d’erreur | 0/16 — 0 % |
+
+Ces chiffres ne remplacent pas les **83,3 %** du premier rapport. Ils mesurent une autre dimension : la présence de différents profils de tests pour chaque critère d’acceptation.
+
+> Un cas non passant correspond à un refus fonctionnel attendu, par exemple des identifiants invalides. Un cas d’erreur représente plutôt une défaillance technique contrôlée, comme une indisponibilité réseau ou une réponse serveur invalide.
+
+---
+
+## Rapports disponibles
+
+Tous les rapports sont regroupés dans un seul site GitHub Pages :
+
+### Portail principal
+
+[Accéder au portail QA Coverage](https://maximejoannis.github.io/saucedemo-qa-automation/)
+
+### Rapports publiés
+
+| Rapport | Description | Accès |
+|---|---|---|
+| Allure | Résultats détaillés des tests automatisés | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/allure/) |
+| Qualité du code | Résultats ESLint et Prettier | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/quality/) |
+| Couverture fonctionnelle | Cartographie des fonctionnalités et règles métier | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/coverage/) |
+| Critères d’acceptation | Analyse par User Story, cas passant, non passant et erreur | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/acceptance/) |
+
+Les rapports Playwright, les résultats Allure bruts et les autres fichiers générés sont également conservés comme artefacts GitHub Actions pendant 30 jours.
+
+---
 
 ## Architecture
 
+Le framework utilise une architecture Page Object Model afin de séparer les scénarios de test des interactions avec l’interface.
+
 ```text
 .
-├── .github/workflows/
-│   ├── playwright.yml              # Qualité, tests E2E, artefacts et publication
-│   └── deploy-pages.yml            # Validation et publication des rapports QA statiques
-├── ai/feature-mapper/
-│   ├── execution/                  # Exécution Playwright avec preuve JSON
-│   ├── explorers/                  # Exploration et graphe de navigation
-│   ├── output/                     # Cartographie et rapports générés
-│   ├── parsers/                    # Analyse du référentiel, des POM et des tests
-│   ├── reasoning/                  # Corrélation et calcul de couverture
-│   ├── report/                     # Génération du rapport HTML/JSON
-│   ├── reporters/                  # Sérialisation des résultats
-│   ├── tests/                      # Tests unitaires du moteur
-│   ├── tools/                      # Accès au dépôt, aux tests et au navigateur
-│   ├── validators/                 # Validation des entrées et résultats
-│   ├── agent.js                    # Orchestration principale
-│   └── config.js                   # Configuration
+├── .github/
+│   └── workflows/
+│       └── playwright.yml
+│
+├── ai/
+│   └── feature-mapper/
+│       ├── execution/
+│       ├── explorers/
+│       ├── output/
+│       ├── parsers/
+│       ├── reasoning/
+│       ├── report/
+│       ├── reporters/
+│       ├── tests/
+│       ├── tools/
+│       └── validators/
+│
 ├── docs/
-│   ├── architecture/               # Documentation du Feature Mapper
-│   ├── business-rules.md            # 12 règles métier BRxx
-│   ├── functional-map.md            # 14 fonctionnalités Fxx
+│   ├── architecture/
+│   ├── business-rules.md
+│   ├── functional-map.md
 │   ├── glossary.md
-│   └── user-stories.md              # 5 User Stories et 16 critères
+│   └── user-stories.md
+│
 ├── reports/
-│   ├── acceptance/                 # Rapport critères d'acceptation
-│   ├── coverage/                   # Rapport couverture fonctionnelle
-│   └── index.html                  # Portail des rapports QA
+│   ├── acceptance/
+│   ├── coverage/
+│   └── index.html
+│
 ├── scripts/
-│   └── generate-quality-report.js  # Rapport qualité ESLint/Prettier
+│   └── generate-quality-report.js
+│
 ├── src/
-│   ├── data/                       # Utilisateurs, produits et client checkout
-│   ├── fixtures/                   # Fixtures Playwright personnalisées
-│   └── pages/                      # Page Objects
+│   ├── data/
+│   ├── fixtures/
+│   └── pages/
+│
 ├── tests/
 │   ├── us01-authentication/
 │   ├── us02-catalogue/
 │   ├── us03-panier/
 │   ├── us04-checkout/
 │   └── us05-e2e/
-├── eslint.config.js
+│
 ├── global-setup.js
 ├── playwright.config.js
-└── package.json
+├── eslint.config.js
+├── package.json
+└── README.md
 ```
 
-### Flux principal
+### Principaux composants
 
-```mermaid
-flowchart LR
-    A[Référentiel métier] --> B[Feature Mapper]
-    C[Page Objects] --> B
-    D[Tests Playwright] --> B
-    B --> E[Cartographie JSON]
-    E --> F[Couverture HTML et JSON]
-    G[Résultats Playwright] --> F
-```
+- `tests/` : scénarios Playwright organisés par User Story.
+- `src/pages/` : Page Objects représentant les écrans de l’application.
+- `src/data/` : utilisateurs, produits et données de checkout.
+- `src/fixtures/` : fixtures Playwright personnalisées.
+- `docs/` : référentiel fonctionnel utilisé pour l’analyse.
+- `ai/feature-mapper/` : moteur de cartographie et de corrélation.
+- `reports/` : rapports web statiques publiés sur GitHub Pages.
+- `scripts/` : génération des rapports complémentaires.
+
+---
 
 ## Prérequis
 
-- Node.js en version LTS ;
+Avant de lancer le projet, installer :
+
+- [Node.js](https://nodejs.org/) en version LTS ;
 - npm ;
 - Git ;
-- un accès réseau à [SauceDemo](https://www.saucedemo.com/) ;
-- les dépendances système Playwright sur Linux.
+- les dépendances système nécessaires aux navigateurs Playwright.
 
-Le workflow CI utilise la version Node.js LTS disponible au moment de son exécution.
+Vérification :
+
+```bash
+node --version
+npm --version
+git --version
+```
+
+---
 
 ## Installation
 
-Clonez le dépôt puis installez les dépendances verrouillées :
+Cloner le dépôt :
 
 ```bash
 git clone https://github.com/maximejoannis/saucedemo-qa-automation.git
 cd saucedemo-qa-automation
+```
+
+Installer les dépendances :
+
+```bash
 npm ci
 ```
 
-Installez Chromium et Firefox :
+Installer les navigateurs Playwright :
 
 ```bash
-npx playwright install chromium firefox
+npx playwright install
 ```
 
-Sous Linux, dans un conteneur ou dans GitHub Codespaces :
+Sous Linux, GitHub Codespaces ou dans un environnement CI :
 
 ```bash
-npx playwright install --with-deps chromium firefox
+npx playwright install --with-deps
 ```
 
-Le projet n'exige pas de fichier `.env`. Les utilisateurs de démonstration et les données fonctionnelles sont définis dans `src/data/`.
+---
 
-## Exécuter les tests
+## Exécution des tests
 
-### Suite complète
+### Tous les tests
 
 ```bash
 npm test
 ```
 
-Cette commande exécute les 43 scénarios sur Chromium et Firefox, soit 86 exécutions configurées.
-
-### Observer le navigateur
+### Mode visible
 
 ```bash
 npm run test:headed
 ```
 
-### Utiliser l'interface Playwright
+### Interface Playwright
 
 ```bash
 npm run test:ui
 ```
 
-### Cibler un navigateur
-
-```bash
-npx playwright test --project=chromium
-npx playwright test --project=firefox
-```
-
-### Cibler une User Story ou un fichier
+### Exécuter une User Story
 
 ```bash
 npx playwright test tests/us01-authentication
+```
+
+### Exécuter un fichier précis
+
+```bash
 npx playwright test tests/us03-panier/ac01-panier.spec.js
 ```
 
-### Exécuter les tests tagués
-
-```bash
-npx playwright test --grep "@smoke"
-npx playwright test --grep "@critical"
-```
-
-### Déboguer
-
-```bash
-npx playwright test --debug
-```
-
-### Lister les tests sans les exécuter
-
-```bash
-npx playwright test --list
-```
-
-### Comportement CI
-
-Dans GitHub Actions, la configuration applique :
-
-- un seul worker ;
-- deux tentatives supplémentaires en cas d'échec ;
-- `forbidOnly` pour empêcher un `test.only` oublié ;
-- une trace au premier retry ;
-- une capture et une vidéo conservées en cas d'échec.
-
-## Qualité du code
-
-| Commande                 | Rôle                                             |
-| ------------------------ | ------------------------------------------------ |
-| `npm run lint`           | Analyse tous les fichiers JavaScript avec ESLint |
-| `npm run lint:fix`       | Applique les corrections ESLint disponibles      |
-| `npm run format`         | Formate le dépôt avec Prettier                   |
-| `npm run format:check`   | Vérifie le formatage sans modifier les fichiers  |
-| `npm run quality`        | Exécute ESLint puis la vérification Prettier     |
-| `npm run quality:report` | Génère le rapport qualité dans `quality-report/` |
-
-Vérification locale recommandée avant un push :
-
-```bash
-npm run quality
-npm run test:ai
-npx playwright test --list
-```
-
-Dans la version analysée, `npm run quality` et les **26 tests unitaires** du Feature Mapper réussissent.
-
-## Rapports
-
-### Rapports Playwright et Allure
-
-| Rapport          | Génération                | Emplacement local    |
-| ---------------- | ------------------------- | -------------------- |
-| Playwright HTML  | `npm test`                | `playwright-report/` |
-| Résultats Allure | `npm test`                | `allure-results/`    |
-| Allure HTML      | `npm run allure:generate` | `allure-report/`     |
-| Qualité du code  | `npm run quality:report`  | `quality-report/`    |
-
-Ouvrir le rapport Playwright :
+### Afficher le rapport Playwright local
 
 ```bash
 npx playwright show-report
 ```
 
-Générer puis ouvrir Allure :
+---
+
+## Rapport Allure
+
+Exécuter les tests afin de produire les résultats Allure :
+
+```bash
+npm test
+```
+
+Générer le rapport :
 
 ```bash
 npm run allure:generate
+```
+
+Ouvrir le rapport localement :
+
+```bash
 npm run allure:open
 ```
 
-### Rapports de couverture
-
-Deux rapports statiques et interactifs sont versionnés dans `reports/` :
-
-- [`reports/coverage/`](reports/coverage/) : fonctionnalités, règles métier et écarts ;
-- [`reports/acceptance/`](reports/acceptance/) : User Stories, critères et types de cas ;
-- [`reports/index.html`](reports/index.html) : portail d'accès aux deux rapports.
-
-Ils peuvent être consultés localement avec un serveur statique :
-
-```bash
-npx serve reports
-```
-
-Ou, sans dépendance supplémentaire :
-
-```bash
-python3 -m http.server 8000 --directory reports
-```
-
-Puis ouvrez `http://localhost:8000`.
-
-Le workflow `deploy-pages.yml` publie le dossier `reports/` vers GitHub Pages après validation de la présence des trois pages principales et de la syntaxe JavaScript.
-
-Portail attendu : [maximejoannis.github.io/saucedemo-qa-automation](https://maximejoannis.github.io/saucedemo-qa-automation/)
-
-> Consultez la section [Limites connues](#limites-connues) avant de modifier les workflows de publication.
-
-## AI Feature Mapper
-
-Le Feature Mapper transforme les sources du dépôt en une cartographie fonctionnelle exploitable.
-
-### Sources analysées
-
-- `docs/functional-map.md` ;
-- Page Objects de `src/pages/` ;
-- scénarios de `tests/` ;
-- résultats Playwright JSON lorsqu'ils sont disponibles.
-
-### Commandes
-
-| Commande                     | Résultat                                                               |
-| ---------------------------- | ---------------------------------------------------------------------- |
-| `npm run ai:map-features`    | Analyse le dépôt et génère `feature-map.json`                          |
-| `npm run test:ai`            | Exécute les 26 tests unitaires du moteur                               |
-| `npm run ai:coverage-report` | Produit le rapport de couverture à partir de la cartographie existante |
-| `npm run ai:report`          | Régénère la cartographie puis les rapports HTML/JSON                   |
-| `npm run test:coverage`      | Exécute Playwright avec le reporter JSON de preuve                     |
-| `npm run ai:report:executed` | Régénère un rapport enrichi par la dernière exécution Playwright       |
-
-### Livrables générés
+Le contenu HTML est généré dans :
 
 ```text
-ai/feature-mapper/output/
-├── feature-map.json
-├── coverage-report.json
-├── coverage-report.html
-└── playwright-results.json
+allure-report/
 ```
 
-### Formule principale
+---
+
+## Agent de cartographie fonctionnelle
+
+L’AI Feature Mapper analyse le référentiel fonctionnel et le code du projet.
+
+### Générer la cartographie
+
+```bash
+npm run ai:map-features
+```
+
+Cette commande génère notamment :
 
 ```text
-couverture fonctionnelle = fonctionnalités couvertes / fonctionnalités recensées × 100
+ai/feature-mapper/output/feature-map.json
 ```
 
-Une fonctionnalité est considérée couverte lorsque le moteur trouve une corrélation entre le référentiel, les Page Objects et les tests. Si le rapport Playwright JSON existe, le résultat est enrichi avec le statut de la dernière exécution.
+### Générer la cartographie et le rapport de couverture
 
-Cette mesure reste une corrélation statique : elle ne prouve pas encore quelle assertion exacte valide chaque fonctionnalité.
+```bash
+npm run ai:report
+```
+
+Résultats principaux :
+
+```text
+ai/feature-mapper/output/coverage-report.html
+ai/feature-mapper/output/coverage-report.json
+ai/feature-mapper/output/feature-map.json
+```
+
+### Exécuter les tests avec collecte de preuves
+
+```bash
+npm run test:coverage
+```
+
+### Générer un rapport enrichi avec l’exécution
+
+```bash
+npm run ai:report:executed
+```
+
+### Tester l’agent
+
+```bash
+npm run test:ai
+```
+
+Ces tests vérifient les parseurs, les moteurs de corrélation et de couverture, les validateurs ainsi que la génération du rapport.
+
+---
+
+## Qualité du code
+
+### Exécuter ESLint
+
+```bash
+npm run lint
+```
+
+### Corriger les erreurs ESLint automatiquement
+
+```bash
+npm run lint:fix
+```
+
+### Vérifier le formatage Prettier
+
+```bash
+npm run format:check
+```
+
+### Formater le projet
+
+```bash
+npm run format
+```
+
+### Exécuter le contrôle complet
+
+```bash
+npm run quality
+```
+
+Cette commande exécute successivement ESLint et Prettier :
+
+```bash
+npm run lint && npm run format:check
+```
+
+### Générer le rapport qualité
+
+```bash
+npm run quality:report
+```
+
+Le rapport est créé dans :
+
+```text
+quality-report/
+```
+
+---
 
 ## Intégration continue
 
-### `playwright.yml`
+Le workflow principal est défini dans :
 
-Déclenché sur les push et pull requests visant `main`, ainsi que manuellement. Il :
-
-1. installe les dépendances ;
-2. exécute ESLint et Prettier ;
-3. génère le rapport qualité ;
-4. installe les navigateurs Playwright ;
-5. exécute la suite E2E ;
-6. génère Allure ;
-7. charge les rapports comme artefacts GitHub Actions pendant 30 jours ;
-8. prépare et publie Allure et le rapport qualité sur GitHub Pages hors pull request ;
-9. fait échouer le job à la fin si ESLint ou Prettier a échoué.
-
-### `deploy-pages.yml`
-
-Déclenché lorsqu'un fichier de `reports/**` change sur `main`, ou manuellement. Il :
-
-1. vérifie les trois fichiers `index.html` requis ;
-2. valide la syntaxe des fichiers JavaScript ;
-3. publie le dossier `reports/` sur GitHub Pages.
-
-### Artefacts CI
-
-| Artefact              | Rétention |
-| --------------------- | --------: |
-| `playwright-report`   |  30 jours |
-| `allure-results`      |  30 jours |
-| `allure-report`       |  30 jours |
-| `code-quality-report` |  30 jours |
-
-## Ajouter un scénario
-
-1. Identifiez la User Story et le critère d'acceptation dans `docs/`.
-2. Ajoutez ou complétez les données dans `src/data/`.
-3. Ajoutez les interactions réutilisables dans le Page Object concerné.
-4. Créez le scénario dans le dossier `tests/usxx-*` correspondant.
-5. Utilisez les fixtures exposées par `src/fixtures/test.js`.
-6. Ajoutez des assertions qui démontrent directement le résultat métier attendu.
-7. Exécutez le test sur Chromium et Firefox.
-8. Lancez les contrôles qualité et les tests du Feature Mapper.
-9. Régénérez la cartographie et les rapports si le référentiel change.
-
-Exemple de squelette :
-
-```js
-const { test, expect } = require('../../src/fixtures/test');
-
-test.describe('USxx - Domaine', () => {
-  test('TC-USxx-ACxx-01 résultat attendu', async ({ page }) => {
-    // Arrange / Given
-    // Act / When
-    // Assert / Then
-    await expect(page).toHaveURL(/expected/);
-  });
-});
+```text
+.github/workflows/playwright.yml
 ```
 
-## Conventions
+Il se déclenche :
 
-### Nommage
+- à chaque `push` sur `main` ;
+- à chaque Pull Request ciblant `main` ;
+- manuellement avec `workflow_dispatch`.
 
-- suites métier : `USxx - Domaine` ;
-- scénarios : `TC-USxx-ACxx-nn description` ;
-- fonctionnalités : `Fxx` ;
-- règles métier : `BRxx` ;
-- Page Objects : classe et fichier en `PascalCase` ;
-- méthodes et variables : `camelCase`.
+### Étapes du pipeline
 
-### Bonnes pratiques
+1. Récupération du dépôt.
+2. Installation de Node.js et des dépendances.
+3. Analyse ESLint.
+4. Vérification Prettier.
+5. Génération du rapport qualité.
+6. Installation des navigateurs Playwright.
+7. Exécution des tests automatisés.
+8. Génération du rapport Allure.
+9. Validation des rapports HTML et JavaScript.
+10. Téléversement des artefacts GitHub Actions.
+11. Construction d’un site GitHub Pages unique.
+12. Publication des quatre rapports.
 
-- privilégier les locators `data-test` et les rôles accessibles ;
-- placer les sélecteurs et actions réutilisables dans les Page Objects ;
-- séparer les données de test des scénarios ;
-- éviter les délais fixes ;
-- conserver des tests indépendants ;
-- utiliser une assertion métier explicite, pas seulement une vérification d'URL ;
-- ne jamais versionner de secret ou de données réelles.
+Les contrôles ESLint et Prettier utilisent une Quality Gate différée. Les rapports peuvent ainsi être générés et téléversés avant que le job signale finalement une erreur de qualité.
 
-## Limites connues
+---
 
-### Corrélation fonctionnelle
+## Publication GitHub Pages
 
-Le moteur peut produire des associations trop larges lorsque plusieurs tests partagent une fixture ou un Page Object. Le taux de 100 % des fonctionnalités déclarées doit donc être lu avec les preuves détaillées et la revue QA.
+Le projet utilise un seul workflow responsable du déploiement GitHub Pages.
 
-### Profondeur des tests
+Cette règle est importante : deux workflows utilisant séparément `actions/deploy-pages` publieraient chacun un artefact complet. Le dernier déploiement remplacerait alors les fichiers du précédent.
 
-- BR04 — accès aux pages protégées sans authentification — n'est pas démontrée ;
-- BR09 — checkout interdit avec panier vide — n'est pas démontrée ;
-- seuls 3 critères sur 16 possèdent un cas non passant identifié ;
-- aucun critère ne possède encore un véritable cas d'erreur technique ;
-- `error_user`, `visual_user`, `Reset App State` et l'ajout depuis la fiche produit restent à approfondir.
+### Arborescence publiée
 
-### Publication GitHub Pages
+```text
+pages-site/
+├── index.html
+├── .nojekyll
+├── allure/
+├── quality/
+├── coverage/
+└── acceptance/
+```
 
-Les workflows `playwright.yml` et `deploy-pages.yml` publient actuellement deux artefacts différents vers le même environnement `github-pages` :
+### Configuration GitHub
 
-- `playwright.yml` publie Allure à la racine et la qualité sous `/quality/` ;
-- `deploy-pages.yml` publie le portail statique `reports/`.
+Dans le dépôt GitHub :
 
-GitHub Pages ne conserve qu'un déploiement actif à la fois. Le dernier workflow terminé peut donc remplacer le contenu publié par l'autre. La publication doit être consolidée dans un seul artefact et un seul job de déploiement pour exposer durablement Allure, qualité, couverture et acceptance sous une même racine.
+1. Ouvrir `Settings`.
+2. Sélectionner `Pages`.
+3. Dans `Build and deployment`, choisir `GitHub Actions`.
+4. Vérifier que le workflow dispose des permissions :
 
-### Documentation d'architecture
+```yaml
+permissions:
+  pages: write
+  id-token: write
+```
 
-Les documents `ai/feature-mapper/README.md` et `docs/architecture/ai-feature-mapper.md` ne décrivent pas exactement le même périmètre : le premier attribue le calcul de couverture au Feature Mapper, tandis que le second le réserve à un composant Coverage Analyzer. Cette responsabilité reste à harmoniser.
+Le job de déploiement utilise l’environnement protégé :
+
+```yaml
+environment:
+  name: github-pages
+```
+
+### Concurrence
+
+Le workflow utilise également :
+
+```yaml
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+```
+
+Cette configuration empêche deux publications concurrentes de modifier le site simultanément.
+
+> Il ne doit rester qu’un seul appel à `actions/deploy-pages@v4` dans l’ensemble des workflows du dépôt.
+
+---
+
+## Ajouter de nouveaux tests
+
+Pour ajouter une nouvelle User Story :
+
+1. Documenter le besoin dans `docs/user-stories.md`.
+2. Ajouter ou mettre à jour les règles dans `docs/business-rules.md`.
+3. Compléter la cartographie dans `docs/functional-map.md`.
+4. Créer le Page Object nécessaire dans `src/pages/`.
+5. Ajouter les données de test dans `src/data/`.
+6. Créer le répertoire de tests correspondant dans `tests/`.
+7. Ajouter les cas passants, non passants et les cas d’erreur pertinents.
+8. Relancer l’agent de cartographie.
+9. Vérifier les nouveaux taux de couverture.
+
+Convention recommandée :
+
+```text
+tests/usXX-nom-fonctionnalite/acXX-description.spec.js
+```
+
+Exemple :
+
+```text
+tests/us06-deconnexion/ac01-deconnexion.spec.js
+```
+
+---
+
+## Stratégie de test recommandée
+
+Pour chaque critère d’acceptation, rechercher si possible les trois catégories suivantes :
+
+| Catégorie | Objectif | Exemple |
+|---|---|---|
+| Cas passant | Vérifier le comportement attendu avec des données valides | Connexion avec un utilisateur autorisé |
+| Cas non passant | Vérifier un refus fonctionnel attendu | Connexion avec un mot de passe invalide |
+| Cas d’erreur | Vérifier la réaction à une défaillance technique | Réponse serveur indisponible ou invalide |
+
+Toutes les fonctionnalités ne nécessitent pas obligatoirement les trois catégories. Chaque absence doit toutefois être analysée et justifiée en fonction du risque métier.
+
+---
+
+## Limites de l’analyse
+
+La couverture produite par l’agent est une couverture fonctionnelle issue de la corrélation entre la documentation, les tests et les résultats disponibles.
+
+Elle ne représente pas directement :
+
+- la couverture des lignes de code de SauceDemo ;
+- la couverture de toutes les combinaisons de données ;
+- la couverture exhaustive des navigateurs et appareils ;
+- la performance ou la charge ;
+- l’accessibilité complète ;
+- la sécurité de l’application ;
+- les pannes réseau et erreurs serveur non simulées.
+
+Le taux doit donc être interprété comme un indicateur d’aide à la décision, et non comme une preuve absolue d’absence de défaut.
+
+---
 
 ## Roadmap
 
-### Priorité P0
+Les axes d’amélioration identifiés sont notamment :
 
-- couvrir BR04 : accès direct sans authentification ;
-- couvrir BR09 : checkout avec panier vide ;
-- consolider les deux publications GitHub Pages.
+- renforcer les scénarios non passants ;
+- ajouter des cas d’erreur technique ;
+- couvrir les règles métier encore sans preuve ;
+- intégrer des tests d’accessibilité ;
+- ajouter des tests responsive et multi-navigateurs ;
+- améliorer la traçabilité entre exigences, tests et exécutions ;
+- calculer automatiquement les indicateurs à chaque pipeline ;
+- ajouter une Quality Gate sur la couverture fonctionnelle.
 
-### Priorité P1
+---
 
-- ajouter des cas non passants pour le catalogue, le panier et la commande ;
-- introduire des cas d'erreur technique contrôlés ;
-- couvrir `error_user` et `visual_user` ;
-- tester les états incohérents et les données limites ;
-- ajouter les identifiants Fxx, BRxx et USxx-ACxx dans les métadonnées des tests ;
-- renforcer le moteur de corrélation avec les assertions réellement exécutées.
+## Technologies utilisées
 
-### Priorité P2
+- [Playwright](https://playwright.dev/)
+- [Node.js](https://nodejs.org/)
+- [JavaScript](https://developer.mozilla.org/fr/docs/Web/JavaScript)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Allure Report](https://allurereport.org/)
+- [GitHub Actions](https://github.com/features/actions)
+- [GitHub Pages](https://pages.github.com/)
 
-- couvrir `Reset App State` ;
-- tester l'ajout et le retrait depuis la fiche produit ;
-- harmoniser la documentation d'architecture ;
-- automatiser la régénération des deux rapports statiques dans la CI.
+---
 
 ## Contribution
 
-Les contributions sont bienvenues pour enrichir les scénarios, les preuves de couverture et le moteur d'analyse.
+Les contributions sont les bienvenues.
 
-Avant de proposer une modification :
+1. Créer un fork du dépôt.
+2. Créer une branche :
 
 ```bash
-npm ci
+git switch -c feature/nom-de-la-fonctionnalite
+```
+
+3. Effectuer les modifications.
+4. Vérifier la qualité et les tests :
+
+```bash
 npm run quality
 npm run test:ai
 npm test
 ```
 
-Une pull request devrait :
+5. Créer un commit :
 
-- expliquer le besoin ou le risque couvert ;
-- référencer la User Story, le critère et la règle métier concernés ;
-- inclure des assertions explicites ;
-- rester indépendante des autres tests ;
-- réussir sur Chromium et Firefox ;
-- mettre à jour le référentiel et les rapports si nécessaire.
+```bash
+git commit -m "feat: ajouter une nouvelle couverture fonctionnelle"
+```
 
-## Licence
+6. Publier la branche et ouvrir une Pull Request.
 
-Aucun fichier de licence n'est présent dans la version analysée du dépôt. Pour rendre le statut open source juridiquement explicite, ajoutez une licence adaptée — par exemple MIT, Apache-2.0 ou une autre licence choisie par le propriétaire du projet.
+Toute contribution liée aux tests devrait préciser :
 
-L'application SauceDemo, ses marques et ses contenus restent soumis aux conditions de leurs propriétaires respectifs.
+- la User Story concernée ;
+- le critère d’acceptation associé ;
+- le type de scénario ajouté ;
+- le risque fonctionnel couvert.
 
-## Ressources
+---
 
-- [Application SauceDemo](https://www.saucedemo.com/)
-- [Documentation Playwright](https://playwright.dev/docs/intro)
-- [Documentation Allure](https://allurereport.org/docs/)
-- [Documentation GitHub Pages](https://docs.github.com/pages)
-- [Documentation du Feature Mapper](ai/feature-mapper/README.md)
+## Licence et avertissement
+
+Ce dépôt est proposé comme projet open source de démonstration QA.
+
+SauceDemo est utilisé uniquement comme application support pour l’apprentissage et l’expérimentation autour de l’automatisation des tests. Les marques, noms et contenus associés restent la propriété de leurs détenteurs respectifs.
+
+---
+
+## Auteur
+
+Projet développé et maintenu par [maximejoannis](https://github.com/maximejoannis).
+
+Application testée : [saucedemo.com](https://www.saucedemo.com/)
+
+Portail des rapports : [QA Coverage](https://maximejoannis.github.io/saucedemo-qa-automation/)
