@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright Tests and Reports
 
 on:
   push:
@@ -14,20 +14,21 @@ on:
 permissions:
   contents: read
 
+# Empêche deux publications GitHub Pages simultanées.
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
   test:
-    name: Playwright tests
+    name: Tests and report generation
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
     steps:
-      # ------------------------------------------------------
+      # ======================================================
       # INSTALLATION
-      # ------------------------------------------------------
+      # ======================================================
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,12 +42,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # ------------------------------------------------------
+      # ======================================================
       # QUALITÉ DU CODE
-      # ------------------------------------------------------
+      # ======================================================
 
-      # continue-on-error permet de générer et publier les rapports
-      # avant de faire échouer le job à la fin.
+      # Les contrôles peuvent échouer sans interrompre immédiatement
+      # le workflow afin que les rapports soient quand même générés.
       - name: Run ESLint
         id: eslint
         continue-on-error: true
@@ -63,13 +64,14 @@ jobs:
 
       - name: Display code quality status
         if: ${{ !cancelled() }}
+        shell: bash
         run: |
           echo "ESLint outcome: ${{ steps.eslint.outcome }}"
           echo "Prettier outcome: ${{ steps.prettier.outcome }}"
 
-      # ------------------------------------------------------
+      # ======================================================
       # PLAYWRIGHT
-      # ------------------------------------------------------
+      # ======================================================
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
@@ -77,19 +79,39 @@ jobs:
       - name: Run Playwright tests
         run: npm test
 
-      # ------------------------------------------------------
+      # ======================================================
       # ALLURE
-      # ------------------------------------------------------
+      # ======================================================
 
-      # La commande existante est conservée afin de ne pas modifier
-      # ta génération Allure ni son historique.
       - name: Generate Allure report
         if: ${{ !cancelled() }}
         run: npm run allure:generate
 
-      # ------------------------------------------------------
+      # ======================================================
+      # VALIDATION DES RAPPORTS STATIQUES
+      # ======================================================
+
+      - name: Validate static reports
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          test -f reports/index.html
+          test -f reports/coverage/index.html
+          test -f reports/acceptance/index.html
+
+          echo "Static HTML reports are present."
+
+          find reports \
+            -type f \
+            -name "*.js" \
+            -print0 |
+            xargs -0 -r -n1 node --check
+
+          echo "JavaScript syntax validation completed."
+
+      # ======================================================
       # ARTEFACTS GITHUB ACTIONS
-      # ------------------------------------------------------
+      # ======================================================
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
@@ -127,32 +149,65 @@ jobs:
           retention-days: 30
           if-no-files-found: error
 
-      # ------------------------------------------------------
-      # GITHUB PAGES
-      # ------------------------------------------------------
+      - name: Upload functional reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: functional-reports
+          path: reports/
+          retention-days: 30
+          if-no-files-found: error
+
+      # ======================================================
+      # CONSTRUCTION DU SITE GITHUB PAGES
+      # ======================================================
 
       - name: Prepare GitHub Pages site
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        shell: bash
         run: |
           rm -rf pages-site
+
+          mkdir -p pages-site/allure
           mkdir -p pages-site/quality
-          cp -r allure-report/. pages-site/
+          mkdir -p pages-site/coverage
+          mkdir -p pages-site/acceptance
+
+          # Page d'accueil des rapports
+          cp reports/index.html pages-site/index.html
+
+          # Rapport de couverture fonctionnelle
+          cp -r reports/coverage/. pages-site/coverage/
+
+          # Rapport des user stories et critères d'acceptation
+          cp -r reports/acceptance/. pages-site/acceptance/
+
+          # Rapport d'exécution Allure
+          cp -r allure-report/. pages-site/allure/
+
+          # Rapport de qualité ESLint et Prettier
           cp -r quality-report/. pages-site/quality/
+
+          # Désactive le traitement Jekyll.
+          touch pages-site/.nojekyll
+
+          echo "GitHub Pages content:"
+          find pages-site -maxdepth 2 -type f | sort
 
       - name: Configure GitHub Pages
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         uses: actions/configure-pages@v5
 
-      - name: Upload reports for GitHub Pages
+      - name: Upload GitHub Pages artifact
         if: ${{ !cancelled() && github.event_name != 'pull_request' }}
         uses: actions/upload-pages-artifact@v4
         with:
           path: pages-site/
 
-      # ------------------------------------------------------
+      # ======================================================
       # QUALITY GATE
-      # Cette étape doit rester après les uploads.
-      # ------------------------------------------------------
+      # Cette étape reste après la génération et les uploads.
+      # ======================================================
 
       - name: Fail when code quality checks fail
         if: >-
@@ -163,6 +218,7 @@ jobs:
               steps.prettier.outcome == 'failure'
             )
           }}
+        shell: bash
         run: |
           echo "::error::Le contrôle qualité du code a échoué."
 
@@ -176,8 +232,12 @@ jobs:
 
           exit 1
 
+  # ==========================================================
+  # DÉPLOIEMENT UNIQUE VERS GITHUB PAGES
+  # ==========================================================
+
   deploy:
-    name: Publish reports
+    name: Publish reports to GitHub Pages
 
     if: >-
       ${{
