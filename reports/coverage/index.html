@@ -1,15 +1,90 @@
-<!doctype html><html lang="fr" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SauceDemo — QA Acceptance Coverage</title><link rel="stylesheet" href="styles.css"></head>
-<body><div class="noise"></div><header class="topbar"><a class="brand" href="#top"><span class="mark">SD</span><span><b>QA Acceptance</b><small>CRITERIA COVERAGE</small></span></a><nav><a href="#overview">Synthèse</a><a href="#matrix">Critères</a><a href="#gaps">Écarts</a></nav><button id="theme" aria-label="Changer de thème">◐</button></header>
-<main id="top"><section class="hero reveal"><div><p class="eyebrow"><i></i>AUDIT DE TRAÇABILITÉ · 8 AOÛT 2026</p><h1>Du besoin<br><em>jusqu’à la preuve.</em></h1><p class="intro">Chaque User Story, chaque critère d’acceptation et chaque scénario Playwright reliés sans raccourci — avec trois lentilles : passant, non passant et erreur.</p><a class="cta" href="#matrix">Explorer les 16 critères <b>↘</b></a></div><div class="hero-visual"><div class="rings"><div class="core"><strong>16</strong><span>CRITÈRES<br>ANALYSÉS</span></div></div><span class="chip c1">5<small>USER STORIES</small></span><span class="chip c2">43<small>SCÉNARIOS</small></span><span class="chip c3">100%<small>TRAÇABILITÉ</small></span></div></section>
-<section class="ticker"><span>PASSANT <b>87,5%</b></span><span>NON PASSANT <b>18,8%</b></span><span>ERREUR <b>0%</b></span><span>COMPLET 3/3 <b>0%</b></span></section>
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Observatoire de couverture QA de SauceDemo">
+  <title>SauceDemo — QA Coverage Observatory</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Retour en haut">
+      <span class="brand-mark">SD</span>
+      <span><b>QA Observatory</b><small>SAUCEDEMO / AUDIT 2026</small></span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <a href="#coverage">Couverture</a><a href="#matrix">Matrice</a><a href="#gaps">Écarts</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Changer de thème">◐</button>
+  </header>
 
-<section class="section reveal" id="overview"><div class="heading"><div><p>01 / SYNTHÈSE</p><h2>Une couverture large.<br>Une profondeur à construire.</h2></div><aside>Les critères sont tous reliés à un test, mais la plupart ne possèdent qu’un parcours nominal. Aucun test ne provoque ni ne vérifie une défaillance technique.</aside></div><div class="metrics"><article class="metric green"><span>CRITÈRES AVEC TEST</span><strong>16<sup>/16</sup></strong><div class="bar"><i style="--w:100%"></i></div><p>Au moins une action et une assertion pertinentes pour chaque critère.</p></article><article class="metric cyan"><span>CAS PASSANTS</span><strong>14<sup>/16</sup></strong><div class="bar"><i style="--w:87.5%"></i></div><p>Deux critères d’authentification sont exclusivement des refus métier.</p></article><article class="metric orange"><span>CAS NON PASSANTS</span><strong>3<sup>/16</sup></strong><div class="bar"><i style="--w:18.75%"></i></div><p>Identifiants invalides, utilisateur bloqué et informations obligatoires.</p></article><article class="metric pink"><span>CAS D’ERREUR</span><strong>0<sup>/16</sup></strong><div class="bar"><i style="--w:0%"></i></div><p>Aucune panne, réponse technique anormale ou état dégradé n’est asserté.</p></article></div><div class="note"><b>!</b><p><strong>Convention appliquée.</strong> Un message de validation provoqué par une saisie invalide est classé « non passant », pas « erreur ». La catégorie « erreur » est réservée à une défaillance technique ou à un comportement inattendu vérifié.</p></div></section>
+  <main id="top">
+    <section class="hero reveal">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> RAPPORT D’AUDIT FONCTIONNEL</p>
+        <h1>La qualité,<br><em>mise sous observation.</em></h1>
+        <p class="intro">Une lecture indépendante de la couverture automatisée de SauceDemo — au-delà du chiffre flatteur, jusqu’à la preuve.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#matrix">Explorer la matrice <span>↘</span></a>
+          <button class="button ghost" id="printReport" type="button">Exporter en PDF</button>
+        </div>
+      </div>
+      <div class="hero-orbit" aria-label="100 pour cent des fonctionnalités déclarées sont couvertes">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="score"><strong data-count="100">0</strong><span>%</span><small>RÉFÉRENTIEL<br>COUVERT</small></div>
+        <div class="satellite sat-a">14/14<br><small>FEATURES</small></div>
+        <div class="satellite sat-b">43<br><small>SCÉNARIOS</small></div>
+      </div>
+    </section>
 
-<section class="section reveal" id="matrix"><div class="heading matrix-heading"><div><p>02 / MATRICE D’ACCEPTATION</p><h2>La preuve,<br>critère par critère.</h2></div><div class="controls"><select id="storyFilter" aria-label="Filtrer par User Story"><option value="all">Toutes les User Stories</option><option value="US01">US01 · Authentification</option><option value="US02">US02 · Catalogue</option><option value="US03">US03 · Panier</option><option value="US04">US04 · Checkout</option><option value="US05">US05 · E2E</option></select><select id="caseFilter" aria-label="Filtrer par type"><option value="all">Tous les profils</option><option value="pass">Avec cas passant</option><option value="fail">Avec cas non passant</option><option value="error">Avec cas d’erreur</option><option value="incomplete">Couverture incomplète</option></select><input id="search" type="search" placeholder="Rechercher un critère…" aria-label="Rechercher"></div></div><div class="legend"><span><i class="pass"></i>Passant</span><span><i class="fail"></i>Non passant</span><span><i class="error"></i>Erreur</span><small>Cliquer sur une ligne pour afficher la preuve</small></div><div id="criteria" class="criteria"></div><div id="empty" hidden>Aucun critère ne correspond à ces filtres.</div></section>
+    <section class="signal-strip reveal" aria-label="Synthèse">
+      <article><span class="signal green"></span><div><small>FONCTIONNALITÉS</small><strong>14 / 14</strong></div><b>100%</b></article>
+      <article><span class="signal amber"></span><div><small>RÈGLES MÉTIER</small><strong>10 / 12</strong></div><b>83,3%</b></article>
+      <article><span class="signal cyan"></span><div><small>DERNIÈRE EXÉCUTION</small><strong>86 / 86</strong></div><b>PASS</b></article>
+      <article><span class="signal violet"></span><div><small>MOTEUR D’ANALYSE</small><strong>26 / 26</strong></div><b>PASS</b></article>
+    </section>
 
-<section class="section story-section reveal"><div class="heading"><div><p>03 / PROFIL PAR USER STORY</p><h2>Où se trouve<br>la profondeur ?</h2></div></div><div id="storyCards" class="story-grid"></div></section>
+    <section class="section reveal" id="coverage">
+      <div class="section-heading"><div><p class="kicker">01 / LECTURE DU SIGNAL</p><h2>Trois chiffres.<br>Trois réalités.</h2></div><p>La couverture déclarative est excellente. La couverture des règles révèle deux angles morts prioritaires. L’exécution enregistrée est saine, mais antérieure à cet audit.</p></div>
+      <div class="coverage-grid">
+        <article class="metric-card lime"><div class="metric-top"><span>PORTÉE DÉCLARÉE</span><i>01</i></div><strong>100<sup>%</sup></strong><div class="bar"><span style="--value:100%"></span></div><p>Chaque fonctionnalité Fxx du référentiel possède au moins un test direct et pertinent.</p></article>
+        <article class="metric-card orange"><div class="metric-top"><span>RÈGLES MÉTIER</span><i>02</i></div><strong>83,3<sup>%</sup></strong><div class="bar"><span style="--value:83.3%"></span></div><p>BR04 et BR09 ne sont pas démontrées par un scénario négatif explicite.</p></article>
+        <article class="metric-card blue"><div class="metric-top"><span>EXÉCUTION CONSERVÉE</span><i>03</i></div><strong>86<sup>/86</sup></strong><div class="bar"><span style="--value:100%"></span></div><p>43 scénarios exécutés sur Chromium et Firefox, sans échec ni instabilité.</p></article>
+      </div>
+      <aside class="callout"><span>!</span><p><strong>Le “100 %” est juste, mais incomplet.</strong> Il décrit seulement les 14 fonctionnalités inscrites dans le référentiel. Il ne couvre pas automatiquement toutes les capacités visibles de l’application.</p></aside>
+    </section>
 
-<section class="section reveal" id="gaps"><div class="heading"><div><p>04 / TESTS RECOMMANDÉS</p><h2>Les prochains scénarios<br>qui changent la confiance.</h2></div><aside>Priorisation par risque métier et valeur de détection.</aside></div><div class="gaps"><article class="p0"><span>P0 · AUTH</span><h3>Accès direct sans session</h3><p>Ouvrir catalogue, panier et checkout sans authentification ; vérifier le refus ou la redirection.</p><footer>US01 / US02 / US04 <b>→</b></footer></article><article class="p0"><span>P0 · CHECKOUT</span><h3>Commande avec panier vide</h3><p>Engager le checkout sans article et vérifier explicitement la règle de blocage attendue.</p><footer>US03 / US04 <b>→</b></footer></article><article><span>P1 · ROBUSTESSE</span><h3>Erreur technique contrôlée</h3><p>Simuler une ressource indisponible ou une réponse anormale et vérifier l’état présenté à l’utilisateur.</p></article><article><span>P1 · PROFILS</span><h3>error_user et visual_user</h3><p>Vérifier leurs anomalies spécifiques avec des assertions fonctionnelles et visuelles.</p></article><article><span>P1 · FRONTIÈRES</span><h3>Données extrêmes</h3><p>Tester longueurs maximales, caractères spéciaux, espaces et valeurs limites du checkout.</p></article><article><span>P2 · ÉTAT</span><h3>Reset App State</h3><p>Vérifier la remise à zéro du panier, du badge et des boutons d’action.</p></article></div></section>
+    <section class="section reveal" id="matrix">
+      <div class="section-heading matrix-head"><div><p class="kicker">02 / MATRICE DE PREUVE</p><h2>Chaque fonction.<br>Son test témoin.</h2></div><div class="filters" role="group" aria-label="Filtrer par domaine"><button class="active" data-filter="all">Tout <b>14</b></button><button data-filter="auth">Auth <b>3</b></button><button data-filter="catalogue">Catalogue <b>3</b></button><button data-filter="panier">Panier <b>4</b></button><button data-filter="checkout">Checkout <b>4</b></button></div></div>
+      <div class="matrix" id="featureMatrix"></div>
+    </section>
 
-<aside class="signature reveal"><span class="mark">SD</span><div><h3>QA Acceptance Coverage</h3><p>Généré le 8 août 2026</p></div><div>Source : dépôt <code>saucedemo-qa-automation-main</code><br>Application : <a href="https://www.saucedemo.com/" target="_blank" rel="noopener">saucedemo.com ↗</a></div></aside></main>
-<footer><div><b>SD · QA Acceptance Coverage</b><small>Analyse stricte des preuves Playwright</small></div><button onclick="print()">Exporter en PDF</button></footer><script src="app.js"></script></body></html>
+    <section class="section gaps-section reveal" id="gaps">
+      <div class="section-heading"><div><p class="kicker">03 / ANGLES MORTS</p><h2>Ce que le vert<br>ne raconte pas.</h2></div><p>Deux règles critiques et plusieurs capacités visibles restent à transformer en preuves automatisées.</p></div>
+      <div class="gap-grid">
+        <article class="critical"><div><span>P0</span><small>RÈGLE BR04</small></div><h3>Accès sans authentification</h3><p>Aucun test n’essaie d’ouvrir directement le catalogue, le panier ou le checkout sans session.</p><footer>À TESTER EN PREMIER <b>→</b></footer></article>
+        <article class="critical"><div><span>P0</span><small>RÈGLE BR09</small></div><h3>Checkout avec panier vide</h3><p>Le dépôt couvre seulement l’accès positif avec un produit. Le refus attendu n’est pas démontré.</p><footer>À TESTER EN PREMIER <b>→</b></footer></article>
+        <article><div><span>P1</span><small>ÉTAT APPLICATION</small></div><h3>Reset App State</h3><p>Vérifier la remise à zéro du badge, du panier et des boutons après réinitialisation.</p></article>
+        <article><div><span>P1</span><small>PROFILS SPÉCIAUX</small></div><h3>Error & Visual users</h3><p>Ajouter des scénarios ciblés et des assertions visuelles maîtrisées.</p></article>
+        <article><div><span>P2</span><small>FICHE PRODUIT</small></div><h3>Ajout depuis le détail</h3><p>L’ouverture est couverte, mais pas l’ajout ni le retrait depuis cette vue.</p></article>
+        <article><div><span>P2</span><small>NAVIGATION</small></div><h3>Liens secondaires</h3><p>All Items, About et liens sociaux restent hors du périmètre actuel.</p></article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-heading"><div><p class="kicker">04 / PLAN D’ACTION</p><h2>Du score<br>à la confiance.</h2></div></div>
+      <ol class="roadmap">
+        <li><span>01</span><div><strong>Fermer les brèches P0</strong><p>Ajouter les scénarios négatifs BR04 et BR09.</p></div><em>IMMÉDIAT</em></li>
+        <li><span>02</span><div><strong>Rendre la traçabilité explicite</strong><p>Annoter chaque test avec ses identifiants Fxx et BRxx.</p></div><em>COURT TERME</em></li>
+        <li><span>03</span><div><strong>Réduire les faux positifs</strong><p>Fonder la corrélation sur les assertions métier, pas sur les fixtures communes.</p></div><em>COURT TERME</em></li>
+        <li><span>04</span><div><strong>Élargir le référentiel</strong><p>Intégrer Reset App State, profils spéciaux et actions depuis la fiche produit.</p></div><em>PROCHAIN CYCLE</em></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="footer"><div><span class="brand-mark">SD</span><p><b>QA Coverage Observatory</b><small>Rapport généré le 7 août 2026</small></p></div><p>Source : dépôt <code>saucedemo-qa-automation-main</code><br>Application : <a href="https://www.saucedemo.com/">saucedemo.com ↗</a></p></footer>
+  <script src="app.js"></script>
+</body>
+</html>
