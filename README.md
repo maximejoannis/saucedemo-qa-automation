@@ -76,13 +76,13 @@ Le dépôt poursuit quatre objectifs principaux :
 
 Le framework couvre actuellement cinq ensembles fonctionnels.
 
-| User Story | Domaine | Exemples de comportements vérifiés |
-|---|---|---|
-| US01 | Authentification | Connexion valide, identifiants invalides et utilisateurs particuliers |
-| US02 | Catalogue | Affichage des produits, informations produit et tri |
-| US03 | Panier | Ajout, suppression, compteur et conservation des articles |
-| US04 | Checkout | Informations client, validations et récapitulatif |
-| US05 | Parcours E2E | Commande complète, de la connexion à la confirmation |
+| User Story | Domaine          | Exemples de comportements vérifiés                                    |
+| ---------- | ---------------- | --------------------------------------------------------------------- |
+| US01       | Authentification | Connexion valide, identifiants invalides et utilisateurs particuliers |
+| US02       | Catalogue        | Affichage des produits, informations produit et tri                   |
+| US03       | Panier           | Ajout, suppression, compteur et conservation des articles             |
+| US04       | Checkout         | Informations client, validations et récapitulatif                     |
+| US05       | Parcours E2E     | Commande complète, de la connexion à la confirmation                  |
 
 Les tests sont organisés dans des répertoires correspondant aux User Stories :
 
@@ -117,10 +117,10 @@ Le taux de **83,3 %** correspond donc à la couverture des règles métier déte
 L’analyse détaillée des User Stories porte un regard différent sur la profondeur des scénarios :
 
 | Type de scénario | Couverture observée |
-|---|---:|
-| Cas passants | 14/16 — 87,5 % |
-| Cas non passants | 3/16 — 18,8 % |
-| Cas d’erreur | 0/16 — 0 % |
+| ---------------- | ------------------: |
+| Cas passants     |      14/16 — 87,5 % |
+| Cas non passants |       3/16 — 18,8 % |
+| Cas d’erreur     |          0/16 — 0 % |
 
 Ces chiffres ne remplacent pas les **83,3 %** du premier rapport. Ils mesurent une autre dimension : la présence de différents profils de tests pour chaque critère d’acceptation.
 
@@ -138,12 +138,12 @@ Tous les rapports sont regroupés dans un seul site GitHub Pages :
 
 ### Rapports publiés
 
-| Rapport | Description | Accès |
-|---|---|---|
-| Allure | Résultats détaillés des tests automatisés | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/allure/) |
-| Qualité du code | Résultats ESLint et Prettier | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/quality/) |
-| Couverture fonctionnelle | Cartographie des fonctionnalités et règles métier | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/coverage/) |
-| Critères d’acceptation | Analyse par User Story, cas passant, non passant et erreur | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/acceptance/) |
+| Rapport                  | Description                                                | Accès                                                                         |
+| ------------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Allure                   | Résultats détaillés des tests automatisés                  | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/allure/)     |
+| Qualité du code          | Résultats ESLint et Prettier                               | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/quality/)    |
+| Couverture fonctionnelle | Cartographie des fonctionnalités et règles métier          | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/coverage/)   |
+| Critères d’acceptation   | Analyse par User Story, cas passant, non passant et erreur | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/acceptance/) |
 
 Les rapports Playwright, les résultats Allure bruts et les autres fichiers générés sont également conservés comme artefacts GitHub Actions pendant 30 jours.
 
@@ -560,11 +560,11 @@ tests/us06-deconnexion/ac01-deconnexion.spec.js
 
 Pour chaque critère d’acceptation, rechercher si possible les trois catégories suivantes :
 
-| Catégorie | Objectif | Exemple |
-|---|---|---|
-| Cas passant | Vérifier le comportement attendu avec des données valides | Connexion avec un utilisateur autorisé |
-| Cas non passant | Vérifier un refus fonctionnel attendu | Connexion avec un mot de passe invalide |
-| Cas d’erreur | Vérifier la réaction à une défaillance technique | Réponse serveur indisponible ou invalide |
+| Catégorie       | Objectif                                                  | Exemple                                  |
+| --------------- | --------------------------------------------------------- | ---------------------------------------- |
+| Cas passant     | Vérifier le comportement attendu avec des données valides | Connexion avec un utilisateur autorisé   |
+| Cas non passant | Vérifier un refus fonctionnel attendu                     | Connexion avec un mot de passe invalide  |
+| Cas d’erreur    | Vérifier la réaction à une défaillance technique          | Réponse serveur indisponible ou invalide |
 
 Toutes les fonctionnalités ne nécessitent pas obligatoirement les trois catégories. Chaque absence doit toutefois être analysée et justifiée en fonction du risque métier.
 
