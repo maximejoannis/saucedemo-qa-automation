@@ -98,6 +98,8 @@ jobs:
           test -f reports/index.html
           test -f reports/coverage/index.html
           test -f reports/acceptance/index.html
+          test -f allure-report/index.html
+          test -f quality-report/index.html
 
           echo "Static HTML reports are present."
 
