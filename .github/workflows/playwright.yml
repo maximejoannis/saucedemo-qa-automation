@@ -97,7 +97,6 @@ jobs:
         run: |
           test -f reports/index.html
           test -f reports/coverage/index.html
-          test -f reports/acceptance/index.html
           test -f allure-report/index.html
           test -f quality-report/index.html
 
@@ -173,16 +172,12 @@ jobs:
           mkdir -p pages-site/allure
           mkdir -p pages-site/quality
           mkdir -p pages-site/coverage
-          mkdir -p pages-site/acceptance
 
           # Page d'accueil des rapports
           cp reports/index.html pages-site/index.html
 
           # Rapport de couverture fonctionnelle
           cp -r reports/coverage/. pages-site/coverage/
-
-          # Rapport des user stories et critères d'acceptation
-          cp -r reports/acceptance/. pages-site/acceptance/
 
           # Rapport d'exécution Allure
           cp -r allure-report/. pages-site/allure/
