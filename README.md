@@ -1,6 +1,6 @@
 # SauceDemo QA Automation
 
-[![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml)
+[![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg?branch=main&event=push)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml?query=branch%3Amain+event%3Apush)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-QA%20Reports-222222?logo=github)](https://maximejoannis.github.io/saucedemo-qa-automation/)
 [![Playwright](https://img.shields.io/badge/Playwright-1.61.1-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
