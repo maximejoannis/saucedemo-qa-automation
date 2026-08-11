@@ -238,9 +238,9 @@ jobs:
 
     if: >-
       ${{
-        always() &&
+        !cancelled() &&
         github.event_name != 'pull_request' &&
-        needs.test.result != 'cancelled'
+        needs.test.result == 'success'
       }}
 
     needs: test
