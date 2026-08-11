@@ -178,4 +178,3 @@ Fonctionnalité: Session et menu
     Quand je ferme le menu
     Alors le panneau n'est plus visible
 ```
-

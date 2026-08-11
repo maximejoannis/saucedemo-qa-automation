@@ -115,4 +115,3 @@ En tant que client, je veux naviguer via le menu afin d'accéder aux actions glo
 - Quel taux et quelle règle d'arrondi fiscal sont attendus ?
 - Quelle durée de session et quelle persistance après fermeture sont voulues ?
 - Les anomalies des profils dégradés doivent-elles toutes être détectées ou seulement servir de démonstration ?
-

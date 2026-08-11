@@ -47,4 +47,3 @@ Les profils dégradés servent à éprouver la robustesse. Leurs anomalies inten
 - Les règles de longueur, format ou caractères autorisés des champs client ne sont pas affichées ; seuls les champs obligatoires sont confirmés.
 - L'arrondi fiscal, la persistance inter-session, la durée de session et les contrats API nécessitent une spécification produit.
 - Les contrôles responsive, multi-navigateurs, performance et accessibilité sont proposés mais n'ont pas été exhaustivement exécutés.
-

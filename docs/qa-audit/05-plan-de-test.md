@@ -2,14 +2,14 @@
 
 ## Organisation des campagnes
 
-| Campagne | Objectif | Sélection | Fréquence | Responsable | Sortie |
-|---|---|---|---|---|---|
-| Smoke | Aptitude du build | P0 nominaux | Chaque build | CI QA | 100 % passant |
-| Régression | Couverture métier | P0 + P1 | Quotidien/release | QA | Seuils stratégie |
-| Négative | Rejets et erreurs | Tags negative/error | Quotidien | CI QA | Messages et état corrects |
-| Cross-browser | Compatibilité | P0 + tris/fiches | Avant release | QA | Aucun majeur |
-| Exploratoire | Découverte | Profils spéciaux, historique, données atypiques | Sprint | QA | Charters et anomalies |
-| Accessibilité | WCAG/usage clavier | Pages clés | Avant release | QA/A11y | Aucun blocage clavier |
+| Campagne      | Objectif           | Sélection                                       | Fréquence         | Responsable | Sortie                    |
+| ------------- | ------------------ | ----------------------------------------------- | ----------------- | ----------- | ------------------------- |
+| Smoke         | Aptitude du build  | P0 nominaux                                     | Chaque build      | CI QA       | 100 % passant             |
+| Régression    | Couverture métier  | P0 + P1                                         | Quotidien/release | QA          | Seuils stratégie          |
+| Négative      | Rejets et erreurs  | Tags negative/error                             | Quotidien         | CI QA       | Messages et état corrects |
+| Cross-browser | Compatibilité      | P0 + tris/fiches                                | Avant release     | QA          | Aucun majeur              |
+| Exploratoire  | Découverte         | Profils spéciaux, historique, données atypiques | Sprint            | QA          | Charters et anomalies     |
+| Accessibilité | WCAG/usage clavier | Pages clés                                      | Avant release     | QA/A11y     | Aucun blocage clavier     |
 
 ## Lots d'exécution
 
@@ -29,15 +29,15 @@
 
 ## Jeux de données
 
-| Jeu | Prénom | Nom | Code postal | But |
-|---|---|---|---|---|
-| D-01 | Ada | Lovelace | 75001 | Nominal |
-| D-02 | vide | Lovelace | 75001 | Prénom requis |
-| D-03 | Ada | vide | 75001 | Nom requis |
-| D-04 | Ada | Lovelace | vide | Code requis |
-| D-05 | espaces | espaces | espaces | Limite à clarifier |
-| D-06 | Élodie | O'Connor-Smith | 75001 | Unicode/spéciaux |
-| D-07 | 256 caractères | 256 caractères | 256 caractères | Robustesse |
+| Jeu  | Prénom         | Nom            | Code postal    | But                |
+| ---- | -------------- | -------------- | -------------- | ------------------ |
+| D-01 | Ada            | Lovelace       | 75001          | Nominal            |
+| D-02 | vide           | Lovelace       | 75001          | Prénom requis      |
+| D-03 | Ada            | vide           | 75001          | Nom requis         |
+| D-04 | Ada            | Lovelace       | vide           | Code requis        |
+| D-05 | espaces        | espaces        | espaces        | Limite à clarifier |
+| D-06 | Élodie         | O'Connor-Smith | 75001          | Unicode/spéciaux   |
+| D-07 | 256 caractères | 256 caractères | 256 caractères | Robustesse         |
 
 ## Tests non fonctionnels
 
@@ -50,4 +50,3 @@
 ## Rapport et décision
 
 Publier résultats par priorité, couverture US/AC, anomalies par sévérité, flakiness, durée, environnement. Bloquer la release si P0 échoue, si une route privée est accessible après logout, si le total est incohérent ou si une commande invalide peut être finalisée.
-

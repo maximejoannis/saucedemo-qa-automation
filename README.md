@@ -26,15 +26,15 @@ Le projet comprend :
 
 ## Indicateurs principaux
 
-| Indicateur | Résultat |
-|---|---:|
-| Cas de test inclus dans le calcul | 44 |
-| Cas couverts par une automatisation complète | 22 |
-| Cas non automatisés ou partiellement automatisés | 22 |
-| Couverture automatisée globale | **50,0 %** |
-| Couverture P0 | **69,6 %** |
-| Couverture P1 | **31,6 %** |
-| Couverture P2 | **0,0 %** |
+| Indicateur                                       |   Résultat |
+| ------------------------------------------------ | ---------: |
+| Cas de test inclus dans le calcul                |         44 |
+| Cas couverts par une automatisation complète     |         22 |
+| Cas non automatisés ou partiellement automatisés |         22 |
+| Couverture automatisée globale                   | **50,0 %** |
+| Couverture P0                                    | **69,6 %** |
+| Couverture P1                                    | **31,6 %** |
+| Couverture P2                                    |  **0,0 %** |
 
 La couverture est calculée à partir des cas de test du référentiel QA, et non à partir du nombre de lignes de code ou du nombre brut de scénarios Playwright.
 
@@ -112,12 +112,12 @@ Elle ne représente pas les spécifications historiques ayant piloté le dévelo
 
 Deux systèmes d’identification coexistent donc dans le dépôt :
 
-| Référentiel | Rôle |
-|---|---|
-| `US01` à `US05` | Organisation technique initiale des tests Playwright |
+| Référentiel         | Rôle                                                   |
+| ------------------- | ------------------------------------------------------ |
+| `US01` à `US05`     | Organisation technique initiale des tests Playwright   |
 | `US-001` à `US-014` | Référentiel fonctionnel d’audit construit a posteriori |
-| `TC-USxx-ACxx-xx` | Identifiants historiques présents dans les tests |
-| `TC-001` à `TC-050` | Cas de test du référentiel QA d’audit |
+| `TC-USxx-ACxx-xx`   | Identifiants historiques présents dans les tests       |
+| `TC-001` à `TC-050` | Cas de test du référentiel QA d’audit                  |
 
 Les dossiers techniques `us01` à `us05` ne doivent pas être assimilés automatiquement aux quatorze user stories du référentiel d’audit.
 
@@ -151,13 +151,13 @@ Le projet poursuit les objectifs suivants :
 
 Les tests Playwright sont répartis dans cinq ensembles techniques :
 
-| Dossier | Domaine |
-|---|---|
-| `us01-authentication` | Authentification |
-| `us02-catalogue` | Catalogue et fiches produit |
-| `us03-panier` | Gestion du panier |
-| `us04-checkout` | Informations client et validations |
-| `us05-e2e` | Récapitulatif et finalisation |
+| Dossier               | Domaine                            |
+| --------------------- | ---------------------------------- |
+| `us01-authentication` | Authentification                   |
+| `us02-catalogue`      | Catalogue et fiches produit        |
+| `us03-panier`         | Gestion du panier                  |
+| `us04-checkout`       | Informations client et validations |
+| `us05-e2e`            | Récapitulatif et finalisation      |
 
 ```text
 tests/
@@ -177,22 +177,22 @@ tests/
 
 L’audit fonctionnel distingue quatorze user stories :
 
-| ID | User story |
-|---|---|
-| US-001 | Se connecter |
-| US-002 | Consulter le catalogue |
-| US-003 | Trier le catalogue |
-| US-004 | Consulter un produit |
-| US-005 | Ajouter au panier |
-| US-006 | Retirer du panier |
-| US-007 | Consulter le panier |
+| ID     | User story                      |
+| ------ | ------------------------------- |
+| US-001 | Se connecter                    |
+| US-002 | Consulter le catalogue          |
+| US-003 | Trier le catalogue              |
+| US-004 | Consulter un produit            |
+| US-005 | Ajouter au panier               |
+| US-006 | Retirer du panier               |
+| US-007 | Consulter le panier             |
 | US-008 | Fournir les informations client |
-| US-009 | Contrôler le récapitulatif |
-| US-010 | Finaliser la commande |
-| US-011 | Annuler ou revenir |
-| US-012 | Gérer la session |
-| US-013 | Réinitialiser l’application |
-| US-014 | Utiliser le menu |
+| US-009 | Contrôler le récapitulatif      |
+| US-010 | Finaliser la commande           |
+| US-011 | Annuler ou revenir              |
+| US-012 | Gérer la session                |
+| US-013 | Réinitialiser l’application     |
+| US-014 | Utiliser le menu                |
 
 Ce référentiel permet une mesure plus précise que le seul regroupement technique des fichiers de tests.
 
@@ -271,18 +271,18 @@ nombre de cas couverts par une automatisation complète
 22 ÷ 44 × 100 = 50,0 %
 ```
 
-| Cas inclus | Cas automatisés | Cas non automatisés | Taux |
-|---:|---:|---:|---:|
-| 44 | 22 | 22 | **50,0 %** |
+| Cas inclus | Cas automatisés | Cas non automatisés |       Taux |
+| ---------: | --------------: | ------------------: | ---------: |
+|         44 |              22 |                  22 | **50,0 %** |
 
 ### Couverture par priorité
 
-| Priorité | Cas inclus | Cas automatisés | Cas non automatisés | Taux |
-|---|---:|---:|---:|---:|
-| P0 — Critique | 23 | 16 | 7 | **69,6 %** |
-| P1 — Important | 19 | 6 | 13 | **31,6 %** |
-| P2 — Complémentaire | 2 | 0 | 2 | **0,0 %** |
-| **Total** | **44** | **22** | **22** | **50,0 %** |
+| Priorité            | Cas inclus | Cas automatisés | Cas non automatisés |       Taux |
+| ------------------- | ---------: | --------------: | ------------------: | ---------: |
+| P0 — Critique       |         23 |              16 |                   7 | **69,6 %** |
+| P1 — Important      |         19 |               6 |                  13 | **31,6 %** |
+| P2 — Complémentaire |          2 |               0 |                   2 |  **0,0 %** |
+| **Total**           |     **44** |          **22** |              **22** | **50,0 %** |
 
 Contrôle de cohérence :
 
@@ -293,22 +293,22 @@ Contrôle de cohérence :
 
 ### Couverture par user story
 
-| User story | Cas automatisés | Cas inclus | Taux |
-|---|---:|---:|---:|
-| US-001 — Se connecter | 5 | 5 | **100,0 %** |
-| US-002 — Consulter le catalogue | 0 | 2 | **0,0 %** |
-| US-003 — Trier le catalogue | 4 | 5 | **80,0 %** |
-| US-004 — Consulter un produit | 1 | 3 | **33,3 %** |
-| US-005 — Ajouter au panier | 1 | 4 | **25,0 %** |
-| US-006 — Retirer du panier | 2 | 2 | **100,0 %** |
-| US-007 — Consulter le panier | 1 | 3 | **33,3 %** |
-| US-008 — Fournir les informations client | 4 | 4 | **100,0 %** |
-| US-009 — Contrôler le récapitulatif | 1 | 4 | **25,0 %** |
-| US-010 — Finaliser la commande | 2 | 3 | **66,7 %** |
-| US-011 — Annuler ou revenir | 0 | 2 | **0,0 %** |
-| US-012 — Gérer la session | 1 | 4 | **25,0 %** |
-| US-013 — Réinitialiser l’application | 0 | 1 | **0,0 %** |
-| US-014 — Utiliser le menu | 0 | 2 | **0,0 %** |
+| User story                               | Cas automatisés | Cas inclus |        Taux |
+| ---------------------------------------- | --------------: | ---------: | ----------: |
+| US-001 — Se connecter                    |               5 |          5 | **100,0 %** |
+| US-002 — Consulter le catalogue          |               0 |          2 |   **0,0 %** |
+| US-003 — Trier le catalogue              |               4 |          5 |  **80,0 %** |
+| US-004 — Consulter un produit            |               1 |          3 |  **33,3 %** |
+| US-005 — Ajouter au panier               |               1 |          4 |  **25,0 %** |
+| US-006 — Retirer du panier               |               2 |          2 | **100,0 %** |
+| US-007 — Consulter le panier             |               1 |          3 |  **33,3 %** |
+| US-008 — Fournir les informations client |               4 |          4 | **100,0 %** |
+| US-009 — Contrôler le récapitulatif      |               1 |          4 |  **25,0 %** |
+| US-010 — Finaliser la commande           |               2 |          3 |  **66,7 %** |
+| US-011 — Annuler ou revenir              |               0 |          2 |   **0,0 %** |
+| US-012 — Gérer la session                |               1 |          4 |  **25,0 %** |
+| US-013 — Réinitialiser l’application     |               0 |          1 |   **0,0 %** |
+| US-014 — Utiliser le menu                |               0 |          2 |   **0,0 %** |
 
 ### Exclusions
 
@@ -323,10 +323,10 @@ Les cas suivants sont exclus du dénominateur :
 
 Le taux de couverture ne doit pas être confondu avec le taux de réussite.
 
-| Indicateur | Question traitée |
-|---|---|
+| Indicateur             | Question traitée                                                        |
+| ---------------------- | ----------------------------------------------------------------------- |
 | Couverture automatisée | Les comportements attendus sont-ils réellement vérifiés par des tests ? |
-| Résultats d’exécution | Les tests exécutés ont-ils réussi ou échoué ? |
+| Résultats d’exécution  | Les tests exécutés ont-ils réussi ou échoué ?                           |
 
 Un test peut exister et échouer lors d’une exécution. Il reste alors automatisé, mais son résultat d’exécution est en échec.
 
@@ -344,11 +344,11 @@ Tous les rapports sont publiés dans un portail GitHub Pages unique.
 
 ### Rapports publiés
 
-| Rapport | Description | Accès |
-|---|---|---|
+| Rapport                | Description                                        | Accès                                                                       |
+| ---------------------- | -------------------------------------------------- | --------------------------------------------------------------------------- |
 | Couverture automatisée | Couverture globale, par user story et par priorité | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/coverage/) |
-| Allure | Résultats détaillés des exécutions Playwright | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/allure/) |
-| Qualité du code | Résultats ESLint et Prettier | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/quality/) |
+| Allure                 | Résultats détaillés des exécutions Playwright      | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/allure/)   |
+| Qualité du code        | Résultats ESLint et Prettier                       | [Ouvrir](https://maximejoannis.github.io/saucedemo-qa-automation/quality/)  |
 
 Les rapports Playwright, les résultats Allure et les rapports complémentaires sont également conservés comme artefacts GitHub Actions pendant 30 jours.
 
@@ -558,17 +558,17 @@ Le référentiel d’audit se trouve dans :
 docs/qa-audit/
 ```
 
-| Document | Contenu |
-|---|---|
-| `README.md` | Contexte, périmètre et conventions |
-| `01-cartographie-fonctionnelle.md` | Fonctionnalités et parcours |
-| `02-user-stories-criteres-acceptation.md` | User stories et critères d’acceptation |
-| `03-scenarios-gherkin.md` | Scénarios Gherkin |
-| `04-strategie-de-test.md` | Stratégie de test et priorisation |
-| `05-plan-de-test.md` | Organisation des campagnes |
-| `06-cas-de-test.md` | Cas positifs, négatifs, limites et erreurs |
-| `07-matrice-tracabilite.md` | Correspondance entre exigences et tests |
-| `08-rapport-final-couverture-automatisation.md` | Indicateurs de couverture automatisée |
+| Document                                        | Contenu                                    |
+| ----------------------------------------------- | ------------------------------------------ |
+| `README.md`                                     | Contexte, périmètre et conventions         |
+| `01-cartographie-fonctionnelle.md`              | Fonctionnalités et parcours                |
+| `02-user-stories-criteres-acceptation.md`       | User stories et critères d’acceptation     |
+| `03-scenarios-gherkin.md`                       | Scénarios Gherkin                          |
+| `04-strategie-de-test.md`                       | Stratégie de test et priorisation          |
+| `05-plan-de-test.md`                            | Organisation des campagnes                 |
+| `06-cas-de-test.md`                             | Cas positifs, négatifs, limites et erreurs |
+| `07-matrice-tracabilite.md`                     | Correspondance entre exigences et tests    |
+| `08-rapport-final-couverture-automatisation.md` | Indicateurs de couverture automatisée      |
 
 Le rapport Markdown et le rapport HTML doivent présenter les mêmes valeurs.
 

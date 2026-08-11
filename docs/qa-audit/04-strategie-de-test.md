@@ -6,11 +6,11 @@ Garantir que l'utilisateur actif peut se connecter, choisir des produits, mainte
 
 ## Approche par risque
 
-| Niveau | Définition | Exécution | Contenu |
-|---|---|---|---|
-| P0 | Blocage du revenu/parcours ou faille de session | Chaque commit, build et déploiement | Login, catalogue, panier, validations, calcul, finish, logout |
-| P1 | Fonction fréquente ou défaut à impact élevé contournable | Quotidien + régression | Tri, fiche, annulation, reset, refresh, profils dégradés |
-| P2 | Risque faible/rare, visuel ou étendu | Hebdomadaire / avant release | Responsive, compatibilité étendue, accessibilité, liens externes |
+| Niveau | Définition                                               | Exécution                           | Contenu                                                          |
+| ------ | -------------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------------- |
+| P0     | Blocage du revenu/parcours ou faille de session          | Chaque commit, build et déploiement | Login, catalogue, panier, validations, calcul, finish, logout    |
+| P1     | Fonction fréquente ou défaut à impact élevé contournable | Quotidien + régression              | Tri, fiche, annulation, reset, refresh, profils dégradés         |
+| P2     | Risque faible/rare, visuel ou étendu                     | Hebdomadaire / avant release        | Responsive, compatibilité étendue, accessibilité, liens externes |
 
 ## Niveaux et types
 
@@ -53,12 +53,11 @@ Rapport : ID, titre, environnement, profil, préconditions, étapes, attendu/obt
 
 ## Risques et parades
 
-| Risque | Impact | Parade |
-|---|---|---|
-| Profils volontairement défectueux confondus avec l'oracle | Faux échecs | Oracle `standard_user`; suites séparées |
-| État partagé/local storage | Flakiness | Reset avant/après, contextes isolés |
-| Sélecteurs textuels fragiles | Maintenance | `data-test`, page objects légers |
-| Calcul fiscal non spécifié | Faux verdict | Faire confirmer règle et arrondi |
-| E2E trop nombreux | Suite lente | Descendre règles aux niveaux composant/unitaire |
-| Démo tierce instable | Échecs environnementaux | Retry limité au setup, diagnostic réseau distinct |
-
+| Risque                                                    | Impact                  | Parade                                            |
+| --------------------------------------------------------- | ----------------------- | ------------------------------------------------- |
+| Profils volontairement défectueux confondus avec l'oracle | Faux échecs             | Oracle `standard_user`; suites séparées           |
+| État partagé/local storage                                | Flakiness               | Reset avant/après, contextes isolés               |
+| Sélecteurs textuels fragiles                              | Maintenance             | `data-test`, page objects légers                  |
+| Calcul fiscal non spécifié                                | Faux verdict            | Faire confirmer règle et arrondi                  |
+| E2E trop nombreux                                         | Suite lente             | Descendre règles aux niveaux composant/unitaire   |
+| Démo tierce instable                                      | Échecs environnementaux | Retry limité au setup, diagnostic réseau distinct |
