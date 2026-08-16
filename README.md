@@ -1,5 +1,105 @@
 # SauceDemo QA Automation
 
+Suite de tests End-to-End automatisant les parcours critiques de l’application e-commerce de démonstration [SauceDemo](https://www.saucedemo.com/).
+
+Ce projet teste l’authentification, le catalogue, les fiches produit, le panier, le checkout et la finalisation d’une commande. Il démontre ma capacité à concevoir un framework Playwright JavaScript maintenable, à structurer les tests avec le Page Object Model, à mesurer leur couverture fonctionnelle et à industrialiser leur exécution avec GitHub Actions.
+
+> Ce dépôt est un projet personnel, pédagogique et démonstratif. Il n’est ni affilié à Sauce Labs ni maintenu par les propriétaires de SauceDemo.
+
+## Vue d’ensemble
+
+| Élément            | Réalisation                                               |
+| ------------------ | --------------------------------------------------------- |
+| Application testée | SauceDemo, application e-commerce de démonstration        |
+| Périmètre          | Authentification, catalogue, panier, checkout et commande |
+| Automatisation     | Playwright et JavaScript                                  |
+| Architecture       | Page Object Model, fixtures et données réutilisables      |
+| Stratégie          | Scénarios Smoke et Régression, priorisés en P0, P1 et P2  |
+| Qualité du code    | ESLint et Prettier                                        |
+| Reporting          | Rapports Playwright, Allure et couverture fonctionnelle   |
+| CI/CD              | GitHub Actions et publication sur GitHub Pages            |
+| Couverture auditée | 22 cas entièrement couverts sur 44, soit 50 %             |
+
+## Compétences démontrées
+
+* analyse des parcours métier et des risques ;
+* conception de scénarios positifs, négatifs et de validation ;
+* structuration d’un framework avec le Page Object Model ;
+* centralisation des sélecteurs, données et fixtures ;
+* préparation et réutilisation des sessions de test ;
+* mise en place de contrôles de qualité du code ;
+* intégration continue et conservation des preuves d’exécution ;
+* mesure factuelle de la couverture fonctionnelle ;
+* production d’une documentation QA traçable.
+
+## Accès rapide
+
+* [Ouvrir le portail QA](https://maximejoannis.github.io/saucedemo-qa-automation/)
+* [Consulter le dépôt GitHub](https://github.com/maximejoannis/saucedemo-qa-automation)
+* [Parcourir la documentation QA](docs/qa-audit/README.md)
+* [Voir les exécutions GitHub Actions](https://github.com/maximejoannis/saucedemo-qa-automation/actions)
+
+## Parcours automatisés
+
+| Domaine          | Exemples de contrôles                                            |
+| ---------------- | ---------------------------------------------------------------- |
+| Authentification | Connexion valide, identifiants incorrects et profils spécifiques |
+| Catalogue        | Affichage, tri et consultation des produits                      |
+| Panier           | Ajout, retrait et vérification du contenu                        |
+| Checkout         | Validation des informations obligatoires                         |
+| Commande         | Vérification du récapitulatif et finalisation de l’achat         |
+| Session          | Préparation, réutilisation et protection de l’état utilisateur   |
+
+## Exécution rapide
+
+### Prérequis
+
+* Node.js LTS ;
+* npm ;
+* Git.
+
+### Installation et lancement
+
+```bash
+git clone https://github.com/maximejoannis/saucedemo-qa-automation.git
+cd saucedemo-qa-automation
+npm ci
+npx playwright install
+npm test
+```
+
+### Commandes principales
+
+```bash
+npm test                 # Exécuter tous les tests
+npm run test:headed      # Exécuter avec le navigateur visible
+npm run test:ui          # Ouvrir l’interface Playwright
+npx playwright show-report
+```
+
+## Résultats clés
+
+La couverture est calculée à partir du référentiel fonctionnel QA et non à partir du nombre de fichiers ou de lignes de code.
+
+| Indicateur                  | Résultat |
+| --------------------------- | -------: |
+| Cas inclus dans le calcul   |       44 |
+| Cas entièrement automatisés |       22 |
+| Couverture globale          |   50,0 % |
+| Couverture P0               |   69,6 % |
+| Couverture P1               |   31,6 % |
+| Couverture P2               |    0,0 % |
+
+Une couverture partielle est considérée comme non couverte afin de conserver une mesure stricte et vérifiable.
+
+---
+
+## Documentation détaillée
+
+La suite de ce README présente le référentiel fonctionnel, la stratégie d’automatisation, l’architecture, les rapports, la CI/CD, les limites connues et les axes d’amélioration.
+
+# SauceDemo QA Automation
+
 [![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg?branch=main&event=push)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml?query=branch%3Amain+event%3Apush)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-QA%20Reports-222222?logo=github)](https://maximejoannis.github.io/saucedemo-qa-automation/)
 [![Playwright](https://img.shields.io/badge/Playwright-1.61.1-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
