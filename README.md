@@ -157,7 +157,6 @@ La couverture est calculée à partir des cas de test du référentiel QA, et no
 - [Exécution des tests](#exécution-des-tests)
 - [Rapport Allure](#rapport-allure)
 - [Documentation QA](#documentation-qa)
-- [Agent de cartographie fonctionnelle](#agent-de-cartographie-fonctionnelle)
 - [Qualité du code](#qualité-du-code)
 - [Intégration continue](#intégration-continue)
 - [Publication GitHub Pages](#publication-github-pages)
@@ -461,20 +460,6 @@ Les rapports Playwright, les résultats Allure et les rapports complémentaires 
 ├── .github/
 │   └── workflows/
 │       └── playwright.yml
-│
-├── ai/
-│   └── feature-mapper/
-│       ├── execution/
-│       ├── explorers/
-│       ├── output/
-│       ├── parsers/
-│       ├── reasoning/
-│       ├── report/
-│       ├── reporters/
-│       ├── tests/
-│       ├── tools/
-│       └── validators/
-│
 ├── docs/
 │   ├── architecture/
 │   ├── qa-audit/
@@ -528,7 +513,6 @@ Les rapports Playwright, les résultats Allure et les rapports complémentaires 
 - `src/data/` : utilisateurs, produits et données du checkout ;
 - `src/fixtures/` : fixtures Playwright personnalisées ;
 - `docs/qa-audit/` : référentiel fonctionnel d’audit construit a posteriori ;
-- `ai/feature-mapper/` : moteur expérimental de cartographie et de corrélation ;
 - `reports/coverage/` : rapport web statique de couverture automatisée ;
 - `scripts/` : scripts de génération des rapports complémentaires.
 
@@ -679,52 +663,6 @@ docs/qa-audit/08-rapport-final-couverture-automatisation.md
 reports/coverage/index.html
 reports/coverage/app.js
 ```
-
----
-
-## Agent de cartographie fonctionnelle
-
-Le dossier `ai/feature-mapper/` contient un moteur expérimental d’analyse de la documentation, des Page Objects, des tests et des résultats Playwright.
-
-### Générer la cartographie
-
-```bash
-npm run ai:map-features
-```
-
-### Générer la cartographie et le rapport
-
-```bash
-npm run ai:report
-```
-
-### Exécuter les tests avec collecte de preuves
-
-```bash
-npm run test:coverage
-```
-
-### Générer un rapport enrichi
-
-```bash
-npm run ai:report:executed
-```
-
-### Tester le moteur d’analyse
-
-```bash
-npm run test:ai
-```
-
-Les sorties principales sont enregistrées dans :
-
-```text
-ai/feature-mapper/output/
-```
-
-> Les indicateurs publiés dans `reports/coverage/` proviennent de l’audit strict fondé sur les cas `TC-nnn`. Ils ne doivent pas être remplacés automatiquement par une ancienne métrique produite par le moteur expérimental sans vérification du référentiel et des assertions.
-
----
 
 ## Qualité du code
 
