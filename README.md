@@ -22,22 +22,22 @@ Ce projet teste l’authentification, le catalogue, les fiches produit, le panie
 
 ## Compétences démontrées
 
-* analyse des parcours métier et des risques ;
-* conception de scénarios positifs, négatifs et de validation ;
-* structuration d’un framework avec le Page Object Model ;
-* centralisation des sélecteurs, données et fixtures ;
-* préparation et réutilisation des sessions de test ;
-* mise en place de contrôles de qualité du code ;
-* intégration continue et conservation des preuves d’exécution ;
-* mesure factuelle de la couverture fonctionnelle ;
-* production d’une documentation QA traçable.
+- analyse des parcours métier et des risques ;
+- conception de scénarios positifs, négatifs et de validation ;
+- structuration d’un framework avec le Page Object Model ;
+- centralisation des sélecteurs, données et fixtures ;
+- préparation et réutilisation des sessions de test ;
+- mise en place de contrôles de qualité du code ;
+- intégration continue et conservation des preuves d’exécution ;
+- mesure factuelle de la couverture fonctionnelle ;
+- production d’une documentation QA traçable.
 
 ## Accès rapide
 
-* [Ouvrir le portail QA](https://maximejoannis.github.io/saucedemo-qa-automation/)
-* [Consulter le dépôt GitHub](https://github.com/maximejoannis/saucedemo-qa-automation)
-* [Parcourir la documentation QA](docs/qa-audit/README.md)
-* [Voir les exécutions GitHub Actions](https://github.com/maximejoannis/saucedemo-qa-automation/actions)
+- [Ouvrir le portail QA](https://maximejoannis.github.io/saucedemo-qa-automation/)
+- [Consulter le dépôt GitHub](https://github.com/maximejoannis/saucedemo-qa-automation)
+- [Parcourir la documentation QA](docs/qa-audit/README.md)
+- [Voir les exécutions GitHub Actions](https://github.com/maximejoannis/saucedemo-qa-automation/actions)
 
 ## Parcours automatisés
 
@@ -54,9 +54,9 @@ Ce projet teste l’authentification, le catalogue, les fiches produit, le panie
 
 ### Prérequis
 
-* Node.js LTS ;
-* npm ;
-* Git.
+- Node.js LTS ;
+- npm ;
+- Git.
 
 ### Installation et lancement
 
