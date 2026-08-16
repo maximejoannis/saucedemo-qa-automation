@@ -1,5 +1,12 @@
 # SauceDemo QA Automation
 
+[![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg?branch=main&event=push)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml?query=branch%3Amain+event%3Apush)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-QA%20Reports-222222?logo=github)](https://maximejoannis.github.io/saucedemo-qa-automation/)
+[![Playwright](https://img.shields.io/badge/Playwright-1.61.1-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES2023-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
+[![Allure](https://img.shields.io/badge/Allure-Test%20Report-orange)](https://allurereport.org/)
+
 Suite de tests End-to-End automatisant les parcours critiques de l’application e-commerce de démonstration [SauceDemo](https://www.saucedemo.com/).
 
 Ce projet teste l’authentification, le catalogue, les fiches produit, le panier, le checkout et la finalisation d’une commande. Il démontre ma capacité à concevoir un framework Playwright JavaScript maintenable, à structurer les tests avec le Page Object Model, à mesurer leur couverture fonctionnelle et à industrialiser leur exécution avec GitHub Actions.
@@ -99,13 +106,6 @@ Une couverture partielle est considérée comme non couverte afin de conserver u
 La suite de ce README présente le référentiel fonctionnel, la stratégie d’automatisation, l’architecture, les rapports, la CI/CD, les limites connues et les axes d’amélioration.
 
 # SauceDemo QA Automation
-
-[![Playwright Tests](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml/badge.svg?branch=main&event=push)](https://github.com/maximejoannis/saucedemo-qa-automation/actions/workflows/playwright.yml?query=branch%3Amain+event%3Apush)
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-QA%20Reports-222222?logo=github)](https://maximejoannis.github.io/saucedemo-qa-automation/)
-[![Playwright](https://img.shields.io/badge/Playwright-1.61.1-2EAD33?logo=playwright&logoColor=white)](https://playwright.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-LTS-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES2023-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/fr/docs/Web/JavaScript)
-[![Allure](https://img.shields.io/badge/Allure-Test%20Report-orange)](https://allurereport.org/)
 
 Framework d’automatisation QA basé sur **Playwright** et JavaScript, appliqué à l’application web de démonstration [SauceDemo](https://www.saucedemo.com/).
 
